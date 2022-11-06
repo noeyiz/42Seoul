@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:43:54 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 20:19:03 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/06 16:15:42 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static int	ft_press_key(int key_code, t_game *game)
 	if (key_code == KEY_ESC)
 		ft_exit_game(game);
 	else if (key_code == KEY_W)
-		ft_move_up(game);
+		ft_move(game, Up);
 	else if (key_code == KEY_A)
-		ft_move_left(game);
+		ft_move(game, Left);
 	else if (key_code == KEY_S)
-		ft_move_down(game);
+		ft_move(game, Down);
 	else if (key_code == KEY_D)
-		ft_move_right(game);
+		ft_move(game, Right);
 	return (0);
 }
 

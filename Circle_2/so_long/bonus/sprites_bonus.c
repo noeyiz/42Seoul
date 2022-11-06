@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:07:29 by jikoo             #+#    #+#             */
-/*   Updated: 2022/10/26 16:52:45 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:32:03 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ static void	ft_put_image(t_game *game, void *sprite, int x, int y)
 
 static void	ft_put_player_image(t_game *game)
 {
-	mlx_put_image_to_window(game->mlx, game->win, game->sprites.black, \
-	(game->player.col + 1) * SIZE, \
-	(game->player.row + 1) * SIZE);
 	mlx_put_image_to_window(game->mlx, game->win, ft_get_pl_sprite(game), \
 	game->player.x + SIZE, game->player.y + SIZE);
 }
@@ -79,6 +76,7 @@ void	ft_set_sprites(t_game *game)
 		col = 0;
 		while (col < game->map.col)
 		{
+			ft_put_image(game, game->sprites.black, col, row);
 			idx = row * game->map.col + col;
 			if (game->map.map_str[idx] == '1')
 				ft_put_image(game, game->sprites.wall, col, row);

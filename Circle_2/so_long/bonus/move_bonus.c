@@ -6,148 +6,90 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:20:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 21:55:11 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/06 16:33:49 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long_bonus.h"
 
-void	ft_move_up(t_game *game)
+static void	ft_set_nxt(t_game *game, int *nxt, t_direction dir)
 {
-	int	cur;
-	int	nxt;
-	int	nxt2;
-	
-	cur = game->map.col * game->player.row + game->player.col;
-	// cur = game->map.col * (game->player.y / 32) + (game->player.x / 32);
-	nxt = game->map.col * ((game->player.y - 8) / 32) + (game->player.x / 32);
-	if (game->player.x % 32)
-		nxt2 = game->map.col * ((game->player.y - 8) / 32) + ((game->player.x + 32) / 32);
+	if (dir == Up)
+		*nxt = game->map.col * ((game->player.y - 8) / 32) + (game->player.x / 32);
+	else if (dir == Down)
+		*nxt = game->map.col * ((game->player.y + 32) / 32) + (game->player.x / 32);
+	else if (dir == Left)
+		*nxt = game->map.col * (game->player.y / 32) + ((game->player.x - 8) / 32);
+	else if (dir == Right)
+		*nxt = game->map.col * (game->player.y / 32) + ((game->player.x + 32) / 32);
+}
+
+static void	ft_set_nxt2(t_game *game, int nxt, int *nxt2, t_direction dir)
+{
+	if (dir == Up && game->player.x % 32)
+		*nxt2 = game->map.col * ((game->player.y - 8) / 32) + ((game->player.x + 32) / 32);
+	else if (dir == Down && game->player.x % 32)
+		*nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x + 32) / 32);
+	else if (dir == Left && game->player.y % 32)
+		*nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x - 8) / 32);
+	else if (dir == Right && game->player.y % 32)
+		*nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x + 32) / 32);
 	else
-		nxt2 = nxt;
-	printf("cur : %c, nxt : %c\n", game->map.map_str[cur], game->map.map_str[nxt]);
-	if (game->map.map_str[nxt] == 'E' && game->collectible)
-		return ;
-	if (game->map.map_str[nxt] != '1' && game->map.map_str[nxt2] != '1')
-	{
+		*nxt2 = nxt;
+}
+
+static void	ft_update_pl_info(t_game *game, t_direction dir)
+{
+	game->player.cnt++;
+	game->player.direction = dir;
+	if (dir == Up)
 		game->player.y -= 8;
-		if (game->player.y % 32 == 0)
-		{
-			if (game->map.map_str[nxt] == 'C')
-				game->collectible--;
-			if (game->map.map_str[nxt] == 'E' && !game->collectible)
-				ft_exit_game(game);
-			game->player.row = game->player.y / 32;
-			game->map.map_str[cur] = '0';
-			game->map.map_str[nxt] = 'P';
-		}
-		game->player.cnt++;
-		game->player.direction = Up;
-		ft_set_sprites(game);
-	}
-}
-
-void	ft_move_down(t_game *game)
-{
-	int	cur;
-	int	nxt;
-	int	nxt2;
-
-	cur = game->map.col * game->player.row + game->player.col;
-	// cur = game->map.col * (game->player.y / 32) + (game->player.x / 32);
-	nxt = game->map.col * ((game->player.y + 32) / 32) + (game->player.x / 32);
-	if (game->player.x % 32)
-		nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x + 32) / 32);
-	else
-		nxt2 = nxt;
-	printf("cur : %c, nxt : %c\n", game->map.map_str[cur], game->map.map_str[nxt]);
-	if (game->map.map_str[nxt] == 'E' && game->collectible)
-		return ;
-	if (game->map.map_str[nxt] != '1' && game->map.map_str[nxt2] != '1')
-	{
+	else if (dir == Down)
 		game->player.y += 8;
-		if (game->player.y % 32 == 0)
-		{
-			if (game->map.map_str[nxt] == 'C')
-				game->collectible--;
-			if (game->map.map_str[nxt] == 'E' && !game->collectible)
-				ft_exit_game(game);
-			game->player.row = game->player.y / 32;
-			game->map.map_str[cur] = '0';
-			game->map.map_str[nxt] = 'P';
-		}
-		game->player.cnt++;
-		game->player.direction = Down;
-		ft_set_sprites(game);
-	}
-}
-
-void	ft_move_left(t_game *game)
-{
-	int	cur;
-	int	nxt;
-	int	nxt2;
-
-	cur = game->map.col * game->player.row + game->player.col;
-	// cur = game->map.col * (game->player.y / 32) + (game->player.x / 32);
-	nxt = game->map.col * (game->player.y / 32) + ((game->player.x - 8) / 32);
-	if (game->player.y % 32)
-		nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x - 8) / 32);
-	else
-		nxt2 = nxt;
-	printf("cur : %c, nxt : %c\n", game->map.map_str[cur], game->map.map_str[nxt]);
-	if (game->map.map_str[nxt] == 'E' && game->collectible)
-		return ;
-	if (game->map.map_str[nxt] != '1' && game->map.map_str[nxt2] != '1')
-	{
+	else if (dir == Left)
 		game->player.x -= 8;
-		if (game->player.x % 32 == 0)
-		{
-			if (game->map.map_str[nxt] == 'C')
-				game->collectible--;
-			if (game->map.map_str[nxt] == 'E' && !game->collectible)
-				ft_exit_game(game);
-			game->player.col = game->player.x / 32;
-			game->map.map_str[cur] = '0';
-			game->map.map_str[nxt] = 'P';
-		}
-		game->player.cnt++;
-		game->player.direction = Left;
-		ft_set_sprites(game);
-	}
+	else if (dir == Right)
+		game->player.x += 8;
 }
 
-void	ft_move_right(t_game *game)
+static int	ft_check_and_update_pl_coord(t_game *game, t_direction dir)
+{
+	if ((dir == Up || dir == Down) && !(game->player.y % 32))
+	{
+		game->player.row = game->player.y / 32;
+		return (1);
+	}
+	else if ((dir == Left || dir == Right) && !(game->player.x % 32))
+	{
+		game->player.col = game->player.x / 32;
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_move(t_game *game, t_direction direction)
 {
 	int	cur;
 	int	nxt;
 	int	nxt2;
 
 	cur = game->map.col * game->player.row + game->player.col;
-	// cur = game->map.col * (game->player.y / 32) + (game->player.x / 32);
-	nxt = game->map.col * (game->player.y / 32) + ((game->player.x + 32) / 32);
-	if (game->player.y % 32)
-		nxt2 = game->map.col * ((game->player.y + 32) / 32) + ((game->player.x + 32) / 32);
-	else
-		nxt2 = nxt;
-	printf("cur : %c, nxt : %c\n", game->map.map_str[cur], game->map.map_str[nxt]);
+	ft_set_nxt(game, &nxt, direction);
+	ft_set_nxt2(game, nxt, &nxt2, direction);
 	if (game->map.map_str[nxt] == 'E' && game->collectible)
 		return ;
 	if (game->map.map_str[nxt] != '1' && game->map.map_str[nxt2] != '1')
 	{
-		game->player.x += 8;
-		if (game->player.x % 32 == 0)
+		ft_update_pl_info(game, direction);
+		if (ft_check_and_update_pl_coord(game, direction))
 		{
 			if (game->map.map_str[nxt] == 'C')
 				game->collectible--;
 			if (game->map.map_str[nxt] == 'E' && !game->collectible)
 				ft_exit_game(game);
-			game->player.col = game->player.x / 32;
 			game->map.map_str[cur] = '0';
 			game->map.map_str[nxt] = 'P';
 		}
-		game->player.cnt++;
-		game->player.direction = Right;
 		ft_set_sprites(game);
 	}
 }

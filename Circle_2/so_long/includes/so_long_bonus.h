@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:28:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 14:29:58 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/06 16:16:29 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,7 @@ void	ft_init_player(t_game *game);
 void	*ft_get_pl_sprite(t_game *game);
 
 /* move */
-void	ft_move_up(t_game *game);
-void	ft_move_down(t_game *game);
-void	ft_move_left(t_game *game);
-void	ft_move_right(t_game *game);
+void	ft_move(t_game *game, t_direction direction);
 
 /* game */
 void	ft_start_game(t_game *game);
