@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 13:55:05 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 13:55:56 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 00:16:20 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include <fcntl.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

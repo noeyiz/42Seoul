@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:28:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:55:52 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 01:17:46 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define SO_LONG_BONUS_H
 
 # include <fcntl.h>
-# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../mlx/mlx.h"
 
 # define SIZE 32
 
@@ -99,8 +99,6 @@ typedef struct s_player
 
 typedef struct s_enemy
 {
-	int			col;
-	int			row;
 	int			x;
 	int			y;
 	t_direction	direction;

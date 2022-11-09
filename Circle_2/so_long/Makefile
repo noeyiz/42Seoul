@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/05 13:59:18 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/09 21:51:15 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/10 00:31:41 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= so_long
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
-MLX			= -lmlx -framework OpenGL -framework Appkit
+MLX			= -Lmlx -lmlx -framework OpenGL -framework Appkit
 
 # header files
 HEADER_DIR  = includes/
@@ -53,6 +53,7 @@ endif
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 $(NAME): $(OBJS)
+	@make -s -C ./mlx all
 	$(CC) $(CFLAGS) $(MLX) -o $@ $(OBJS)
 	@echo "$(MAGENTA)|----------------------------------------|$(RESET)"
 	@echo "$(MAGENTA)|                                        |$(RESET)"

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:07:29 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:31:34 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 00:54:28 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_put_player_image(t_game *game)
 static void	ft_put_enemy_image(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx, game->win, ft_get_en_sprite(game), \
-	(game->enemy.col + 1) * SIZE, (game->enemy.row + 1) * SIZE);
+	game->enemy.x + SIZE, game->enemy.y + SIZE);
 }
 
 void	ft_set_sprites(t_game *game)

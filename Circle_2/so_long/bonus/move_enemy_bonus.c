@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:35:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:54:58 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 01:28:25 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,53 @@
 
 static void	ft_set_nxt_idx(t_game *game, int *nxt)
 {
-	int	cur;
-
-	cur = game->map.col * game->enemy.row + game->enemy.col;
 	if (game->enemy.direction == Up)
-		*nxt = cur - game->map.col;
+		*nxt = game->map.col * ((game->enemy.y - 8) / 32) \
+		+ (game->enemy.x / 32);
 	else if (game->enemy.direction == Left)
-		*nxt = cur - 1;
+		*nxt = game->map.col * (game->enemy.y / 32) \
+		+ ((game->enemy.x - 8) / 32);
 	else if (game->enemy.direction == Down)
-		*nxt = cur + game->map.col;
+		*nxt = game->map.col * ((game->enemy.y + 32) / 32) \
+		+ (game->enemy.x / 32);
 	else if (game->enemy.direction == Right)
-		*nxt = cur + 1;
+		*nxt = game->map.col * (game->enemy.y / 32) \
+		+ ((game->enemy.x + 32) / 32);
 }
 
-// 다음 칸 갈 수 있으면 가  ... 못가면 방향 바꿔  ... 갔는데 플레이어 만나면 게임 종료 ...
+static void	ft_set_rand_direction(t_game *game)
+{
+	t_direction	h_dirs[2] = {Up, Down};
+	t_direction	v_dirs[2] = {Left, Right};
+	
+	if ((game->enemy.direction == Up || game->enemy.direction == Down) && !(game->enemy.y % 32))
+		game->enemy.direction = v_dirs[rand() % 2];
+	else if ((game->enemy.direction == Left || game->enemy.direction == Right) && !(game->enemy.x % 32))
+		game->enemy.direction = h_dirs[rand() % 2];
+}
+
+static void	ft_update_en_info(t_game *game)
+{
+	if (game->enemy.direction == Up)
+		game->enemy.y -= 8;
+	else if (game->enemy.direction == Left)
+		game->enemy.x -= 8;
+	else if (game->enemy.direction == Down)
+		game->enemy.y += 8;
+	else if (game->enemy.direction == Right)
+		game->enemy.x += 8;
+}
+
 void	ft_move_enemy(t_game *game)
 {
-	t_direction	dirs[4] = {Up, Left, Down, Right};
 	int	nxt;
 
+	ft_set_rand_direction(game);
 	ft_set_nxt_idx(game, &nxt);
 	if (game->map.map_str[nxt] == '0' || game->map.map_str[nxt] == 'C')
-	{
-		game->enemy.col = nxt % game->map.col;
-		game->enemy.row = nxt / game->map.col;
-		printf("col : %d, row : %d\n", game->enemy.col, game->enemy.row);
-	}
+		ft_update_en_info(game);
 	else if (game->map.map_str[nxt] == '1' || game->map.map_str[nxt] == 'E')
-	{
-		game->enemy.direction = dirs[rand() % 4];
-		printf("%u\n", game->enemy.direction);
 		ft_move_enemy(game);
-	}
-	else if (game->map.map_str[nxt] == 'P')
-	{
-		printf("die ~~~~~\n");
+	else if (game->map.map_str[nxt] == 'P') // 이 부분 수정 필요
 		ft_exit_game(game);
-	}
 }
