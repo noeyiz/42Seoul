@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:28:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/06 16:16:29 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/09 21:55:52 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 typedef enum e_direction
 {
 	Up,
-	Down,
 	Left,
+	Down,
 	Right,
 	Stop
 }	t_direction;
@@ -60,13 +60,25 @@ typedef struct s_pl_sprite
 	void	*closed;
 	void	*up;
 	void	*up_semi;
-	void	*down;
-	void	*down_semi;
 	void	*left;
 	void	*left_semi;
+	void	*down;
+	void	*down_semi;
 	void	*right;
 	void	*right_semi;
 }	t_pl_sprite;
+
+typedef struct s_en_sprite
+{
+	void	*up1;
+	void	*up2;
+	void	*left1;
+	void	*left2;
+	void	*down1;
+	void	*down2;
+	void	*right1;
+	void	*right2;
+}	t_en_sprite;
 
 typedef struct s_map
 {
@@ -85,6 +97,15 @@ typedef struct s_player
 	t_direction	direction;
 }	t_player;
 
+typedef struct s_enemy
+{
+	int			col;
+	int			row;
+	int			x;
+	int			y;
+	t_direction	direction;
+}	t_enemy;
+
 typedef struct s_game
 {
 	int			collectible;
@@ -92,8 +113,10 @@ typedef struct s_game
 	void		*win;
 	t_sprite	sprites;
 	t_pl_sprite	pl_sprites;
+	t_en_sprite	en_sprites;
 	t_map		map;
 	t_player	player;
+	t_enemy		enemy;
 }	t_game;
 
 /* map */
@@ -102,15 +125,23 @@ void	ft_verify_map(t_map *map);
 
 /* sprites */
 void	ft_init_sprites(t_game *game);
-void	ft_init_pl_sprites(t_game *game);
 void	ft_set_sprites(t_game *game);
 
 /* player */
 void	ft_init_player(t_game *game);
+void	ft_init_pl_sprites(t_game *game);
 void	*ft_get_pl_sprite(t_game *game);
+
+/* enemy */
+void	ft_init_enemy(t_game *game);
+void	ft_init_en_sprites(t_game *game);
+void	*ft_get_en_sprite(t_game *game);
 
 /* move */
 void	ft_move(t_game *game, t_direction direction);
+
+/* move_enemy */
+void	ft_move_enemy(t_game *game);
 
 /* game */
 void	ft_start_game(t_game *game);

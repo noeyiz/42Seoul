@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 13:58:07 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 13:58:19 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/09 21:43:54 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	ft_get_cur_idx(t_map *map, int *cur)
+static void	ft_set_cur_idx(t_map *map, int *cur)
 {
 	int	idx;
 
@@ -25,7 +25,7 @@ static void	ft_get_cur_idx(t_map *map, int *cur)
 	}
 }
 
-static void	ft_get_nxt_idx(t_map *map, t_direction direction, int cur, int *nxt)
+static void	ft_set_nxt_idx(t_map *map, t_direction direction, int cur, int *nxt)
 {
 	if (direction == Up)
 		*nxt = cur - map->col;
@@ -42,8 +42,8 @@ void	ft_move(t_game *game, t_direction direction)
 	int	cur;
 	int	nxt;
 
-	ft_get_cur_idx(&game->map, &cur);
-	ft_get_nxt_idx(&game->map, direction, cur, &nxt);
+	ft_set_cur_idx(&game->map, &cur);
+	ft_set_nxt_idx(&game->map, direction, cur, &nxt);
 	if (game->map.map_str[nxt] != '1')
 	{
 		if (game->map.map_str[nxt] == 'C')

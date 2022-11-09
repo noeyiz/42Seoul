@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:07:29 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/06 15:32:03 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/09 21:31:34 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,6 @@ void	ft_init_sprites(t_game *game)
 		"sprites/Other/Walls/wall.xpm", &width, &height);
 }
 
-void	ft_init_pl_sprites(t_game *game)
-{
-	int	width;
-	int	height;
-
-	game->pl_sprites.closed = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_closed.xpm", &width, &height);
-	game->pl_sprites.up = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_open_up.xpm", &width, &height);
-	game->pl_sprites.up_semi = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_semi_up.xpm", &width, &height);
-	game->pl_sprites.down = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_open_down.xpm", &width, &height);
-	game->pl_sprites.down_semi = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_semi_down.xpm", &width, &height);
-	game->pl_sprites.left = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_open_left.xpm", &width, &height);
-	game->pl_sprites.left_semi = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_semi_left.xpm", &width, &height);
-	game->pl_sprites.right = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_open_right.xpm", &width, &height);
-	game->pl_sprites.right_semi = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Pac-Man/pac_semi_right.xpm", &width, &height);
-}
-
 static void	ft_put_image(t_game *game, void *sprite, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, sprite, \
@@ -62,6 +37,12 @@ static void	ft_put_player_image(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx, game->win, ft_get_pl_sprite(game), \
 	game->player.x + SIZE, game->player.y + SIZE);
+}
+
+static void	ft_put_enemy_image(t_game *game)
+{
+	mlx_put_image_to_window(game->mlx, game->win, ft_get_en_sprite(game), \
+	(game->enemy.col + 1) * SIZE, (game->enemy.row + 1) * SIZE);
 }
 
 void	ft_set_sprites(t_game *game)
@@ -91,4 +72,5 @@ void	ft_set_sprites(t_game *game)
 		row++;
 	}
 	ft_put_player_image(game);
+	ft_put_enemy_image(game);
 }

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:43:54 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/06 16:15:42 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/09 16:53:28 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	ft_init_game(t_game *game)
 
 	ft_init_player(game);
 	ft_init_pl_sprites(game);
+	ft_init_enemy(game);
+	ft_init_en_sprites(game);
 	ft_init_sprites(game);
 	ft_set_sprites(game);
 	game->collectible = 0;

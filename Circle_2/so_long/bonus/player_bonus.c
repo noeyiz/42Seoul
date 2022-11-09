@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:06:02 by jikoo             #+#    #+#             */
-/*   Updated: 2022/10/26 16:50:56 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/09 21:15:09 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_init_player(t_game *game)
 	int	row;
 
 	game->player.cnt = 0;
-	game->player.direction = Stop;
 	row = 0;
 	while (row < game->map.row)
 	{
@@ -29,6 +28,7 @@ void	ft_init_player(t_game *game)
 			{
 				game->player.col = col;
 				game->player.row = row;
+				break ;
 			}
 			col++;
 		}
@@ -36,6 +36,32 @@ void	ft_init_player(t_game *game)
 	}
 	game->player.x = game->player.col * SIZE;
 	game->player.y = game->player.row * SIZE;
+	game->player.direction = Stop;
+}
+
+void	ft_init_pl_sprites(t_game *game)
+{
+	int	width;
+	int	height;
+
+	game->pl_sprites.closed = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_closed.xpm", &width, &height);
+	game->pl_sprites.up = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_open_up.xpm", &width, &height);
+	game->pl_sprites.up_semi = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_semi_up.xpm", &width, &height);
+	game->pl_sprites.down = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_open_down.xpm", &width, &height);
+	game->pl_sprites.down_semi = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_semi_down.xpm", &width, &height);
+	game->pl_sprites.left = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_open_left.xpm", &width, &height);
+	game->pl_sprites.left_semi = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_semi_left.xpm", &width, &height);
+	game->pl_sprites.right = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_open_right.xpm", &width, &height);
+	game->pl_sprites.right_semi = mlx_xpm_file_to_image(game->mlx, \
+		"sprites/Pac-Man/pac_semi_right.xpm", &width, &height);
 }
 
 void	*ft_get_pl_sprite(t_game *game)

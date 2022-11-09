@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/05 13:59:18 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/05 13:59:56 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/09 21:51:15 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 
 B_DIR		= bonus/
-B_SRCS		= main_bonus.c map_bonus.c map_checker_bonus.c player_bonus.c sprites_bonus.c \
-			  move_bonus.c game_bonus.c utils_bonus.c get_next_line_bonus.c
+B_SRCS		= main_bonus.c map_bonus.c map_checker_bonus.c player_bonus.c enemy_bonus.c \
+			  sprites_bonus.c move_bonus.c move_enemy_bonus.c game_bonus.c utils_bonus.c \
+			  get_next_line_bonus.c
 B_PATH		= $(addprefix $(B_DIR), $(B_SRCS))
 B_OBJS		= $(B_PATH:c=o)
 
