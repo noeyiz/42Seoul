@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:35:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 01:28:25 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 17:05:33 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,19 @@ static void	ft_set_nxt_idx(t_game *game, int *nxt)
 
 static void	ft_set_rand_direction(t_game *game)
 {
+	int	cur;
 	t_direction	h_dirs[2] = {Up, Down};
 	t_direction	v_dirs[2] = {Left, Right};
 	
-	if ((game->enemy.direction == Up || game->enemy.direction == Down) && !(game->enemy.y % 32))
+	cur = game->map.col * (game->enemy.y / 32) + (game->enemy.x / 32);
+	if ((game->enemy.direction == Up || game->enemy.direction == Down) \
+	&& !(game->enemy.y % 32) \
+	&& (game->map.map_str[cur - 1] != '1' || game->map.map_str[cur + 1] != '1'))
 		game->enemy.direction = v_dirs[rand() % 2];
-	else if ((game->enemy.direction == Left || game->enemy.direction == Right) && !(game->enemy.x % 32))
+	else if ((game->enemy.direction == Left || game->enemy.direction == Right) \
+	&& !(game->enemy.x % 32) \
+	&& (game->map.map_str[cur - game->map.col] != '1' \
+	|| game->map.map_str[cur + game->map.col] != '1'))
 		game->enemy.direction = h_dirs[rand() % 2];
 }
 
@@ -51,6 +58,14 @@ static void	ft_update_en_info(t_game *game)
 		game->enemy.x += 8;
 }
 
+static int	ft_did_touch(t_game *game)
+{
+	if (ft_abs(game->player.x, game->enemy.x) < 32 \
+	&& ft_abs(game->player.y, game->enemy.y) < 32)
+		return (1);
+	return (0);
+}
+
 void	ft_move_enemy(t_game *game)
 {
 	int	nxt;
@@ -61,6 +76,6 @@ void	ft_move_enemy(t_game *game)
 		ft_update_en_info(game);
 	else if (game->map.map_str[nxt] == '1' || game->map.map_str[nxt] == 'E')
 		ft_move_enemy(game);
-	else if (game->map.map_str[nxt] == 'P') // 이 부분 수정 필요
+	else if (ft_did_touch(game))
 		ft_exit_game(game);
 }

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:07:29 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 00:54:28 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 16:47:10 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	ft_set_sprites(t_game *game)
 			idx = row * game->map.col + col;
 			if (game->map.map_str[idx] == '1')
 				ft_put_image(game, game->sprites.wall, col, row);
-			if (game->map.map_str[idx] == '0')
-				ft_put_image(game, game->sprites.black, col, row);
 			if (game->map.map_str[idx] == 'E')
 				ft_put_image(game, game->sprites.portal, col, row);
 			if (game->map.map_str[idx] == 'C')

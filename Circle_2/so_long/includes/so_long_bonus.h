@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:28:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 01:17:46 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/10 15:24:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define SO_LONG_BONUS_H
 
 # include <fcntl.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../mlx/mlx.h"
 
 # define SIZE 32
 
@@ -147,7 +147,7 @@ int		ft_exit_game(t_game *game);
 
 /* utils */
 void	ft_print_err_and_exit(char *message);
-
+int		ft_abs(int n, int m);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strrepl(char *str, char c1, char c2);
