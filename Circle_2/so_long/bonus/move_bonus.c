@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:20:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/12 15:19:21 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 17:37:53 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,4 @@ void	ft_move(t_game *game, t_direction direction)
 		ft_move_enemy(game);
 		ft_set_sprites(game);
 	}
-} 
+}

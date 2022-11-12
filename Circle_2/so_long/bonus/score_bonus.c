@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:06:22 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/12 16:28:10 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 16:43:41 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long_bonus.h"
 
-void	ft_init_sc_sprites(t_game* game)
+void	ft_init_sc_sprites(t_game *game)
 {
 	int	width;
 	int	height;
@@ -75,7 +75,8 @@ void	ft_put_score_image(t_game *game)
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->sprites.black, \
 		((game->map.col / 2) + 3 - i) * SIZE, (game->map.row + 2) * SIZE);
-		mlx_put_image_to_window(game->mlx, game->win, ft_get_sc_sprite(game, score % 10), \
+		mlx_put_image_to_window(game->mlx, game->win, \
+		ft_get_sc_sprite(game, score % 10), \
 		((game->map.col / 2) + 3 - i) * SIZE, (game->map.row + 2) * SIZE);
 		score /= 10;
 	}

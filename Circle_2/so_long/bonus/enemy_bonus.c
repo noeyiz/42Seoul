@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:48:52 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/12 15:21:55 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 16:42:53 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_init_enemy(t_game *game)
 	while (1)
 	{
 		rand_num = rand() % (ft_strlen(game->map.map_str) - 1);
-		if (game->map.map_str[rand_num] == '0')
+		if (game->map.map_str[rand_num] == '0' \
+		|| game->map.map_str[rand_num] == 'C')
 		{
 			game->enemy.x = (rand_num % game->map.col) * SIZE;
 			game->enemy.y = (rand_num / game->map.col) * SIZE;
