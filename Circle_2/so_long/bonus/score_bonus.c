@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:06:22 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/12 16:43:41 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 19:45:30 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	ft_put_score_image(t_game *game)
 
 	i = 0;
 	score = game->score;
+	if (score > 9999)
+	{
+		printf(MAGENTA "Game Over\n" RESET "Too many moves.\n");
+		ft_exit_game(game);
+	}
 	while (++i <= 4)
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->sprites.black, \

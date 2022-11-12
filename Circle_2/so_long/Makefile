@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/05 13:59:18 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/12 15:15:06 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/12 19:38:10 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,11 +54,11 @@ endif
 	
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(MLX) -o $@ $(OBJS)
-	@echo "$(MAGENTA)|----------------------------------------|$(RESET)"
-	@echo "$(MAGENTA)|                                        |$(RESET)"
-	@echo "$(MAGENTA)|       so_long compile finished :)      |$(RESET)"
-	@echo "$(MAGENTA)|                                        |$(RESET)"
-	@echo "$(MAGENTA)|----------------------------------------|$(RESET)"
+	@echo "$(BLUE)|----------------------------------------|$(RESET)"
+	@echo "$(BLUE)|                                        |$(RESET)"
+	@echo "$(BLUE)|       so_long compile finished :)      |$(RESET)"
+	@echo "$(BLUE)|                                        |$(RESET)"
+	@echo "$(BLUE)|----------------------------------------|$(RESET)"
 
 all: $(NAME)
 
