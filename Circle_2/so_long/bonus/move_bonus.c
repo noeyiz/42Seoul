@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:20:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:44:30 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 15:19:21 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_set_nxt2_idx(t_game *game, int nxt, int *nxt2, t_direction dir)
 
 static void	ft_update_pl_info(t_game *game, t_direction direction)
 {
-	game->player.cnt++;
+	game->score++;
 	game->player.direction = direction;
 	if (direction == Up)
 		game->player.y -= 8;
@@ -86,7 +86,8 @@ void	ft_move(t_game *game, t_direction direction)
 	cur = game->map.col * game->player.row + game->player.col;
 	ft_set_nxt_idx(game, &nxt, direction);
 	ft_set_nxt2_idx(game, nxt, &nxt2, direction);
-	if (game->map.map_str[nxt] == 'E' && game->collectible)
+	if ((game->map.map_str[nxt] == 'E' || game->map.map_str[nxt2] == 'E') \
+	&& game->collectible)
 		return ;
 	if (game->map.map_str[nxt] != '1' && game->map.map_str[nxt2] != '1')
 	{
@@ -103,4 +104,4 @@ void	ft_move(t_game *game, t_direction direction)
 		ft_move_enemy(game);
 		ft_set_sprites(game);
 	}
-}
+} 

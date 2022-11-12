@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:35:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 17:05:33 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 14:46:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,27 @@ static void	ft_set_nxt_idx(t_game *game, int *nxt)
 static void	ft_set_rand_direction(t_game *game)
 {
 	int	cur;
-	t_direction	h_dirs[2] = {Up, Down};
-	t_direction	v_dirs[2] = {Left, Right};
-	
+
 	cur = game->map.col * (game->enemy.y / 32) + (game->enemy.x / 32);
 	if ((game->enemy.direction == Up || game->enemy.direction == Down) \
 	&& !(game->enemy.y % 32) \
 	&& (game->map.map_str[cur - 1] != '1' || game->map.map_str[cur + 1] != '1'))
-		game->enemy.direction = v_dirs[rand() % 2];
+	{
+		if (rand() % 2)
+			game->enemy.direction = Left;
+		else
+			game->enemy.direction = Right;
+	}
 	else if ((game->enemy.direction == Left || game->enemy.direction == Right) \
 	&& !(game->enemy.x % 32) \
 	&& (game->map.map_str[cur - game->map.col] != '1' \
 	|| game->map.map_str[cur + game->map.col] != '1'))
-		game->enemy.direction = h_dirs[rand() % 2];
+	{
+		if (rand() % 2)
+			game->enemy.direction = Up;
+		else
+			game->enemy.direction = Down;
+	}
 }
 
 static void	ft_update_en_info(t_game *game)

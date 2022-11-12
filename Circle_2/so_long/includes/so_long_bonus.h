@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:28:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 15:24:07 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 15:26:46 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,21 @@ typedef enum e_direction
 	Stop
 }	t_direction;
 
-typedef struct s_sprite
+typedef struct s_sc_sprites
 {
-	void	*black;
-	void	*pacfood;
-	void	*portal;
-	void	*wall;
-}	t_sprite;
+	void	*zero;
+	void	*one;
+	void	*two;
+	void	*three;
+	void	*four;
+	void	*five;
+	void	*six;
+	void	*seven;
+	void	*eight;
+	void	*nine;
+}	t_sc_sprites;
 
-typedef struct s_pl_sprite
+typedef struct s_pl_sprites
 {
 	void	*closed;
 	void	*up;
@@ -66,9 +72,9 @@ typedef struct s_pl_sprite
 	void	*down_semi;
 	void	*right;
 	void	*right_semi;
-}	t_pl_sprite;
+}	t_pl_sprites;
 
-typedef struct s_en_sprite
+typedef struct s_en_sprites
 {
 	void	*up1;
 	void	*up2;
@@ -78,7 +84,15 @@ typedef struct s_en_sprite
 	void	*down2;
 	void	*right1;
 	void	*right2;
-}	t_en_sprite;
+}	t_en_sprites;
+
+typedef struct s_sprites
+{
+	void	*black;
+	void	*pacfood;
+	void	*portal;
+	void	*wall;
+}	t_sprites;
 
 typedef struct s_map
 {
@@ -89,7 +103,6 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			cnt;
 	int			col;
 	int			row;
 	int			x;
@@ -106,34 +119,42 @@ typedef struct s_enemy
 
 typedef struct s_game
 {
-	int			collectible;
-	void		*mlx;
-	void		*win;
-	t_sprite	sprites;
-	t_pl_sprite	pl_sprites;
-	t_en_sprite	en_sprites;
-	t_map		map;
-	t_player	player;
-	t_enemy		enemy;
+	int				score;
+	int				collectible;
+	void			*mlx;
+	void			*win;
+	t_sc_sprites	sc_sprites;
+	t_pl_sprites	pl_sprites;
+	t_en_sprites	en_sprites;
+	t_sprites		sprites;
+	t_map			map;
+	t_player		player;
+	t_enemy			enemy;
 }	t_game;
 
 /* map */
 void	ft_init_map(t_map *map, char *file_name);
 void	ft_verify_map(t_map *map);
 
-/* sprites */
-void	ft_init_sprites(t_game *game);
-void	ft_set_sprites(t_game *game);
+/* score */
+void	ft_init_sc_sprites(t_game *game);
+void	ft_put_score_image(t_game *game);
 
 /* player */
 void	ft_init_player(t_game *game);
 void	ft_init_pl_sprites(t_game *game);
 void	*ft_get_pl_sprite(t_game *game);
+void	ft_put_player_image(t_game *game);
 
 /* enemy */
 void	ft_init_enemy(t_game *game);
 void	ft_init_en_sprites(t_game *game);
 void	*ft_get_en_sprite(t_game *game);
+void	ft_put_enemy_image(t_game *game);
+
+/* sprites */
+void	ft_init_sprites(t_game *game);
+void	ft_set_sprites(t_game *game);
 
 /* move */
 void	ft_move(t_game *game, t_direction direction);
@@ -151,6 +172,7 @@ int		ft_abs(int n, int m);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strrepl(char *str, char c1, char c2);
+
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strldup(char *str, int start, int size);
 

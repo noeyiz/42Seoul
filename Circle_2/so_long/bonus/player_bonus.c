@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:06:02 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:15:09 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 15:20:12 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_init_player(t_game *game)
 	int	col;
 	int	row;
 
-	game->player.cnt = 0;
 	row = 0;
 	while (row < game->map.row)
 	{
@@ -68,27 +67,33 @@ void	*ft_get_pl_sprite(t_game *game)
 {
 	if (game->player.direction == Up)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->pl_sprites.up);
 		return (game->pl_sprites.up_semi);
 	}
 	else if (game->player.direction == Down)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->pl_sprites.down);
 		return (game->pl_sprites.down_semi);
 	}
 	else if (game->player.direction == Left)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->pl_sprites.left);
 		return (game->pl_sprites.left_semi);
 	}
 	else if (game->player.direction == Right)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->pl_sprites.right);
 		return (game->pl_sprites.right_semi);
 	}
 	return (game->pl_sprites.closed);
+}
+
+void	ft_put_player_image(t_game *game)
+{
+	mlx_put_image_to_window(game->mlx, game->win, ft_get_pl_sprite(game), \
+	game->player.x + SIZE, game->player.y + SIZE);
 }

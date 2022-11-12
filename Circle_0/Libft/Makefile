@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 14:33:45 by jikoo             #+#    #+#              #
-#    Updated: 2022/07/26 16:07:26 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/12 16:17:50 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ endif
 NAME        = libft.a
 
 all: $(NAME)
+	sleep 1
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)

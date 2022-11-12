@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:48:52 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 16:50:46 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 15:21:55 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,33 @@ void	*ft_get_en_sprite(t_game *game)
 {
 	if (game->enemy.direction == Up)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->en_sprites.up1);
 		return (game->en_sprites.up2);
 	}
 	else if (game->enemy.direction == Down)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->en_sprites.down1);
 		return (game->en_sprites.down2);
 	}
 	else if (game->enemy.direction == Left)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->en_sprites.left1);
 		return (game->en_sprites.left2);
 	}
 	else if (game->enemy.direction == Right)
 	{
-		if (game->player.cnt % 2)
+		if (game->score % 2)
 			return (game->en_sprites.right1);
 		return (game->en_sprites.right2);
 	}
 	return (0);
+}
+
+void	ft_put_enemy_image(t_game *game)
+{
+	mlx_put_image_to_window(game->mlx, game->win, ft_get_en_sprite(game), \
+	game->enemy.x + SIZE, game->enemy.y + SIZE);
 }
