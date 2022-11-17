@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/05 13:59:18 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/12 19:38:10 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/17 14:49:58 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= so_long
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
-MLX			= -lmlx -framework OpenGL -framework Appkit
+MLX			= -Lmlx -lmlx -framework OpenGL -framework Appkit
 
 # header files
 HEADER_DIR  = includes/
@@ -23,7 +23,8 @@ HEADER		= $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 # source files
 M_DIR		= mandatory/
-M_SRCS      = main.c map.c map_checker.c sprites.c move.c game.c utils.c get_next_line.c
+M_SRCS      = main.c map.c map_checker.c map_path_checker.c sprites.c move.c game.c utils.c \
+			  get_next_line.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 
