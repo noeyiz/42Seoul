@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 13:55:05 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:12 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/25 13:52:18 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@
 # include <unistd.h>
 
 # define SIZE 32
-
-# define RESET "\033[0m"
-# define RED "\033[1;31m"
-# define GREEN "\033[1;32m"
-# define YELLOW "\033[1;33m"
-# define BLUE "\033[1;34m"
-# define MAGENTA "\033[1;35m"
-# define CYAN "\033[1;36m"
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_EXIT 17
@@ -89,9 +81,9 @@ int		ft_exit_game(t_game *game);
 
 /* utils ... */
 void	ft_print_err_and_exit(char *message);
-
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
+void	ft_putstr(char *str);
 char	*ft_strrepl(char *str, char c1, char c2);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strldup(char *str, int start, int size);

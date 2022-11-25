@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 13:57:43 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 13:57:49 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/25 13:46:51 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_check_rectangle(t_map *map)
 {
 	if (ft_strlen(map->map_str) != map->col * map->row)
-		ft_print_err_and_exit("Map must be rectangular!");
+		ft_print_err_and_exit("Error\nMap must be rectangular!");
 }
 
 static void	ft_check_components(char *map_str)
@@ -38,11 +38,11 @@ static void	ft_check_components(char *map_str)
 		else if (map_str[idx] == 'P')
 			player++;
 		else if (map_str[idx] != '1' && map_str[idx] != '0')
-			ft_print_err_and_exit("Unexpected char(s) in map!");
+			ft_print_err_and_exit("Error\nUnexpected char(s) in map!");
 		idx++;
 	}
 	if (!exit || !collectible || player != 1)
-		ft_print_err_and_exit("Map must have at least one exit(E)," \
+		ft_print_err_and_exit("Error\nMap must have at least one exit(E)," \
 			" one collectible(C), and one starting position(P)!");
 }
 
@@ -56,7 +56,7 @@ static void	ft_check_wall(t_map *map)
 	{
 		if (map->map_str[cur_col] != '1'
 			|| map->map_str[(map->row - 1) * map->col + cur_col] != '1')
-			ft_print_err_and_exit("Map must be surrounded by walls!");
+			ft_print_err_and_exit("Error\nMap must be surrounded by walls!");
 		cur_col++;
 	}
 	cur_row = 0;
@@ -64,7 +64,7 @@ static void	ft_check_wall(t_map *map)
 	{
 		if (map->map_str[cur_row * map->col] != '1'
 			|| map->map_str[cur_row * map->col + (map->col - 1)] != '1')
-			ft_print_err_and_exit("Map must be surrounded by walls!");
+			ft_print_err_and_exit("Error\nMap must be surrounded by walls!");
 		cur_row++;
 	}
 }

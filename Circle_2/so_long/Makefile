@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/05 13:59:18 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/12 19:38:10 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/25 14:09:07 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ HEADER		= $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 # source files
 M_DIR		= mandatory/
-M_SRCS      = main.c map.c map_checker.c sprites.c move.c game.c utils.c get_next_line.c
+M_SRCS      = main.c map.c map_checker.c sprites.c move.c game.c utils.c utils2.c get_next_line.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 
@@ -36,11 +36,7 @@ B_OBJS		= $(B_PATH:c=o)
 
 # colors
 RESET = \033[0m
-RED = \033[1;31m
 GREEN = \033[1;32m
-YELLOW = \033[1;33m
-BLUE = \033[1;34m
-MAGENTA = \033[1;35m
 CYAN = \033[1;36m
 
 ifdef BONUSFLAG
@@ -54,11 +50,13 @@ endif
 	
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(MLX) -o $@ $(OBJS)
-	@echo "$(BLUE)|----------------------------------------|$(RESET)"
-	@echo "$(BLUE)|                                        |$(RESET)"
-	@echo "$(BLUE)|       so_long compile finished :)      |$(RESET)"
-	@echo "$(BLUE)|                                        |$(RESET)"
-	@echo "$(BLUE)|----------------------------------------|$(RESET)"
+	@echo "$(GREEN)╔════════════════════════════════════════╗$(RESET)"
+	@echo "$(GREEN)║       so_long compile finished :)      ║$(RESET)"
+	@echo "$(GREEN)╠════════════════════════════════════════╣$(RESET)"
+	@echo "$(GREEN)║                                        ║$(RESET)"
+	@echo "$(GREEN)║                     Have fun !         ║$(RESET)"
+	@echo "$(GREEN)║                                        ║$(RESET)"
+	@echo "$(GREEN)╚════════════════════════════════════════╝$(RESET)"
 
 all: $(NAME)
 
@@ -68,9 +66,16 @@ bonus:
 clean:
 	rm -rf $(M_OBJS)
 	rm -rf $(B_OBJS)
+	@echo "$(CYAN)╔════════════════════════════════════════╗$(RESET)"
+	@echo "$(CYAN)║           make clean finished.         ║$(RESET)"
+	@echo "$(CYAN)╚════════════════════════════════════════╝$(RESET)"
 
-fclean: clean
+fclean: 
+	make clean
 	rm -rf $(NAME)
+	@echo "$(CYAN)╔════════════════════════════════════════╗$(RESET)"
+	@echo "$(CYAN)║          make fclean finished.         ║$(RESET)"
+	@echo "$(CYAN)╚════════════════════════════════════════╝$(RESET)"
 
 re:
 	make fclean

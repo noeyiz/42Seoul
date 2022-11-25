@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:35:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/12 17:38:10 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/12 20:24:45 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,8 @@ void	ft_move_enemy(t_game *game)
 	}
 	else if (ft_abs(game->player.x, game->enemy.x) <= 32 \
 	&& ft_abs(game->player.y, game->enemy.y) <= 32)
+	{
+		printf(MAGENTA "Game Over\n" RESET "Meet enemy !!!\n");
 		ft_exit_game(game);
+	}
 }

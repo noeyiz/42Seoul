@@ -6,17 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 13:56:45 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/05 13:56:58 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/25 13:50:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	ft_print_err_and_exit(char *message)
-{
-	printf(RED "Error\n" RESET "%s\n", message);
-	exit(1);
-}
 
 int	main(int argc, char *argv[])
 {
