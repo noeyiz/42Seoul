@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:55:22 by jikoo             #+#    #+#             */
-/*   Updated: 2022/10/29 13:10:31 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/17 19:31:58 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ static char	*ft_getword(char const *s, char c)
 static char	*ft_free_all(char **s, int i)
 {
 	while (i--)
+	{
 		free(s[i]);
+		s[i] = NULL;
+	}
 	free(s);
+	s = NULL;
 	return (NULL);
 }
 
