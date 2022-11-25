@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/05 13:58:07 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/09 21:43:54 by jikoo            ###   ########.fr       */
+/*   Created: 2022/11/25 18:23:59 by jikoo             #+#    #+#             */
+/*   Updated: 2022/11/25 18:25:38 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void	ft_move(t_game *game, t_direction direction)
 			else
 				ft_exit_game(game);
 		}
-		printf("count : %d\n", ++game->cnt);
+		ft_putstr_fd("count : ", 1);
+		ft_putnbr_fd(++game->cnt, 1);
+		write(1, "\n", 1);
 		game->map.map_str[cur] = '0';
 		game->map.map_str[nxt] = 'P';
 	}

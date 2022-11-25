@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/05 13:57:53 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 13:48:09 by jikoo            ###   ########.fr       */
+/*   Created: 2022/11/25 16:38:09 by jikoo             #+#    #+#             */
+/*   Updated: 2022/11/25 17:11:39 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ft_check_file_type(char *file_name)
 {
-	if (ft_strcmp(file_name + ft_strlen(file_name) - 4, ".ber"))
-		ft_print_err_and_exit("Error\nInvalid file type, use .ber!");
+	if (ft_strncmp(file_name + ft_strlen(file_name) - 4, ".ber", 4))
+		ft_print_err_and_exit("Invalid file type, use .ber!");
 }
 
 static void	ft_count_col_and_row(t_map *map, char *file_name)
@@ -26,7 +26,7 @@ static void	ft_count_col_and_row(t_map *map, char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		ft_print_err_and_exit("Error\nFile not found!");
+		ft_print_err_and_exit("File not found!");
 	cur_col = 0;
 	map->col = 0;
 	map->row = 0;
@@ -54,30 +54,30 @@ static void	ft_set_map(t_map *map, char *file_name, int idx)
 
 	map->map_str = (char *)malloc(sizeof(char) * (map->col * map->row + 1));
 	if (!map->map_str)
-		ft_print_err_and_exit("Error\nMemory allocation error!");
+		ft_print_err_and_exit("Memory allocation error!");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		ft_print_err_and_exit("Error\nFile not found!");
+		ft_print_err_and_exit("File not found!");
 	cur_row = 0;
 	while (cur_row < map->row)
 	{
-		line = ft_strrepl(ft_get_next_line(fd), '\n', '\0');
+		line = ft_strrepl(get_next_line(fd), '\n', '\0');
 		cur_col = 0;
-		while (cur_col < ft_strlen(line))
+		while ((size_t)cur_col < ft_strlen(line))
 		{
 			map->map_str[idx++] = line[cur_col];
 			cur_col++;
 		}
 		cur_row++;
 	}
-	map->map_str[idx] = '\0';
 	close(fd);
+	map->map_str[idx] = '\0';
 }
 
-void	ft_init_map(t_map *map, char *file_name)
+void	ft_init_map(t_game *game, char *file_name)
 {
 	ft_check_file_type(file_name);
-	ft_count_col_and_row(map, file_name);
-	ft_set_map(map, file_name, 0);
-	ft_verify_map(map);
+	ft_count_col_and_row(&(game->map), file_name);
+	ft_set_map(&(game->map), file_name, 0);
+	ft_verify_map(game);
 }

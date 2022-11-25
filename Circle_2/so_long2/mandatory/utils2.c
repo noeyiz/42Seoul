@@ -6,11 +6,25 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:50:39 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 13:54:38 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/25 14:32:43 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+char	*ft_strrepl(char *str, char c1, char c2)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c1)
+			str[i] = c2;
+		i++;
+	}
+	return (str);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
