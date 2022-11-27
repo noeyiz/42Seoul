@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:29:31 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:35:39 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/28 00:49:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ typedef struct s_map
 typedef struct s_check_map
 {
 	int	pl_col;
-    int pl_row;
+	int	pl_row;
 	int	collectible;
-	int exit;
+	int	exit;
 	int	*check;	
 }	t_check_map;
 

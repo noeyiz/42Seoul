@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:25:08 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:26:20 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/28 00:48:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_put_score_image(t_game *game)
 	score = game->score;
 	if (score > 9999)
 	{
-        ft_putstr_fd("Game Over !\nToo many moves...\n", 1);
+		ft_putstr_fd("Game Over !\nToo many moves...\n", 1);
 		ft_exit_game(game);
 	}
 	while (++i <= 4)
