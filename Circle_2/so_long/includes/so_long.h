@@ -6,11 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:56:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 18:25:11 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/27 20:33:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SO_LONG_H
+#ifndef SO_LONG_H
 # define SO_LONG_H
 
 # include <fcntl.h>
@@ -99,4 +99,4 @@ int		ft_exit_game(t_game *game);
 void	ft_print_err_and_exit(char *message);
 char	*ft_strrepl(char *str, char c1, char c2);
 
-# endif
+#endif

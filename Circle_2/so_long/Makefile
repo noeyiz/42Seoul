@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:50:55 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/25 18:28:49 by jikoo            ###   ########.fr        #
+#    Updated: 2022/11/27 20:32:42 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME		= so_long
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
+RM			= rm -f
 MLX			= -Lmlx -lmlx -framework OpenGL -framework Appkit
 LIBFT		= -Llibft -lft
 
@@ -31,7 +32,8 @@ M_OBJS		= $(M_PATH:c=o)
 
 B_DIR		= bonus/
 B_SRCS      = main_bonus.c map_bonus.c map_checker_bonus.c map_path_checker_bonus.c \
-			  sprites_bonus.c move_bonus.c game_bonus.c utils_bonus.c
+			  sprites_bonus.c player_bonus.c enemy_bonus.c score_bonus.c \
+			  move_bonus.c move_enemy_bonus.c game_bonus.c utils_bonus.c
 B_PATH		= $(addprefix $(B_DIR), $(B_SRCS))
 B_OBJS		= $(B_PATH:c=o)
 
@@ -54,10 +56,10 @@ endif
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 	
-$(NAME): $(G_OBJS) $(M_OBJS)
+$(NAME): $(G_OBJS) $(OBJS)
 	@make -C mlx all
 	@make -C libft all
-	@$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(G_OBJS) $(M_OBJS) -o $@
+	@$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(G_OBJS) $(OBJS) -o $@
 	@echo "$(GREEN)╔════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║       so_long compile finished :)      ║$(RESET)"
 	@echo "$(GREEN)╠════════════════════════════════════════╣$(RESET)"
@@ -74,9 +76,9 @@ bonus:
 clean:
 	@make -C mlx clean
 	@make -C libft clean
-	@rm -rf $(G_OBJS)
-	@rm -rf $(M_OBJS)
-	@rm -rf $(B_OBJS)
+	@$(RM) $(G_OBJS)
+	@$(RM) $(M_OBJS)
+	@$(RM) $(B_OBJS)
 	@echo "$(CYAN)╔════════════════════════════════════════╗$(RESET)"
 	@echo "$(CYAN)║           make clean finished.         ║$(RESET)"
 	@echo "$(CYAN)╚════════════════════════════════════════╝$(RESET)"
@@ -84,7 +86,7 @@ clean:
 fclean:
 	@make -C libft fclean
 	@make clean
-	@rm -rf $(NAME)
+	@$(RM) $(NAME)
 	@echo "$(CYAN)╔════════════════════════════════════════╗$(RESET)"
 	@echo "$(CYAN)║          make fclean finished.         ║$(RESET)"
 	@echo "$(CYAN)╚════════════════════════════════════════╝$(RESET)"

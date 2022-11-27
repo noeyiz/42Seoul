@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_path_checker.c                                 :+:      :+:    :+:   */
+/*   map_path_checker_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 17:11:13 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:43:56 by jikoo            ###   ########.fr       */
+/*   Created: 2022/11/27 20:19:21 by jikoo             #+#    #+#             */
+/*   Updated: 2022/11/27 20:43:43 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static void	ft_set_check_map(t_game *game, char mode)
 {
