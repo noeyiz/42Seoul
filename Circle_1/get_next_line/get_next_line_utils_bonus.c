@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:46:50 by jikoo             #+#    #+#             */
-/*   Updated: 2022/09/06 19:47:09 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/26 20:44:42 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_find_nextline(char *str)
 	return (-1);
 }
 
-int	ft_strlen(char *str)
+int	ft_gnl_strlen(char *str)
 {
 	int	len;
 
@@ -36,7 +36,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	int		idx;
 	int		len;
@@ -44,7 +44,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = ft_gnl_strlen(s1) + ft_gnl_strlen(s2);
 	join_str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!join_str)
 		return (NULL);

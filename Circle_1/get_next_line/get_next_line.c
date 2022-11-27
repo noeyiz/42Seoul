@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:14:37 by jikoo             #+#    #+#             */
-/*   Updated: 2022/09/14 12:46:08 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/26 20:52:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static char	*ft_get_line(char **backup, char *buffer)
 	char	*line;
 
 	line = NULL;
-	if (ft_strlen(*backup))
-		line = ft_strldup(*backup, 0, ft_strlen(*backup));
+	if (ft_gnl_strlen(*backup))
+		line = ft_strldup(*backup, 0, ft_gnl_strlen(*backup));
 	free(*backup);
 	*backup = NULL;
 	free(buffer);
@@ -32,7 +32,7 @@ static char	*ft_get_line_nl(char **backup, char *buffer, int idx)
 	char	*temp;
 
 	line = ft_strldup(*backup, 0, idx + 1);
-	temp = ft_strldup(*backup, idx + 1, ft_strlen(*backup) - idx - 1);
+	temp = ft_strldup(*backup, idx + 1, ft_gnl_strlen(*backup) - idx - 1);
 	free(*backup);
 	*backup = temp;
 	free(buffer);
@@ -54,7 +54,7 @@ static char	*ft_read_text(int fd, char **backup, char *buffer)
 		if (read_size == 0)
 			break ;
 		buffer[read_size] = '\0';
-		temp = ft_strjoin(*backup, buffer);
+		temp = ft_gnl_strjoin(*backup, buffer);
 		free(*backup);
 		*backup = temp;
 		idx = ft_find_nextline(*backup);
