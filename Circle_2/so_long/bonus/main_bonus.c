@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:13:03 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/28 00:48:20 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:05:26 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	main(int argc, char *argv[])
 		ft_print_err_and_exit("Invalid number of arguments!");
 	ft_init_map(&game, argv[1]);
 	ft_start_game(&game);
-	return (0);
+	exit (0);
 }
