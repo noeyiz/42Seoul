@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:30:37 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:31:12 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_check_file_type(char *file_name)
 {
 	if (ft_strncmp(file_name + ft_strlen(file_name) - 4, ".ber", 4))
-		ft_print_err_and_exit("Invalid file type, use .ber!");
+		ft_print_err("Invalid file type, use .ber!");
 }
 
 static void	ft_count_col_and_row(t_map *map, char *file_name)
@@ -26,7 +26,7 @@ static void	ft_count_col_and_row(t_map *map, char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		ft_print_err_and_exit("File not found!");
+		ft_print_err("File not found!");
 	cur_col = 0;
 	map->col = 0;
 	map->row = 0;
@@ -54,10 +54,10 @@ static void	ft_set_map(t_map *map, char *file_name, int idx)
 
 	map->map_str = (char *)malloc(sizeof(char) * (map->col * map->row + 1));
 	if (!map->map_str)
-		ft_print_err_and_exit("Memory allocation error!");
+		ft_print_err("Memory allocation error!");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		ft_print_err_and_exit("File not found!");
+		ft_print_err("File not found!");
 	cur_row = 0;
 	while (cur_row < map->row)
 	{

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:50:20 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 17:56:20 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:14:36 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_check_rectangle(t_map *map)
 {
 	if (ft_strlen(map->map_str) != (size_t)(map->col * map->row))
-		ft_print_err_and_exit("Map must be rectangular");
+		ft_print_err("Map must be rectangular");
 }
 
 static void	ft_check_components(t_game *game)
@@ -34,13 +34,13 @@ static void	ft_check_components(t_game *game)
 		else if (game->map.map_str[idx] == 'P')
 			player++;
 		else if (game->map.map_str[idx] != '1' && game->map.map_str[idx] != '0')
-			ft_print_err_and_exit("Unexpected char(s) in map!");
+			ft_print_err("Unexpected char(s) in map!");
 		idx++;
 	}
 	if (!game->check_map.collectible || game->check_map.exit != 1 \
 	|| player != 1)
-		ft_print_err_and_exit("Map must contain 1 exit, at least 1 collectible, \
-		and 1 starting position");
+		ft_print_err("Map must contain 1 exit, at least 1 collectible, " \
+		"and 1 starting position");
 }
 
 static void	ft_check_wall(t_map *map)
@@ -53,7 +53,7 @@ static void	ft_check_wall(t_map *map)
 	{
 		if (map->map_str[cur_col] != '1'
 			|| map->map_str[(map->row - 1) * map->col + cur_col] != '1')
-			ft_print_err_and_exit("Map must be surrounded by walls!");
+			ft_print_err("Map must be surrounded by walls!");
 		cur_col++;
 	}
 	cur_row = 0;
@@ -61,7 +61,7 @@ static void	ft_check_wall(t_map *map)
 	{
 		if (map->map_str[cur_row * map->col] != '1'
 			|| map->map_str[cur_row * map->col + (map->col - 1)] != '1')
-			ft_print_err_and_exit("Map must be surrounded by walls!");
+			ft_print_err("Map must be surrounded by walls!");
 		cur_row++;
 	}
 }

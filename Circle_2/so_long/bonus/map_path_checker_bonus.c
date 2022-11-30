@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:19:21 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/28 00:48:33 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_set_check_map(t_game *game, char mode)
 	game->check_map.check = (int *)malloc(sizeof(int) * \
 	ft_strlen(game->map.map_str));
 	if (!game->check_map.check)
-		ft_print_err_and_exit("Memory allocation error!");
+		ft_print_err("Memory allocation error!");
 	row = -1;
 	while (row++ < game->map.row)
 	{
@@ -65,9 +65,9 @@ void	ft_check_valid_path(t_game *game)
 	ft_set_check_map(game, 'E');
 	ft_floodfill(game->check_map.pl_col, game->check_map.pl_row, game);
 	if (game->check_map.collectible)
-		ft_print_err_and_exit("Not a valid path!");
+		ft_print_err("Not a valid path!");
 	ft_set_check_map(game, '1');
 	ft_floodfill(game->check_map.pl_col, game->check_map.pl_row, game);
 	if (game->check_map.exit)
-		ft_print_err_and_exit("Not a valid path!");
+		ft_print_err("Not a valid path!");
 }

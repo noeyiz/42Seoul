@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:29:31 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/28 00:49:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	ft_start_game(t_game *game);
 int		ft_exit_game(t_game *game);
 
 /* utils */
-void	ft_print_err_and_exit(char *message);
+void	ft_print_err(char *message);
 int		ft_abs(int n, int m);
 char	*ft_strrepl(char *str, char c1, char c2);
 

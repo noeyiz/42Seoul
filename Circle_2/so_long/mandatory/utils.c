@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:31:08 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 16:47:47 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_print_err_and_exit(char *message)
+void	ft_print_err(char *message)
 {
 	ft_putstr_fd("Error\n", 1);
 	perror(message);
