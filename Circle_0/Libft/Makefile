@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 14:33:45 by jikoo             #+#    #+#              #
-#    Updated: 2022/11/26 20:38:31 by jikoo            ###   ########.fr        #
+#    Updated: 2022/12/08 18:36:54 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ bonus:
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)
 
-fclean: clean
+fclean:
+	make clean
 	$(RM) $(NAME)
 
 re:
