@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:26:59 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:27:04 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:49:20 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,33 @@ void	ft_init_en_sprites(t_game *game)
 	int	height;
 
 	game->en_sprites.up1 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_up1.xpm", &width, &height);
+		"sprites/Ghosts/ghost_up1.xpm", &width, &height);
 	game->en_sprites.up2 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_up2.xpm", &width, &height);
+		"sprites/Ghosts/ghost_up2.xpm", &width, &height);
 	game->en_sprites.down1 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_down1.xpm", &width, &height);
+		"sprites/Ghosts/ghost_down1.xpm", &width, &height);
 	game->en_sprites.down2 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_down2.xpm", &width, &height);
+		"sprites/Ghosts/ghost_down2.xpm", &width, &height);
 	game->en_sprites.left1 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_left1.xpm", &width, &height);
+		"sprites/Ghosts/ghost_left1.xpm", &width, &height);
 	game->en_sprites.left2 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_left2.xpm", &width, &height);
+		"sprites/Ghosts/ghost_left2.xpm", &width, &height);
 	game->en_sprites.right1 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_right1.xpm", &width, &height);
+		"sprites/Ghosts/ghost_right1.xpm", &width, &height);
 	game->en_sprites.right2 = mlx_xpm_file_to_image(game->mlx, \
-		"sprites/Ghosts/K/ghost_right2.xpm", &width, &height);
+		"sprites/Ghosts/ghost_right2.xpm", &width, &height);
+}
+
+void	ft_destroy_en_sprites(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->en_sprites.up1);
+	mlx_destroy_image(game->mlx, game->en_sprites.up2);
+	mlx_destroy_image(game->mlx, game->en_sprites.down1);
+	mlx_destroy_image(game->mlx, game->en_sprites.down2);
+	mlx_destroy_image(game->mlx, game->en_sprites.left1);
+	mlx_destroy_image(game->mlx, game->en_sprites.left2);
+	mlx_destroy_image(game->mlx, game->en_sprites.right1);
+	mlx_destroy_image(game->mlx, game->en_sprites.right2);
 }
 
 void	*ft_get_en_sprite(t_game *game)

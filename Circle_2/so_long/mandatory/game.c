@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:23:01 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 18:25:58 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:59:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,17 @@ void	ft_start_game(t_game *game)
 	mlx_loop(game->mlx_ptr);
 }
 
-int	ft_exit_game(t_game *game)
+static void	ft_destroy_game(t_game *game)
 {
+	free(game->map.map_str);
+	ft_destroy_sprites(game);
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+}
+
+int	ft_exit_game(t_game *game)
+{
+	ft_destroy_game(game);
 	ft_putstr_fd("╔════════════════════════════════════════╗\n", 1);
 	ft_putstr_fd("║                                        ║\n", 1);
 	ft_putstr_fd("║      jikoo's so_long finished !!       ║\n", 1);

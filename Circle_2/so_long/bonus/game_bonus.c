@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:20:55 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:40:27 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:47:09 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void	ft_init_game(t_game *game)
 			game->collectible++;
 		idx++;
 	}
-	ft_init_sc_sprites(game);
 	ft_init_player(game);
-	ft_init_pl_sprites(game);
 	ft_init_enemy(game);
+	ft_init_pl_sprites(game);
 	ft_init_en_sprites(game);
+	ft_init_sc_sprites(game);
 	ft_init_sprites(game);
 	ft_set_sprites(game);
 }
@@ -60,8 +60,18 @@ void	ft_start_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
+static void	ft_destroy_game(t_game *game)
+{
+	free(game->map.map_str);
+	ft_destroy_sprites(game);
+	ft_destroy_pl_sprites(game);
+	ft_destroy_en_sprites(game);
+	ft_destroy_sc_sprites(game);
+}
+
 int	ft_exit_game(t_game *game)
 {
+	ft_destroy_game(game);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
 	ft_putstr_fd("╔════════════════════════════════════════╗\n", 1);

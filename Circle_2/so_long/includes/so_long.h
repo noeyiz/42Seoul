@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:56:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:51:51 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_check_valid_path(t_game *game);
 /* sprites */
 void	ft_init_sprites(t_game *game);
 void	ft_set_sprites(t_game *game);
+void	ft_destroy_sprites(t_game *game);
 
 /* move */
 void	ft_move(t_game *game, t_direction direction);

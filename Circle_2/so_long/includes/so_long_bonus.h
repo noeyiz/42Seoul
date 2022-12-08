@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:29:31 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:46:51 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,22 +146,26 @@ void	ft_check_valid_path(t_game *game);
 
 /* score */
 void	ft_init_sc_sprites(t_game *game);
+void	ft_destroy_sc_sprites(t_game *game);
 void	ft_put_score_image(t_game *game);
 
 /* player */
 void	ft_init_player(t_game *game);
 void	ft_init_pl_sprites(t_game *game);
+void	ft_destroy_pl_sprites(t_game *game);
 void	*ft_get_pl_sprite(t_game *game);
 void	ft_put_player_image(t_game *game);
 
 /* enemy */
 void	ft_init_enemy(t_game *game);
 void	ft_init_en_sprites(t_game *game);
+void	ft_destroy_en_sprites(t_game *game);
 void	*ft_get_en_sprite(t_game *game);
 void	ft_put_enemy_image(t_game *game);
 
 /* sprites */
 void	ft_init_sprites(t_game *game);
+void	ft_destroy_sprites(t_game *game);
 void	ft_set_sprites(t_game *game);
 
 /* move */

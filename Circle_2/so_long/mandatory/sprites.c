@@ -6,17 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:24:22 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/25 18:24:32 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:05:45 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-static void	ft_put_image(t_game *game, void *sprite, int x, int y)
-{
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, sprite, \
-		(x + 1) * SIZE, (y + 1) * SIZE);
-}
 
 void	ft_init_sprites(t_game *game)
 {
@@ -33,6 +27,21 @@ void	ft_init_sprites(t_game *game)
 		"sprites/Other/Portal/portal.xpm", &width, &height);
 	game->sprites.wall = mlx_xpm_file_to_image(game->mlx_ptr, \
 		"sprites/Other/Walls/wall.xpm", &width, &height);
+}
+
+void	ft_destroy_sprites(t_game *game)
+{
+	mlx_destroy_image(game->mlx_ptr, game->sprites.black);
+	mlx_destroy_image(game->mlx_ptr, game->sprites.pacfood);
+	mlx_destroy_image(game->mlx_ptr, game->sprites.pacman);
+	mlx_destroy_image(game->mlx_ptr, game->sprites.portal);
+	mlx_destroy_image(game->mlx_ptr, game->sprites.wall);
+}
+
+static void	ft_put_image(t_game *game, void *sprite, int x, int y)
+{
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, sprite, \
+		(x + 1) * SIZE, (y + 1) * SIZE);
 }
 
 void	ft_set_sprites(t_game *game)

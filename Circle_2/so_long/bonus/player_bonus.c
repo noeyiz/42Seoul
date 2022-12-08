@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:26:35 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/27 20:26:42 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:04:08 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ void	ft_init_pl_sprites(t_game *game)
 		"sprites/Pac-Man/pac_open_right.xpm", &width, &height);
 	game->pl_sprites.right_semi = mlx_xpm_file_to_image(game->mlx, \
 		"sprites/Pac-Man/pac_semi_right.xpm", &width, &height);
+}
+
+void	ft_destroy_pl_sprites(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->pl_sprites.closed);
+	mlx_destroy_image(game->mlx, game->pl_sprites.up);
+	mlx_destroy_image(game->mlx, game->pl_sprites.up_semi);
+	mlx_destroy_image(game->mlx, game->pl_sprites.down);
+	mlx_destroy_image(game->mlx, game->pl_sprites.down_semi);
+	mlx_destroy_image(game->mlx, game->pl_sprites.left);
+	mlx_destroy_image(game->mlx, game->pl_sprites.left_semi);
+	mlx_destroy_image(game->mlx, game->pl_sprites.right);
+	mlx_destroy_image(game->mlx, game->pl_sprites.right_semi);
 }
 
 void	*ft_get_pl_sprite(t_game *game)

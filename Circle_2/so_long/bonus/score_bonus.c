@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:25:08 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/28 00:48:47 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:03:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@ void	ft_init_sc_sprites(t_game *game)
 		"sprites/Other/Fonts/8.xpm", &width, &height);
 	game->sc_sprites.nine = mlx_xpm_file_to_image(game->mlx, \
 		"sprites/Other/Fonts/9.xpm", &width, &height);
+}
+
+void	ft_destroy_sc_sprites(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->sc_sprites.zero);
+	mlx_destroy_image(game->mlx, game->sc_sprites.one);
+	mlx_destroy_image(game->mlx, game->sc_sprites.two);
+	mlx_destroy_image(game->mlx, game->sc_sprites.three);
+	mlx_destroy_image(game->mlx, game->sc_sprites.four);
+	mlx_destroy_image(game->mlx, game->sc_sprites.five);
+	mlx_destroy_image(game->mlx, game->sc_sprites.six);
+	mlx_destroy_image(game->mlx, game->sc_sprites.seven);
+	mlx_destroy_image(game->mlx, game->sc_sprites.eight);
+	mlx_destroy_image(game->mlx, game->sc_sprites.nine);
 }
 
 static void	*ft_get_sc_sprite(t_game *game, int n)

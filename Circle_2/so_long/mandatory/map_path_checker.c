@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:11:13 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/30 16:14:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:43:14 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	ft_check_valid_path(t_game *game)
 	ft_floodfill(game->check_map.pl_col, game->check_map.pl_row, game);
 	if (game->check_map.collectible)
 		ft_print_err("Not a valid path!");
+	free(game->check_map.check);
 	ft_set_check_map(game, '1');
 	ft_floodfill(game->check_map.pl_col, game->check_map.pl_row, game);
 	if (game->check_map.exit)
 		ft_print_err("Not a valid path!");
+	free(game->check_map.check);
 }
