@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:31:48 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/12 20:00:47 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/16 15:43:29 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char *argv[])
 {
-	if (argc < 3)
-		ft_putstr_fd("Error\n", 1);
+	ft_check_args(argc, argv);
 	return (0);
 }
