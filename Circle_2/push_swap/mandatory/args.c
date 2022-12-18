@@ -5,107 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 15:42:40 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/16 21:27:46 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/18 20:29:39 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/18 21:18:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static char	**ft_join_split_args(int argc, char **argv)
+static int	ft_check_empty(char *str)
 {
-	int		idx;
-	char	*temp;
-	char	*join_args;
-	char	**split_args;
-	
-	join_args = ft_strdup("");
-	if (!join_args)
-		return (NULL);
-	idx = 1;
-	while (idx < argc)
+	int	idx;
+
+	idx = 0;
+	while (str[idx])
 	{
-		temp = ft_join_with_space(join_args, argv[idx]);
-		if (!temp)
-		{
-			free(join_args);
-			return (NULL);
-		}
-		free(join_args);
-		join_args = temp;
+		if (str[idx] != ' ')
+			return (0);
 		idx++;
 	}
-	split_args = ft_split(join_args, ' ');
-	free(join_args);
-	return (join_args);
+	return (1);
 }
 
-void	ft_check_args(int argc, char **argv)
+static char	*ft_strjoin_w_space(char *s1, char *s2)
 {
-	char	**args;
+	int		idx;
+	int		len;
+	char	*join_str;
 
-	args = ft_join_split_args(argc, argv);
-	if (!args)
-		ft_print_error();
-	// ft_check_int(args);
-	// ft_check_dup(args);
+	if (!s1 || !s2 || ft_check_empty(s2))
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	join_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!join_str)
+		return (NULL);
+	idx = 0;
+	while (*s1)
+		join_str[idx++] = *s1++;
+	join_str[idx++] = ' ';
+	while (*s2)
+		join_str[idx++] = *s2++;
+	join_str[idx] = '\0';
+	return (join_str);
 }
 
-
-// 아래의 경우 ./push_swap "1 3 2"는 ... 처리 못함
-
-// static int	ft_count_space(char *str)
-// {
-// 	int	idx;
-
-// 	idx = 0;
-// 	while (str[idx] && str[idx] == ' ')
-// 		idx++;
-// 	return (idx);
-// }
-
-// static void	ft_check_integer(int argc, char **argv)
-// {
-// 	int	idx;
-// 	int	move_idx;
-
-// 	idx = 1;
-// 	while (idx < argc)
-// 	{
-// 		move_idx = ft_count_space(argv[idx]);
-// 		if (argv[idx][move_idx] == '+')
-// 			move_idx++;
-// 		if (ft_strncmp(argv[idx] + move_idx, \
-// 		ft_itoa(ft_atoi(argv[idx])), ft_strlen(argv[idx])))
-// 			ft_print_error();
-// 		idx++;
-// 	}
-// }
-
-// static void	ft_check_dup(int argc, char **argv)
-// {
-// 	int	idx1;
-// 	int	idx2;
-// 	int	move_idx1;
-// 	int	move_idx2;
-
-// 	idx1 = 1;
-// 	while (idx1 < argc)
-// 	{
-// 		idx2 = 1;
-// 		while (idx2 < idx1)
-// 		{
-// 			move_idx1 = ft_count_space(argv[idx1]);
-// 			if (argv[idx1][move_idx1] == '+')
-// 				move_idx1++;
-// 			move_idx2 = ft_count_space(argv[idx2]);
-// 			if (argv[idx2][move_idx2] == '+')
-// 				move_idx2++;
-// 			if (!ft_strncmp(argv[idx1] + move_idx1, argv[idx2] + move_idx2, \
-// 			ft_strlen(argv[idx1] + move_idx1)))
-// 				ft_print_error();
-// 			idx2++;
-// 		}
-// 		idx1++;
-// 	}
-// }
+char	*ft_join_split_args(int argc, char **argv)
+{
+	int		idx;
+	char	*join;
+	char	*temp;
+	char	**args;
+	
+	idx = 1;
+	join = ft_strdup("");
+	while (idx < argc)
+	{
+		temp = ft_strjoin_w_space(join, argv[idx]);
+		free(join);
+		join = temp;
+		if (!join)
+			return (NULL);
+		idx++;
+	}
+	args = ft_split(join, ' ');
+	free(join);
+	return (args);
+}
