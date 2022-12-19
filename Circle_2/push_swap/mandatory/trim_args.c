@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.c                                             :+:      :+:    :+:   */
+/*   trim_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/18 20:29:39 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/19 18:50:33 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/19 20:16:52 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/19 21:06:26 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_isempty(char *str)
 	return (1);
 }
 
-static char	*ft_strjoin_w_space(char *s1, char *s2)
+static char	*ft_strjoin_with_space(char *s1, char *s2)
 {
 	int		idx;
 	int		len;
@@ -49,54 +49,7 @@ static char	*ft_strjoin_w_space(char *s1, char *s2)
 	return (join_str);
 }
 
-static void	ft_check_int(char **arr)
-{
-	int	idx;
-	int	atoll_n;
-
-	idx = 0;
-	while (arr[idx])
-	{
-		if (ft_atoll(arr[idx], &atoll_n))
-			idx++;
-		else
-		{
-			ft_free_array(arr);
-			ft_print_error(1);
-		}	
-	}
-}
-
-static void	ft_check_dup(char **arr)
-{
-	int		idx_1;
-	int		idx_2;
-	int		offset_1;
-	int		offset_2;
-
-	idx_1 = -1;
-	while (arr[++idx_1])
-	{
-		idx_2 = -1;
-		offset_1 = 0;
-		if (arr[idx_1][0] == '+')
-			offset_1 = 1;
-		while (++idx_2 < idx_1)
-		{
-			offset_2 = 0;
-			if (arr[idx_2][0] == '+')
-				offset_2 = 1;
-			if (ft_strncmp(arr[idx_1] + offset_1, arr[idx_2] + \
-			offset_2, ft_strlen(arr[idx_1] + offset_1)) == 0)
-			{
-				ft_free_array(arr);
-				ft_print_error(1);
-			}
-		}
-	}
-}
-
-void	ft_parse_args(int argc, char **argv, char ***args)
+void	ft_trim_args(int argc, char **argv, char ***args)
 {
 	int		idx;
 	char	*join;
@@ -106,17 +59,15 @@ void	ft_parse_args(int argc, char **argv, char ***args)
 	join = ft_strdup("");
 	while (idx < argc)
 	{
-		temp = ft_strjoin_w_space(join, argv[idx]);
+		temp = ft_strjoin_with_space(join, argv[idx]);
 		free(join);
 		join = temp;
-		if (!join)
+		if (join == NULL)
 			ft_print_error(-1);
 		idx++;
 	}
 	*args = ft_split(join, ' ');
 	free(join);
-	if (!*args)
+	if (*args == NULL)
 		ft_print_error(-1);
-	ft_check_int(*args);
-	ft_check_dup(*args);
 }

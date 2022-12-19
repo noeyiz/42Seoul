@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 20:25:39 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/19 18:50:39 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/19 20:39:16 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ int	ft_print_error(int type)
 
 int	main(int argc, char *argv[])
 {
+	t_deque	a;
+	t_deque	b;
 	char	**args;
 
 	if (argc < 2)
 		ft_print_error(0);
-	ft_parse_args(argc, argv, &args);
+	ft_trim_args(argc, argv, &args);
+	ft_verify_args(args);
+	ft_init_stack(&a, &b, args);
 	return (0);
 }
