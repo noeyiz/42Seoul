@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:31:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/18 21:20:54 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/19 18:49:54 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include "../libft/libft.h"
 
 /* args */
-void	ft_join_aplit_args(int argc, char **argv);
+void	ft_parse_args(int argc, char **argv, char ***args);
 
-void	ft_print_error();
+int		ft_print_error(int type);
+
+/* utils */
+int		ft_atoll(char *str, int *ret_n);
+void	ft_free_array(char **arr);
 
 #endif
