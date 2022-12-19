@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 20:16:52 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/19 21:06:26 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/20 02:33:57 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/20 05:24:35 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	ft_isempty(char *str)
 	while (str[idx])
 	{
 		if (str[idx] != ' ')
-			return (0);
+			return (FALSE);
 		idx++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 static char	*ft_strjoin_with_space(char *s1, char *s2)
@@ -36,8 +36,8 @@ static char	*ft_strjoin_with_space(char *s1, char *s2)
 	if (!s1 || !s2 || ft_isempty(s2))
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	join_str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!join_str)
+	join_str = (char *)malloc(sizeof(char) * (len + 2));
+	if (join_str == NULL)
 		return (NULL);
 	idx = 0;
 	while (*s1)
@@ -49,11 +49,12 @@ static char	*ft_strjoin_with_space(char *s1, char *s2)
 	return (join_str);
 }
 
-void	ft_trim_args(int argc, char **argv, char ***args)
+char	**ft_trim_args(int argc, char **argv)
 {
 	int		idx;
 	char	*join;
 	char	*temp;
+	char	**args;
 
 	idx = 1;
 	join = ft_strdup("");
@@ -63,11 +64,12 @@ void	ft_trim_args(int argc, char **argv, char ***args)
 		free(join);
 		join = temp;
 		if (join == NULL)
-			ft_print_error(-1);
+			ft_ps_error(-1);
 		idx++;
 	}
-	*args = ft_split(join, ' ');
+	args = ft_split(join, ' ');
 	free(join);
-	if (*args == NULL)
-		ft_print_error(-1);
+	if (args == NULL)
+		ft_ps_error(-1);
+	return (args);
 }

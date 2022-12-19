@@ -5,39 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 18:31:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/19 21:36:11 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/20 01:40:48 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/20 05:27:08 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+/* 제출 전에 꼭 지워 ~! */
+# include <stdio.h>
+/********************/
 # include <stdlib.h>
 # include <unistd.h>
 /* libft */
 # include "../libft/libft.h"
 
+# define TRUE 1
+# define FALSE 0
+
 typedef struct s_node
 {
 	int				data;
 	struct s_node	*next;
+	struct s_node	*prev;
 }	t_node;
 
-typedef struct s_circle_linked_list
+typedef struct s_stack
 {
 	int		cur_size;
 	int		max_size;
-	t_node	*top;
+	t_node	*tail;
 }	t_stack;
 
-int		ft_print_error(int type);
+/* utils */
+int		ft_ps_error(int type);
+void	ft_free_array(char **arr);
+void	ft_free_stack(t_stack *stack);
 
 /* args */
-void	ft_trim_args(int argc, char **argv, char ***args);
+char	**ft_trim_args(int argc, char **argv);
 void	ft_verify_args(char **args);
 
-/* utils */
-void	ft_free_array(char **arr);
+/* init stack */
+void	ft_init_stack(t_stack **a, t_stack **b, char **args);
+
+/* stack commands */
+void	ft_push_front(t_stack *stack, t_node *new);
+void	ft_push_back(t_stack *stack, t_node *new);
+t_node	*ft_pop_front(t_stack *stack);
+t_node	*ft_pop_back(t_stack *stack);
 
 #endif
