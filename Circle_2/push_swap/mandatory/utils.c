@@ -6,11 +6,25 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 02:10:10 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 05:37:48 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/20 11:28:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/* 이건 지워서 내야 한단다 ~~~ */
+void	ft_print_stack(t_stack *stack)
+{
+	int		n;
+	t_node	*temp;
+
+	temp = stack->tail->next;
+	while (n--)
+	{
+		printf("  %d\n", temp->data);
+		temp = temp->next;	
+	}
+}
 
 int	ft_ps_error(int type)
 {
