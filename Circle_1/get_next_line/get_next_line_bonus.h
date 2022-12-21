@@ -6,12 +6,16 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:19 by jikoo             #+#    #+#             */
-/*   Updated: 2022/11/26 20:43:37 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/22 00:22:35 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
