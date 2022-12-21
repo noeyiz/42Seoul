@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 01:43:03 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 11:24:32 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/20 10:18:07 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/20 10:25:42 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int argc, char *argv[])
+static void	ft_push(t_stack *src, t_stack *dst)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**args;
+	t_node	*temp;
 
-	if (argc < 2)
-		ft_ps_error(0);
-	args = ft_trim_args(argc, argv);
-	ft_verify_args(args);
-	ft_init_stack(&a, &b, args);
-	if (ft_check_sorted_stack(a) == FALSE)
-	{
-		// 인덱싱
-		// 정렬
-	}
-	ft_free_stack(a);
-	ft_free_stack(b);
-	return (0);
+	if (src->cur_size == 0)
+		return ;
+	temp = ft_pop_front(src);
+	ft_push_front(dst, temp);	
+}
+
+void	ft_pa(t_stack *a, t_stack *b)
+{
+	ft_push(b, a);
+	write(1, "pa\n", 3);
+}
+
+void	ft_pb(t_stack *a, t_stack *b)
+{
+	ft_push(a, b);
+	write(1, "pb\n", 3);
 }

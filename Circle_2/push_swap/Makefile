@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 03:49:46 by jikoo             #+#    #+#              #
-#    Updated: 2022/12/20 05:07:55 by jikoo            ###   ########.fr        #
+#    Updated: 2022/12/20 10:34:56 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ HEADER		= $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 # source files
 M_DIR		= mandatory/
-M_SRCS      = main.c trim_args.c verify_args.c init_stack.c stack_commands.c utils.c
+M_SRCS      = main.c trim_args.c verify_args.c stack.c stack_commands.c \
+			  swap.c push.c rotate.c reverse_rotate.c utils.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 

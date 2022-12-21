@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 02:39:28 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 05:32:51 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/20 09:36:05 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/20 09:49:23 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	ft_fill_stack_a(t_stack **a, char **args)
 		ft_push_back(*a, new);
 		idx++;
 	}
+	ft_free_array(args);
 	return (TRUE);
 }
 
@@ -76,4 +77,20 @@ void	ft_init_stack(t_stack **a, t_stack **b, char **args)
 		ft_free_array(args);
 		ft_ps_error(-1);
 	}
+}
+
+int	ft_check_sorted_stack(t_stack *stack)
+{
+	int		n;
+	t_node	*temp;
+
+	n = stack->max_size;
+	temp = stack->tail;
+	while (--n)
+	{
+		if (temp->data <= temp->prev->data)
+			return (FALSE);
+		temp = temp->prev;
+	}
+	return (TRUE);
 }
