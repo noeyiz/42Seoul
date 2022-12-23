@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 09:57:38 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 10:29:44 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:50:45 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/23 01:55:13 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/command.h"
 
 static void	ft_swap(t_stack *stack)
 {
 	t_node	*temp1;
 	t_node	*temp2;
 
-	if (stack->cur_size < 2)
+	if (stack->size < 2)
 		return ;
 	temp1 = ft_pop_front(stack);
 	temp2 = ft_pop_front(stack);

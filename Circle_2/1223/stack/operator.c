@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_commands.c                                   :+:      :+:    :+:   */
+/*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 02:50:10 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 05:32:01 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:52:59 by jikoo             #+#    #+#             */
+/*   Updated: 2022/12/23 03:10:08 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/stack.h"
 
 void	ft_push_front(t_stack *stack, t_node *new)
 {
@@ -27,7 +27,7 @@ void	ft_push_front(t_stack *stack, t_node *new)
 		stack->tail->next->prev = new;
 		stack->tail->next = new;
 	}
-	stack->cur_size += 1;
+	stack->size++;
 }
 
 void	ft_push_back(t_stack *stack, t_node *new)
@@ -41,14 +41,14 @@ t_node	*ft_pop_front(t_stack *stack)
 	t_node	*pop;
 
 	pop = stack->tail->next;
-	if (stack->cur_size == 1)
+	if (stack->size == 1)
 		stack->tail = NULL;
 	else
 	{
 		stack->tail->next = stack->tail->next->next;
 		stack->tail->next->prev = stack->tail;
 	}
-	stack->cur_size -= 1;
+	stack->size--;
 	return (pop);
 }
 

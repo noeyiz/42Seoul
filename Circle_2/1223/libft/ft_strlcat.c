@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 10:18:07 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 10:25:42 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/12 13:30:37 by jikoo             #+#    #+#             */
+/*   Updated: 2022/07/18 14:40:51 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-static void	ft_push(t_stack *src, t_stack *dst)
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	t_node	*temp;
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
 
-	if (src->cur_size == 0)
-		return ;
-	temp = ft_pop_front(src);
-	ft_push_front(dst, temp);	
-}
-
-void	ft_pa(t_stack *a, t_stack *b)
-{
-	ft_push(b, a);
-	write(1, "pa\n", 3);
-}
-
-void	ft_pb(t_stack *a, t_stack *b)
-{
-	ft_push(a, b);
-	write(1, "pb\n", 3);
+	i = 0;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dst_len >= dstsize)
+		return (dstsize + src_len);
+	while (src[i] && dst_len + i < dstsize - 1)
+	{
+		dst[dst_len + i] = src[i];
+		i++;
+	}
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
 }

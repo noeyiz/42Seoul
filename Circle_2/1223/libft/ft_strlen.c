@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 10:27:32 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 10:30:57 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/08 15:35:05 by jikoo             #+#    #+#             */
+/*   Updated: 2022/07/26 15:17:09 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-static void	ft_rotate(t_stack *stack)
+size_t	ft_strlen(const char *s)
 {
-	if (stack->cur_size < 2)
-		return ;
-	stack->tail = stack->tail->next;
-}
+	size_t	len;
 
-void	ft_ra(t_stack *a)
-{
-	ft_rotate(a);
-	write(1, "ra\n", 3);
-}
-
-void	ft_rb(t_stack *b)
-{
-	ft_rotate(b);
-	write(1, "rb\n", 3);
-}
-
-void	ft_rr(t_stack *a, t_stack *b)
-{
-	ft_rotate(a);
-	ft_rotate(b);
-	write(1, "rr\n", 3);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

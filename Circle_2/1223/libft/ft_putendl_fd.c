@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 10:32:06 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/20 10:33:40 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/22 15:24:35 by jikoo             #+#    #+#             */
+/*   Updated: 2022/07/25 16:10:17 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-static void	ft_reverse_rotate(t_stack *stack)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (stack->cur_size < 2)
+	if (fd < 0)
 		return ;
-	stack->tail = stack->tail->prev;
-}
-
-void	ft_rra(t_stack *a)
-{
-	ft_reverse_rotate(a);
-	write(1, "rra\n", 4);
-}
-
-void	ft_rrb(t_stack *b)
-{
-	ft_reverse_rotate(b);
-	write(1, "rrb\n", 4);
-}
-
-void	ft_rrr(t_stack *a, t_stack *b)
-{
-	ft_reverse_rotate(a);
-	ft_reverse_rotate(b);
-	write(1, "rrr\n", 4);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
