@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 01:36:59 by jikoo             #+#    #+#              #
-#    Updated: 2022/12/23 03:33:47 by jikoo            ###   ########.fr        #
+#    Updated: 2022/12/27 22:16:56 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADER		= $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 # source files
 M_DIR		= mandatory/
-M_SRCS      = main.c args.c init.c utils.c
+M_SRCS      = main.c args.c init_stack.c index_stack.c sort_stack.c utils.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 

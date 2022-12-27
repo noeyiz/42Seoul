@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 02:09:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 03:18:27 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/27 17:25:48 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	ft_set_num_array(t_info *info, char **args)
 	}
 }
 
-void	ft_parse_args_if(t_info *info, int argc, char **argv)
+void	ft_parse_args(t_info *info, int argc, char **argv)
 {
 	char	*join_args;
 	char	**split_args;

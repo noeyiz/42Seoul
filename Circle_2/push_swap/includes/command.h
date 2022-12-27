@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:43:57 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 01:44:52 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/27 15:45:45 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define COMMAND_H
 
 # include <unistd.h>
-# include "stack.h"
+# include "./stack.h"
 
 void	ft_sa(t_stack *a);
 void	ft_sb(t_stack *b);

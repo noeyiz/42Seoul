@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 03:38:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2022/12/27 16:49:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_print_stack(t_stack *stack)
 	temp = stack->tail->next;
 	while (n--)
 	{
-		printf("  %d\n", temp->data);
+		printf("data: %d, index: %d\n", temp->data, temp->index);
 		temp = temp->next;
 	}
 }
@@ -57,4 +57,18 @@ void	ft_free_stack(t_stack *stack)
 	while (stack->size)
 		free(ft_pop_front(stack));
 	free(stack);
+}
+
+int	ft_check_sorted_stack(t_stack *stack) {
+	int		n;
+	t_node	*temp;
+
+	n = stack->size - 1;
+	temp = stack->tail->next;
+	while (n--) {
+		if (temp->data > temp->next->data)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
 }
