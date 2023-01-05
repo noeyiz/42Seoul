@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:50:45 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 01:55:13 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:55:28 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/05 15:17:40 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../includes/push_swap.h"
 
-static void	ft_swap(t_stack *stack)
+static void	ft_rotate(t_stack *stack)
 {
-	t_node	*temp1;
-	t_node	*temp2;
-
 	if (stack->size < 2)
 		return ;
-	temp1 = ft_pop_front(stack);
-	temp2 = ft_pop_front(stack);
-	ft_push_front(stack, temp1);
-	ft_push_front(stack, temp2);
+	stack->tail = stack->tail->next;
 }
 
-void	ft_sa(t_stack *a)
+void	ft_ra(t_info *info)
 {
-	ft_swap(a);
-	write(1, "sa\n", 3);
+	ft_rotate(info->a);
+	write(1, "ra\n", 3);
 }
 
-void	ft_sb(t_stack *b)
+void	ft_rb(t_info *info)
 {
-	ft_swap(b);
-	write(1, "sb\n", 3);
+	ft_rotate(info->b);
+	write(1, "rb\n", 3);
 }
 
-void	ft_ss(t_stack *a, t_stack *b)
+void	ft_rr(t_info *info)
 {
-	ft_swap(a);
-	ft_swap(b);
-	write(1, "ss\n", 3);
+	ft_rotate(info->a);
+	ft_rotate(info->b);
+	write(1, "rr\n", 3);
 }

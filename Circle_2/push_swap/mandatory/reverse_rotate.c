@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:55:28 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 01:55:45 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:56:09 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/05 15:18:50 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../includes/push_swap.h"
 
-static void	ft_rotate(t_stack *stack)
+static void	ft_reverse_rotate(t_stack *stack)
 {
 	if (stack->size < 2)
 		return ;
-	stack->tail = stack->tail->next;
+	stack->tail = stack->tail->prev;
 }
 
-void	ft_ra(t_stack *a)
+void	ft_rra(t_info *info)
 {
-	ft_rotate(a);
-	write(1, "ra\n", 3);
+	ft_reverse_rotate(info->a);
+	write(1, "rra\n", 4);
 }
 
-void	ft_rb(t_stack *b)
+void	ft_rrb(t_info *info)
 {
-	ft_rotate(b);
-	write(1, "rb\n", 3);
+	ft_reverse_rotate(info->b);
+	write(1, "rrb\n", 4);
 }
 
-void	ft_rr(t_stack *a, t_stack *b)
+void	ft_rrr(t_info *info)
 {
-	ft_rotate(a);
-	ft_rotate(b);
-	write(1, "rr\n", 3);
+	ft_reverse_rotate(info->a);
+	ft_reverse_rotate(info->b);
+	write(1, "rrr\n", 4);
 }

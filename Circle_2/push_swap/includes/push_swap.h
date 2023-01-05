@@ -6,16 +6,30 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:47:24 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/27 22:16:48 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/05 15:19:52 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdlib.h>
+# include <unistd.h>
 # include "../libft/libft.h"
-# include "./command.h"
-# include "./stack.h"
+
+typedef struct s_node
+{
+	int				data;
+	int				index;
+	struct s_node	*next;
+	struct s_node	*prev;
+}	t_node;
+
+typedef struct s_stack
+{
+	int		size;
+	t_node	*tail;
+}	t_stack;
 
 typedef struct s_info
 {
@@ -25,8 +39,31 @@ typedef struct s_info
 	int		*num_array;
 }	t_info;
 
+/* commands */
+void	ft_sa(t_info *info);
+void	ft_sb(t_info *info);
+void	ft_ss(t_info *info);
+void	ft_pa(t_info *info);
+void	ft_pb(t_info *info);
+void	ft_ra(t_info *info);
+void	ft_rb(t_info *info);
+void	ft_rr(t_info *info);
+void	ft_rra(t_info *info);
+void	ft_rrb(t_info *info);
+void	ft_rrr(t_info *info);
+
+/* stack_operator */
+void	ft_push_front(t_stack *stack, t_node *new);
+void	ft_push_back(t_stack *stack, t_node *new);
+t_node	*ft_pop_front(t_stack *stack);
+t_node	*ft_pop_back(t_stack *stack);
+
 /* args */
 void	ft_parse_args(t_info *info, int argc, char **argv);
+
+/* create_stack */
+t_node	*ft_create_node(int data);
+t_stack	*ft_create_stack(void);
 
 /* init_stack */
 void	ft_init_stack(t_info *info);

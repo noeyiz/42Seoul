@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.c                                         :+:      :+:    :+:   */
+/*   stack_operator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:52:59 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/23 03:10:08 by jikoo            ###   ########.fr       */
+/*   Created: 2023/01/05 15:11:17 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/05 15:11:32 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/stack.h"
+#include "../includes/push_swap.h"
 
 void	ft_push_front(t_stack *stack, t_node *new)
 {
