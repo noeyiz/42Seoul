@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:24:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:19:36 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:03:52 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ t_node	*ft_pop_back(t_stack *stack);
 
 /* args */
 void	ft_parse_args(t_info *info, int argc, char **argv);
+int		ft_check_int(char **args);
+void	ft_set_num_array(t_info *info, char **args);
+int		ft_check_dup(t_info *info);
 
 /* create_stack */
 t_node	*ft_create_node(int data);
@@ -74,7 +77,7 @@ t_stack	*ft_create_stack(void);
 void	ft_init_stack(t_info *info);
 
 /* checker */
-void    ft_run_checker(t_info *info);
+void	ft_run_checker(t_info *info);
 
 /* utils */
 int		ft_print_and_exit(int type);

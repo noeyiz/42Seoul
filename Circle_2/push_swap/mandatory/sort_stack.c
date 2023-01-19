@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:31:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 11:53:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 20:57:35 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,209 +74,20 @@ static void	ft_div_by_pivot(t_info *info)
 	ft_case_three_args(info);
 }
 
-static int	ft_get_min_index(t_stack *stack)
+static void	ft_clean_up(t_info *info)
 {
-	int		cnt;
-	int		min_idx;
-	t_node	*tmp;
+	int	move_cnt;
 
-	cnt = 0;
-	min_idx = 2147483647;
-	tmp = stack->tail->next;
-	while (cnt < stack->size)
+	move_cnt = ft_find_location_a(info, 1);
+	if (move_cnt > info->a->size / 2)
 	{
-		if (tmp->index < min_idx)
-			min_idx = tmp->index;
-		cnt++;
-		tmp = tmp->next;
-	}
-	return (min_idx);
-}
-
-static int	ft_get_min_location(t_stack *stack)
-{
-	int		target;
-	int		location;
-	t_node	*tmp;
-
-	target = ft_get_min_index(stack);
-	location = 0;
-	tmp = stack->tail->next;
-	while (location < stack->size)
-	{
-		if (tmp->index == target)
-			break;
-		location++;
-		tmp = tmp->next;
-	}
-	if (location > stack->size / 2)
-		location = (stack->size - location) * -1;
-	return (location);
-}
-
-static int	ft_get_max_index(t_stack *stack)
-{
-	int		cnt;
-	int		max_idx;
-	t_node	*tmp;
-
-	cnt = 0;
-	max_idx = 0;
-	tmp = stack->tail->next;
-	while (cnt < stack->size)
-	{
-		if (tmp->index > max_idx)
-			max_idx = tmp->index;
-		cnt++;
-		tmp = tmp->next;
-	}
-	return (max_idx);
-}
-
-static int	ft_get_max_location(t_stack *stack)
-{
-	int		target;
-	int		location;
-	t_node	*tmp;
-
-	target = ft_get_max_index(stack);
-	location = 0;
-	tmp = stack->tail->next;
-	while (location < stack->size)
-	{
-		if (tmp->index == target)
-			break;
-		location++;
-		tmp = tmp->next;
-	}
-	if (location > stack->size / 2)
-		location = (stack->size - location) * -1;
-	return (location);
-}
-
-static int	ft_find_location_a(t_info *info, int index)
-{
-	int		cnt;
-	int		location;
-	t_node	*tmp;
-
-	cnt = 0;
-	location = 0;
-	tmp = info->a->tail->next;
-	if (index < ft_get_min_index(info->a))
-		return (ft_get_min_location(info->a));
-	else if (index > ft_get_max_index(info->a))
-		return (ft_get_max_location(info->a) + 1);
-	while (cnt < info->a->size - 1)
-	{
-		if (tmp->index < index && index < tmp->next->index)
-			location = cnt + 1;
-		cnt++;
-		tmp = tmp->next;
-	}
-	if (location > info->a->size / 2)
-		location =  (info->a->size - location) * -1;
-	return (location);
-}
-
-static int ft_abs(int n)
-{
-	if (n < 0)
-		n *= -1;
-	return (n);
-}
-
-static void	ft_get_min_rotate(t_info *info, int *move_a, int *move_b)
-{
-	int		cnt;
-	int		index;
-	int		location_a;
-	int		location_b;
-	t_node	*tmp;
-
-	cnt = 0;
-	tmp = info->b->tail->next;
-	while (cnt < info->b->size)
-	{
-		index = tmp->index;
-		location_a = ft_find_location_a(info, index);
-		if (cnt > info->b->size / 2)
-			location_b = (info->b->size - cnt) * -1;
-		else
-			location_b = cnt;
-		if (ft_abs(*move_a) + ft_abs(*move_b) > ft_abs(location_a) + ft_abs(location_b))
-		{
-			*move_a = location_a;
-			*move_b = location_b;
-		}
-		cnt++;
-		tmp = tmp->next;
-	}
-}
-
-static void	ft_rotate_same(t_info *info, int *move_a, int *move_b)
-{
-	while (*move_a > 0 && *move_b > 0)
-	{
-		ft_rr(info);
-		*move_a -= 1;
-		*move_b -= 1;
-	}
-	while (*move_a < 0 && *move_b < 0)
-	{
-		ft_rrr(info);
-		*move_a += 1;
-		*move_b += 1;
-	}
-}
-
-static void	ft_rotate_a(t_info *info, int move_cnt)
-{
-	while (move_cnt)
-	{
-		if (move_cnt > 0)
-		{
-			ft_ra(info);
-			move_cnt--;
-		}
-		else
-		{
+		while (info->a->tail->next->index != 1)
 			ft_rra(info);
-			move_cnt++;
-		}
 	}
-}
-
-static void	ft_rotate_b(t_info *info, int move_cnt)
-{
-	while (move_cnt)
+	else
 	{
-		if (move_cnt > 0)
-		{
-			ft_rb(info);
-			move_cnt--;
-		}
-		else
-		{
-			ft_rrb(info);
-			move_cnt++;
-		}
-	}
-}
-
-static void	ft_move_from_b_to_a(t_info *info)
-{
-	int	move_a;
-	int	move_b;
-	while (info->b->size)
-	{
-		move_a = info->a->size;
-		move_b = info->b->size;
-		ft_get_min_rotate(info, &move_a, &move_b);
-		ft_rotate_same(info, &move_a, &move_b);
-		ft_rotate_a(info, move_a);
-		ft_rotate_b(info, move_b);
-		ft_pa(info);
+		while (info->a->tail->next->index != 1)
+			ft_ra(info);
 	}
 }
 
@@ -290,7 +101,6 @@ void	ft_sort_stack(t_info *info)
 	{
 		ft_div_by_pivot(info);
 		ft_move_from_b_to_a(info);
-		while (info->a->tail->next->index != 1)
-			ft_rra(info);
+		ft_clean_up(info);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:24:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:02:41 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_run_checker(t_info *info)
 	{
 		command = get_next_line(0);
 		if (command == NULL)
-			break;
+			break ;
 		ft_execute_command(info, command);
 		free(command);
 		command = NULL;

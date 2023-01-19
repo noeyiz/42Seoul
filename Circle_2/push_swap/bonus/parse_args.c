@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.c                                             :+:      :+:    :+:   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 02:09:11 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:16:47 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:01:39 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-/* str이 NULL이거나 공백문자(' ')일 때 1 리턴 */
 static int	ft_isempty(char *str)
 {
 	int	idx;
@@ -63,94 +62,10 @@ static char	*ft_join_args(int argc, char **argv)
 		free(join);
 		join = temp;
 		if (join == NULL)
-			ft_print_and_exit(-1);
+			ft_error(0);
 		idx++;
 	}
 	return (join);
-}
-
-static int	ft_atoll_if(char *str)
-{
-	long long	result;
-	int			sign;
-	int			cnt;
-
-	result = 0;
-	sign = 1;
-	cnt = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '+' || *str == '-')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-		cnt++;
-	}
-	result *= sign;
-	if (*str != '\0' || cnt > 10 || result == 0 || \
-	result > 2147483647 || result < -2147483648)
-		return (0);
-	return (1);
-}
-
-static int	ft_check_int(char **args)
-{
-	int	idx;
-
-	idx = 0;
-	while (args[idx])
-	{
-		if (ft_atoll_if(args[idx]))
-			idx++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-static void	ft_set_num_array(t_info *info, char **args)
-{
-	int	idx;
-
-	idx = 0;
-	info->num_of_args = 0;
-	while (args[info->num_of_args])
-		info->num_of_args++;
-	info->num_array = (int *)malloc(sizeof(int) * info->num_of_args);
-	if (info->num_array == NULL)
-	{
-		ft_free_array(args);
-		ft_print_and_exit(-1);
-	}
-	while (idx < info->num_of_args)
-	{
-		info->num_array[idx] = ft_atoi(args[idx]);
-		idx++;
-	}
-}
-
-static int	ft_check_dup(t_info *info)
-{
-	int	idx1;
-	int	idx2;
-
-	idx1 = 0;
-	while (idx1 < info->num_of_args)
-	{
-		idx2 = 0;
-		while (idx2 < idx1)
-		{
-			if (info->num_array[idx1] == info->num_array[idx2])
-				return (0);
-			idx2++;
-		}
-		idx1++;
-	}
-	return (1);
 }
 
 void	ft_parse_args(t_info *info, int argc, char **argv)
@@ -162,16 +77,16 @@ void	ft_parse_args(t_info *info, int argc, char **argv)
 	split_args = ft_split(join_args, ' ');
 	free(join_args);
 	if (split_args == NULL)
-		ft_print_and_exit(-1);
+		ft_error(0);
 	if (ft_check_int(split_args) == 0)
 	{
 		ft_free_array(split_args);
-		ft_print_and_exit(ERR);
+		ft_error(1);
 	}
 	ft_set_num_array(info, split_args);
 	if (ft_check_dup(info) == 0)
 	{
 		free(info->num_array);
-		ft_print_and_exit(ERR);
+		ft_error(1);
 	}
 }
