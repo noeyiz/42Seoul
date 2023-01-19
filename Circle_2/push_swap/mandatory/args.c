@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 02:09:11 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/27 17:25:48 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 10:12:10 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,33 +112,7 @@ static int	ft_check_int(char **args)
 	return (1);
 }
 
-static int	ft_check_dup(char **args)
-{
-	int		idx1;
-	int		idx2;
-	char	*temp1;
-	char	*temp2;
-
-	idx1 = -1;
-	while (args[++idx1])
-	{
-		idx2 = -1;
-		temp1 = args[idx1];
-		if (temp1[0] == '+')
-			temp1 += 1;
-		while (++idx2 < idx1)
-		{
-			temp2 = args[idx2];
-			if (temp2[0] == '+')
-				temp2 += 1;
-			if (ft_strncmp(temp1, temp2, ft_strlen(temp1)) == 0)
-				return (0);
-		}
-	}
-	return (1);
-}
-
-void	ft_set_num_array(t_info *info, char **args)
+static void	ft_set_num_array(t_info *info, char **args)
 {
 	int	idx;
 
@@ -159,6 +133,26 @@ void	ft_set_num_array(t_info *info, char **args)
 	}
 }
 
+static int	ft_check_dup(t_info *info)
+{
+	int	idx1;
+	int	idx2;
+
+	idx1 = 0;
+	while (idx1 < info->num_of_args)
+	{
+		idx2 = 0;
+		while (idx2 < idx1)
+		{
+			if (info->num_array[idx1] == info->num_array[idx2])
+				return (0);
+			idx2++;
+		}
+		idx1++;
+	}
+	return (1);
+}
+
 void	ft_parse_args(t_info *info, int argc, char **argv)
 {
 	char	*join_args;
@@ -169,10 +163,15 @@ void	ft_parse_args(t_info *info, int argc, char **argv)
 	free(join_args);
 	if (split_args == NULL)
 		ft_error(0);
-	if (ft_check_int(split_args) == 0 || ft_check_dup(split_args) == 0)
+	if (ft_check_int(split_args) == 0)
 	{
 		ft_free_array(split_args);
 		ft_error(1);
 	}
 	ft_set_num_array(info, split_args);
+	if (ft_check_dup(info) == 0)
+	{
+		free(info->num_array);
+		ft_error(1);
+	}
 }

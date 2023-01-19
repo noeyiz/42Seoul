@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:31:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/18 21:45:51 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 11:53:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,64 @@ static int	ft_get_min_index(t_stack *stack)
 	return (min_idx);
 }
 
-static int	ft_get_location(t_stack *stack, int min)
+static int	ft_get_min_location(t_stack *stack)
 {
+	int		target;
 	int		location;
 	t_node	*tmp;
 
+	target = ft_get_min_index(stack);
 	location = 0;
 	tmp = stack->tail->next;
 	while (location < stack->size)
 	{
-		if (tmp->index == min)
+		if (tmp->index == target)
 			break;
 		location++;
 		tmp = tmp->next;
 	}
 	if (location > stack->size / 2)
-		location = location - stack->size;
+		location = (stack->size - location) * -1;
+	return (location);
+}
+
+static int	ft_get_max_index(t_stack *stack)
+{
+	int		cnt;
+	int		max_idx;
+	t_node	*tmp;
+
+	cnt = 0;
+	max_idx = 0;
+	tmp = stack->tail->next;
+	while (cnt < stack->size)
+	{
+		if (tmp->index > max_idx)
+			max_idx = tmp->index;
+		cnt++;
+		tmp = tmp->next;
+	}
+	return (max_idx);
+}
+
+static int	ft_get_max_location(t_stack *stack)
+{
+	int		target;
+	int		location;
+	t_node	*tmp;
+
+	target = ft_get_max_index(stack);
+	location = 0;
+	tmp = stack->tail->next;
+	while (location < stack->size)
+	{
+		if (tmp->index == target)
+			break;
+		location++;
+		tmp = tmp->next;
+	}
+	if (location > stack->size / 2)
+		location = (stack->size - location) * -1;
 	return (location);
 }
 
@@ -122,18 +164,18 @@ static int	ft_find_location_a(t_info *info, int index)
 	location = 0;
 	tmp = info->a->tail->next;
 	if (index < ft_get_min_index(info->a))
+		return (ft_get_min_location(info->a));
+	else if (index > ft_get_max_index(info->a))
+		return (ft_get_max_location(info->a) + 1);
+	while (cnt < info->a->size - 1)
 	{
-		return (ft_get_location(info->a, ft_get_min_index(info->a)));
-	}
-	while (cnt < info->a->size)
-	{
-		if (tmp->index < index)
+		if (tmp->index < index && index < tmp->next->index)
 			location = cnt + 1;
 		cnt++;
 		tmp = tmp->next;
 	}
 	if (location > info->a->size / 2)
-		location =  location - info->a->size - 1;
+		location =  (info->a->size - location) * -1;
 	return (location);
 }
 
@@ -159,7 +201,7 @@ static void	ft_get_min_rotate(t_info *info, int *move_a, int *move_b)
 		index = tmp->index;
 		location_a = ft_find_location_a(info, index);
 		if (cnt > info->b->size / 2)
-			location_b = cnt - info->b->size;
+			location_b = (info->b->size - cnt) * -1;
 		else
 			location_b = cnt;
 		if (ft_abs(*move_a) + ft_abs(*move_b) > ft_abs(location_a) + ft_abs(location_b))
@@ -248,5 +290,7 @@ void	ft_sort_stack(t_info *info)
 	{
 		ft_div_by_pivot(info);
 		ft_move_from_b_to_a(info);
+		while (info->a->tail->next->index != 1)
+			ft_rra(info);
 	}
 }

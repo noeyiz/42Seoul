@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:57:01 by jikoo             #+#    #+#             */
-/*   Updated: 2022/12/31 13:08:55 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 11:53:53 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,5 @@ int	main(int argc, char *argv[])
 		ft_index_stack(&info);
 		ft_sort_stack(&info);
 	}
-	ft_putstr_fd("=== a\n", 1);
-	ft_print_stack(info.a);
-	ft_putstr_fd("\n\n=== b\n", 1);
-	ft_print_stack(info.b);
 	return (0);
 }

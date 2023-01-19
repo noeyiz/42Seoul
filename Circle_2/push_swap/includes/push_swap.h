@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:47:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/05 15:19:52 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 10:15:14 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+#include <stdio.h> // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 typedef struct s_node
 {
