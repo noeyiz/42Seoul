@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:24:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:03:52 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:26:43 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
-# define ERR 0
-# define OK 1
-# define KO 2
+typedef enum s_exit_type
+{
+	EXIT_TYPE_ERR,
+	EXIT_TYPE_OK,
+	EXIT_TYPE_KO,
+	EXIT_TYPE_ETC
+}	t_exit_type
 
 typedef struct s_node
 {
@@ -80,7 +84,7 @@ void	ft_init_stack(t_info *info);
 void	ft_run_checker(t_info *info);
 
 /* utils */
-int		ft_print_and_exit(int type);
+int		ft_exit(t_exit_type type);
 void	ft_free_array(char **arr);
 void	ft_free_stack(t_stack *stack);
 int		ft_check_sorted_stack(t_stack *stack);

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:56:22 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 20:57:03 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:21:25 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ void	ft_init_stack(t_info *info)
 {
 	info->a = ft_create_stack();
 	if (info->a == NULL)
-		ft_error(0);
+		ft_error(ERR_TYPE_ALLOC_FAIL);
 	info->b = ft_create_stack();
 	if (info->b == NULL)
-		ft_error(0);
+		ft_error(ERR_TYPE_ALLOC_FAIL);
 	if (ft_fill_stack_a(info) == 0)
 	{
 		ft_free_stack(info->a);
 		ft_free_stack(info->b);
 		free(info->num_array);
-		ft_error(0);
+		ft_error(ERR_TYPE_ALLOC_FAIL);
 	}
 	ft_index_stack(info);
 }

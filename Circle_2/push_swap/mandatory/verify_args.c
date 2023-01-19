@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 19:01:06 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:21:25 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_set_num_array(t_info *info, char **args)
 	if (info->num_array == NULL)
 	{
 		ft_free_array(args);
-		ft_error(0);
+		ft_error(ERR_TYPE_ALLOC_FAIL);
 	}
 	while (idx < info->num_of_args)
 	{

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:57:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 19:08:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:21:34 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 	t_info	info;
 
 	if (argc < 2)
-		ft_error(0);
+		ft_error(ERR_TYPE_ETC);
 	ft_parse_args(&info, argc, argv);
 	ft_init_stack(&info);
 	if (ft_check_sorted_stack(info.a) == 0)

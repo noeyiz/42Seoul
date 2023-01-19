@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:02:41 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 21:26:43 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_execute_command(t_info *info, char *command)
 	else if (ft_strncmp(command, "rrr\n", 4) == 0)
 		ft_rrr(info);
 	else
-		ft_print_and_exit(ERR);
+		ft_exit(EXIT_TYPE_ERR);
 }
 
 void	ft_run_checker(t_info *info)
@@ -54,7 +54,7 @@ void	ft_run_checker(t_info *info)
 		command = NULL;
 	}
 	if (ft_check_sorted_stack(info->a) && info->b->size == 0)
-		ft_print_and_exit(OK);
+		ft_exit(EXIT_TYPE_OK);
 	else
-		ft_print_and_exit(KO);
+		ft_exit(EXIT_TYPE_KO);
 }
