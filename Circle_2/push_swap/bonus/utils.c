@@ -6,19 +6,26 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:26 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:21:32 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
-/* 서브젝트에 명시된 오류(정수가 아님, 값 중복)는 type 1, 그 외의 오류는 type 0 */
-int	ft_error(int type)
+int	ft_print_and_exit(int type)
 {
-	if (type == 1)
+	if (type == ERR)
+	{
 		ft_putstr_fd("Error\n", 2);
-	exit(1);
-	return (-1);
+		exit(1);
+		return (-1);
+	}
+	else if (type == OK)
+		ft_putstr_fd("OK\n", 1);
+	else if (type == KO)
+		ft_putstr_fd("KO\n", 1);
+	exit(0);
+	return (0);
 }
 
 void	ft_free_array(char **arr)

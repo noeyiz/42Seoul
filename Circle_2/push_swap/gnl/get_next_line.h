@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:57:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:12 by jikoo            ###   ########.fr       */
+/*   Created: 2022/09/01 16:13:19 by jikoo             #+#    #+#             */
+/*   Updated: 2022/11/25 16:10:32 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(int argc, char *argv[])
-{
-	t_info	info;
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (argc < 2)
-		ft_error(0);
-	ft_parse_args(&info, argc, argv);
-	ft_init_stack(&info);
-	if (ft_check_sorted_stack(info.a) == 0)
-	{
-		ft_index_stack(&info);
-		ft_sort_stack(&info);
-	}
-	return (0);
-}
+char	*get_next_line(int fd);
+
+int		ft_find_nextline(char *str);
+int		ft_gnl_strlen(char *str);
+char	*ft_gnl_strjoin(char *s1, char *s2);
+char	*ft_strldup(char *str, int start, int len);
+
+#endif

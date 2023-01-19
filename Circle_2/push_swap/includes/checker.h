@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:47:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:26 by jikoo            ###   ########.fr       */
+/*   Created: 2023/01/19 15:24:09 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/19 16:19:36 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
+
+# define ERR 0
+# define OK 1
+# define KO 2
 
 typedef struct s_node
 {
@@ -68,14 +73,11 @@ t_stack	*ft_create_stack(void);
 /* init_stack */
 void	ft_init_stack(t_info *info);
 
-/* index_stack */
-void	ft_index_stack(t_info *info);
-
-/* sort_stack */
-void	ft_sort_stack(t_info *info);
+/* checker */
+void    ft_run_checker(t_info *info);
 
 /* utils */
-int		ft_error(int type);
+int		ft_print_and_exit(int type);
 void	ft_free_array(char **arr);
 void	ft_free_stack(t_stack *stack);
 int		ft_check_sorted_stack(t_stack *stack);

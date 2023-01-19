@@ -6,11 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 03:26:53 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:26 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:17:45 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
 static int	ft_fill_stack_a(t_info *info)
 {
@@ -33,15 +33,15 @@ void	ft_init_stack(t_info *info)
 {
 	info->a = ft_create_stack();
 	if (info->a == NULL)
-		ft_error(0);
+		ft_print_and_exit(-1);
 	info->b = ft_create_stack();
 	if (info->b == NULL)
-		ft_error(0);
+		ft_print_and_exit(-1);
 	if (ft_fill_stack_a(info) == 0)
 	{
 		ft_free_stack(info->a);
 		ft_free_stack(info->b);
 		free(info->num_array);
-		ft_error(0);
+		ft_print_and_exit(-1);
 	}
 }

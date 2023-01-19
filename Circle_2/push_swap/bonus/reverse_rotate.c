@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:57:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:12 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:56:09 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/19 16:26:41 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
-int	main(int argc, char *argv[])
+static void	ft_reverse_rotate(t_stack *stack)
 {
-	t_info	info;
+	if (stack->size < 2)
+		return ;
+	stack->tail = stack->tail->prev;
+}
 
-	if (argc < 2)
-		ft_error(0);
-	ft_parse_args(&info, argc, argv);
-	ft_init_stack(&info);
-	if (ft_check_sorted_stack(info.a) == 0)
-	{
-		ft_index_stack(&info);
-		ft_sort_stack(&info);
-	}
-	return (0);
+void	ft_rra(t_info *info)
+{
+	ft_reverse_rotate(info->a);
+}
+
+void	ft_rrb(t_info *info)
+{
+	ft_reverse_rotate(info->b);
+}
+
+void	ft_rrr(t_info *info)
+{
+	ft_reverse_rotate(info->a);
+	ft_reverse_rotate(info->b);
 }

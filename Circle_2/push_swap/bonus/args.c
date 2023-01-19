@@ -6,11 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 02:09:11 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:07:26 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:16:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
 /* str이 NULL이거나 공백문자(' ')일 때 1 리턴 */
 static int	ft_isempty(char *str)
@@ -63,7 +63,7 @@ static char	*ft_join_args(int argc, char **argv)
 		free(join);
 		join = temp;
 		if (join == NULL)
-			ft_error(0);
+			ft_print_and_exit(-1);
 		idx++;
 	}
 	return (join);
@@ -124,7 +124,7 @@ static void	ft_set_num_array(t_info *info, char **args)
 	if (info->num_array == NULL)
 	{
 		ft_free_array(args);
-		ft_error(0);
+		ft_print_and_exit(-1);
 	}
 	while (idx < info->num_of_args)
 	{
@@ -162,16 +162,16 @@ void	ft_parse_args(t_info *info, int argc, char **argv)
 	split_args = ft_split(join_args, ' ');
 	free(join_args);
 	if (split_args == NULL)
-		ft_error(0);
+		ft_print_and_exit(-1);
 	if (ft_check_int(split_args) == 0)
 	{
 		ft_free_array(split_args);
-		ft_error(1);
+		ft_print_and_exit(ERR);
 	}
 	ft_set_num_array(info, split_args);
 	if (ft_check_dup(info) == 0)
 	{
 		free(info->num_array);
-		ft_error(1);
+		ft_print_and_exit(ERR);
 	}
 }
