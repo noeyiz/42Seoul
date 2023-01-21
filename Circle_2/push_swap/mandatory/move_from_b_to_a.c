@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:27:03 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 20:57:19 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 17:46:18 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_get_min_move_cnt(t_info *info, int *move_a, int *move_b)
 	while (cnt < info->b->size)
 	{
 		index = tmp->index;
-		location_a = ft_find_location_a(info, index);
+		location_a = ft_find_location(info->a, index);
 		if (cnt > info->b->size / 2)
 			location_b = (info->b->size - cnt) * -1;
 		else

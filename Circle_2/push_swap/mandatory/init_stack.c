@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:56:22 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:21:25 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 18:11:15 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	ft_set_index(t_info *info, int *arr)
 				index++;
 			tmp_node = tmp_node->next;
 		}
-		arr[idx++] = index;
+		arr[idx] = index;
+		idx++;
 		cur_node = cur_node->next;
 	}
 }
@@ -50,6 +51,7 @@ static void	ft_index_stack(t_info *info)
 		ft_free_stack(info->a);
 		ft_free_stack(info->b);
 		free(info->num_array);
+		return ;
 	}
 	ft_set_index(info, idx_arr);
 	idx = 0;
@@ -83,16 +85,24 @@ void	ft_init_stack(t_info *info)
 {
 	info->a = ft_create_stack();
 	if (info->a == NULL)
-		ft_error(ERR_TYPE_ALLOC_FAIL);
+	{
+		free(info->num_array);
+		ft_error(ERR_TYPE_ETC);
+	}
 	info->b = ft_create_stack();
 	if (info->b == NULL)
-		ft_error(ERR_TYPE_ALLOC_FAIL);
+	{
+		ft_free_stack(info->a);
+		free(info->num_array);
+		ft_error(ERR_TYPE_ETC);
+	}
 	if (ft_fill_stack_a(info) == 0)
 	{
 		ft_free_stack(info->a);
 		ft_free_stack(info->b);
 		free(info->num_array);
-		ft_error(ERR_TYPE_ALLOC_FAIL);
+		ft_error(ERR_TYPE_ETC);
 	}
 	ft_index_stack(info);
+	free(info->num_array);
 }

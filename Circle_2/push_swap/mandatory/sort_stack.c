@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:31:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 20:57:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 18:11:35 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_div_by_pivot(t_info *info)
 	while (cnt < info->num_of_args)
 	{
 		temp = info->a->tail->next->index;
-		if (temp > pivot1 && temp <= pivot2)
+		if (pivot1 < temp && temp <= pivot2)
 			ft_pb(info);
 		else if (temp <= pivot1)
 		{
@@ -78,7 +78,7 @@ static void	ft_clean_up(t_info *info)
 {
 	int	move_cnt;
 
-	move_cnt = ft_find_location_a(info, 1);
+	move_cnt = ft_find_location(info->a, 1);
 	if (move_cnt > info->a->size / 2)
 	{
 		while (info->a->tail->next->index != 1)

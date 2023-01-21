@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verify_args.c                                      :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:25:43 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 16:15:24 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_atoll_if(char *str)
 		cnt++;
 	}
 	result *= sign;
-	if (*str != '\0' || cnt > 10 || result == 0 || \
+	if (*str != '\0' || cnt > 10 || \
 	result > 2147483647 || result < -2147483648)
 		return (0);
 	return (1);
@@ -67,7 +67,7 @@ void	ft_set_num_array(t_info *info, char **args)
 	if (info->num_array == NULL)
 	{
 		ft_free_array(args);
-		ft_exit(ETC);
+		ft_exit(EXIT_TYPE_ETC);
 	}
 	while (idx < info->num_of_args)
 	{

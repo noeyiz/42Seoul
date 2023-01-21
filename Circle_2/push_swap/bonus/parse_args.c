@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 02:09:11 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:26:43 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 16:10:59 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_parse_args(t_info *info, int argc, char **argv)
 		ft_exit(EXIT_TYPE_ERR);
 	}
 	ft_set_num_array(info, split_args);
+	ft_free_array(split_args);
 	if (ft_check_dup(info) == 0)
 	{
 		free(info->num_array);

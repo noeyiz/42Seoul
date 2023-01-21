@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_location_a.c                                  :+:      :+:    :+:   */
+/*   find_location.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:52:53 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 20:56:50 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 18:17:46 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	ft_get_max_location(t_stack *stack)
 	return (location);
 }
 
-int	ft_find_location_a(t_info *info, int index)
+int	ft_find_location(t_stack *stack, int index)
 {
 	int		cnt;
 	int		location;
@@ -100,19 +100,19 @@ int	ft_find_location_a(t_info *info, int index)
 
 	cnt = 0;
 	location = 0;
-	tmp = info->a->tail->next;
-	if (index < ft_get_min_index(info->a))
-		return (ft_get_min_location(info->a));
-	else if (index > ft_get_max_index(info->a))
-		return (ft_get_max_location(info->a) + 1);
-	while (cnt < info->a->size - 1)
+	tmp = stack->tail->next;
+	if (index < ft_get_min_index(stack))
+		return (ft_get_min_location(stack));
+	else if (index > ft_get_max_index(stack))
+		return (ft_get_max_location(stack) + 1);
+	while (cnt < stack->size - 1)
 	{
 		if (tmp->index < index && index < tmp->next->index)
 			location = cnt + 1;
 		cnt++;
 		tmp = tmp->next;
 	}
-	if (location > info->a->size / 2)
-		location = (info->a->size - location) * -1;
+	if (location > stack->size / 2)
+		location = (stack->size - location) * -1;
 	return (location);
 }

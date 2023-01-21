@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:26:43 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 16:35:11 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static void	ft_execute_command(t_info *info, char *command)
+static int	ft_execute_command(t_info *info, char *command)
 {
 	if (ft_strncmp(command, "sa\n", 3) == 0)
 		ft_sa(info);
@@ -37,11 +37,14 @@ static void	ft_execute_command(t_info *info, char *command)
 	else if (ft_strncmp(command, "rrr\n", 4) == 0)
 		ft_rrr(info);
 	else
-		ft_exit(EXIT_TYPE_ERR);
+		return (0);
+	return (1);
 }
 
 void	ft_run_checker(t_info *info)
 {
+	int		is_executed;
+	int		is_sorted;
 	char	*command;
 
 	while (1)
@@ -49,12 +52,20 @@ void	ft_run_checker(t_info *info)
 		command = get_next_line(0);
 		if (command == NULL)
 			break ;
-		ft_execute_command(info, command);
+		is_executed = ft_execute_command(info, command);
 		free(command);
 		command = NULL;
+		if (is_executed == 0)
+		{
+			ft_free_stack(info->a);
+			ft_free_stack(info->b);
+			ft_exit(EXIT_TYPE_ETC);
+		}
 	}
-	if (ft_check_sorted_stack(info->a) && info->b->size == 0)
-		ft_exit(EXIT_TYPE_OK);
-	else
+	is_sorted = ft_check_sorted_stack(info->a);
+	ft_free_stack(info->a);
+	ft_free_stack(info->b);
+	if (is_sorted == 0 || info->b->size > 0)
 		ft_exit(EXIT_TYPE_KO);
+	ft_exit(EXIT_TYPE_OK);
 }

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:47:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:21:34 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 17:48:11 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
-typedef enum s_err_type
+typedef enum e_err_type
 {
 	ERR_TYPE_SUBJECT,
-	ERR_TYPE_ALLOC_FAIL,
-	ERR_TYPE_ETC
+	ERR_TYPE_ETC,
 }	t_err_type;
 
 typedef struct s_node
@@ -81,7 +80,7 @@ void	ft_init_stack(t_info *info);
 /* sort_stack */
 void	ft_sort_stack(t_info *info);
 void	ft_move_from_b_to_a(t_info *info);
-int		ft_find_location_a(t_info *info, int index);
+int		ft_find_location(t_stack *stack, int index);
 
 /* utils */
 int		ft_abs(int n);

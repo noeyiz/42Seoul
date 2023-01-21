@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:24:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:26:43 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 16:01:18 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
-typedef enum s_exit_type
+typedef enum e_exit_type
 {
 	EXIT_TYPE_ERR,
 	EXIT_TYPE_OK,
 	EXIT_TYPE_KO,
 	EXIT_TYPE_ETC
-}	t_exit_type
+}	t_exit_type;
 
 typedef struct s_node
 {

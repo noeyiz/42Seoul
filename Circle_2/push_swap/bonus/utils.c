@@ -6,23 +6,23 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 21:02:55 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 16:01:12 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-int	ft_print_and_exit(int type)
+int	ft_exit(t_exit_type type)
 {
-	if (type == ERR)
+	if (type == EXIT_TYPE_ERR)
 	{
 		ft_putstr_fd("Error\n", 2);
 		exit(1);
 		return (-1);
 	}
-	else if (type == OK)
+	else if (type == EXIT_TYPE_OK)
 		ft_putstr_fd("OK\n", 1);
-	else if (type == KO)
+	else if (type == EXIT_TYPE_KO)
 		ft_putstr_fd("KO\n", 1);
 	exit(0);
 	return (0);
