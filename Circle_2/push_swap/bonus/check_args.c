@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/21 16:15:24 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 20:45:58 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ static int	ft_atoll_if(char *str)
 {
 	long long	result;
 	int			sign;
-	int			cnt;
 
 	result = 0;
 	sign = 1;
-	cnt = 0;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-')
@@ -31,11 +29,9 @@ static int	ft_atoll_if(char *str)
 	{
 		result = result * 10 + (*str - '0');
 		str++;
-		cnt++;
 	}
 	result *= sign;
-	if (*str != '\0' || cnt > 10 || \
-	result > 2147483647 || result < -2147483648)
+	if (*str != '\0' || result > 2147483647 || result < -2147483648)
 		return (0);
 	return (1);
 }

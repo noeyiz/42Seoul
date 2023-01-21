@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 01:36:59 by jikoo             #+#    #+#              #
-#    Updated: 2023/01/21 18:17:33 by jikoo            ###   ########.fr        #
+#    Updated: 2023/01/21 21:14:23 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME		= push_swap
 BONUS_NAME	= checker
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
-INCLUDE		= -I includes/
 RM			= rm -f
 LIBFT		= -Llibft -lft
 
@@ -45,15 +44,15 @@ GREEN = \033[1;32m
 CYAN = \033[1;36m
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ $(INCLUDE)
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 all: $(NAME)
 
 bonus: $(BONUS_NAME)
 
 $(NAME): $(M_OBJS)
-	@make -C libft all
-	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@ $(INCLUDE)
+	@make -sC libft
+	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@
 	@echo "$(GREEN)╔════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                            ║$(RESET)"
 	@echo "$(GREEN)║          push_swap compile finished        ║$(RESET)"
@@ -61,8 +60,8 @@ $(NAME): $(M_OBJS)
 	@echo "$(GREEN)╚════════════════════════════════════════════╝$(RESET)"
 
 $(BONUS_NAME): $(B_OBJS) $(G_OBJS)
-	@make -C libft all
-	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@ $(INCLUDE)
+	@make -sC libft
+	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@
 	@echo "$(GREEN)╔════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                            ║$(RESET)"
 	@echo "$(GREEN)║           checker compile finished         ║$(RESET)"
@@ -70,14 +69,14 @@ $(BONUS_NAME): $(B_OBJS) $(G_OBJS)
 	@echo "$(GREEN)╚════════════════════════════════════════════╝$(RESET)"
 
 clean:
-	@make -C libft clean
+	@make -sC libft clean
 	@$(RM) $(M_OBJS) $(B_OBJS) $(G_OBJS)
 	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
 	@echo "$(CYAN)║             make clean finished.            ║$(RESET)"
 	@echo "$(CYAN)╚═════════════════════════════════════════════╝$(RESET)"
 
 fclean:
-	@make -C libft fclean
+	@make -sC libft fclean
 	@make clean
 	@$(RM) $(NAME) $(BONUS_NAME)
 	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
@@ -87,5 +86,6 @@ fclean:
 re:
 	make fclean
 	make all
+	make bonus
 
 .PHONY: all bonus clean fclean re

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:57:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/21 18:17:00 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 19:19:31 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char *argv[])
 {
 	t_info	info;
 
-	system("leaks push_swap");
 	if (argc < 2)
 		ft_error(ERR_TYPE_ETC);
 	ft_parse_args(&info, argc, argv);

@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:11:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/05 15:11:28 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 19:26:10 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	*ft_create_node(int data)
 	if (new == NULL)
 		return (NULL);
 	new->data = data;
-	new->index = -1;
+	new->index = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

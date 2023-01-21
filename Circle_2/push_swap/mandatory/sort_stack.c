@@ -6,17 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:31:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/21 18:11:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/21 19:40:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static void	ft_case_two_args(t_info *info)
-{
-	if (info->a->tail->data < info->a->tail->next->data)
-		ft_sa(info);
-}
 
 static void	ft_case_three_args(t_info *info)
 {
@@ -94,7 +88,7 @@ static void	ft_clean_up(t_info *info)
 void	ft_sort_stack(t_info *info)
 {
 	if (info->num_of_args == 2)
-		ft_case_two_args(info);
+		ft_sa(info);
 	else if (info->num_of_args == 3)
 		ft_case_three_args(info);
 	else
