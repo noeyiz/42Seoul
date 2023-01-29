@@ -6,17 +6,24 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 18:08:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:22:19 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker_bonus.h"
 
-int	ft_exit(void)
+void	ft_exit(t_exit_type type)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
-	return (-1);
+	if (type == EXIT_TYPE_ERR)
+	{
+		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
+	else if (type == EXIT_TYPE_KO)
+		ft_putstr_fd("KO\n", 1);
+	else if (type == EXIT_TYPE_OK)
+		ft_putstr_fd("OK\n", 1);
+	exit(0);
 }
 
 void	ft_free_array(char **arr)

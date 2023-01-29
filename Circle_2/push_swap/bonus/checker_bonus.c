@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 18:07:36 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:23:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	ft_run_checker(t_info *info)
 		{
 			ft_free_stack(info->a);
 			ft_free_stack(info->b);
-			ft_exit();
+			ft_exit(EXIT_TYPE_ERR);
 		}
 	}
 	is_sorted = ft_check_sorted_stack(info->a);
 	ft_free_stack(info->a);
 	ft_free_stack(info->b);
 	if (is_sorted == 0 || info->b->size > 0)
-		ft_putstr_fd("KO\n", 1);
-	ft_putstr_fd("OK\n", 1);
+		ft_exit(EXIT_TYPE_KO);
+	ft_exit(EXIT_TYPE_OK);
 }
