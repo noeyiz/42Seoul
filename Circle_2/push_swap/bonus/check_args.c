@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/28 21:10:28 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 17:07:28 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_set_num_array(t_info *info, char **args)
 	if (info->num_array == NULL)
 	{
 		ft_free_array(args);
-		ft_exit(EXIT_TYPE_ETC);
+		ft_exit();
 	}
 	while (idx < info->num_of_args)
 	{

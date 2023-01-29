@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 01:36:59 by jikoo             #+#    #+#              #
-#    Updated: 2023/01/21 21:14:23 by jikoo            ###   ########.fr        #
+#    Updated: 2023/01/29 17:42:00 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,14 @@ GREEN = \033[1;32m
 CYAN = \033[1;36m
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 bonus: $(BONUS_NAME)
 
 $(NAME): $(M_OBJS)
-	@make -sC libft
+	@make -sC libft all
 	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@
 	@echo "$(GREEN)╔════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                            ║$(RESET)"
@@ -60,7 +60,7 @@ $(NAME): $(M_OBJS)
 	@echo "$(GREEN)╚════════════════════════════════════════════╝$(RESET)"
 
 $(BONUS_NAME): $(B_OBJS) $(G_OBJS)
-	@make -sC libft
+	@make -sC libft all
 	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $@
 	@echo "$(GREEN)╔════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                            ║$(RESET)"
@@ -69,14 +69,14 @@ $(BONUS_NAME): $(B_OBJS) $(G_OBJS)
 	@echo "$(GREEN)╚════════════════════════════════════════════╝$(RESET)"
 
 clean:
-	@make -sC libft clean
+	@make -C libft clean
 	@$(RM) $(M_OBJS) $(B_OBJS) $(G_OBJS)
 	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
 	@echo "$(CYAN)║             make clean finished.            ║$(RESET)"
 	@echo "$(CYAN)╚═════════════════════════════════════════════╝$(RESET)"
 
 fclean:
-	@make -sC libft fclean
+	@make -C libft fclean
 	@make clean
 	@$(RM) $(NAME) $(BONUS_NAME)
 	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
@@ -84,8 +84,7 @@ fclean:
 	@echo "$(CYAN)╚═════════════════════════════════════════════╝$(RESET)"
 
 re:
-	make fclean
-	make all
-	make bonus
+	@make fclean
+	@make all
 
 .PHONY: all bonus clean fclean re

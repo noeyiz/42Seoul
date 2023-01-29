@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 14:33:45 by jikoo             #+#    #+#              #
-#    Updated: 2022/12/19 16:18:13 by jikoo            ###   ########.fr        #
+#    Updated: 2023/01/29 17:41:07 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,20 @@ NAME        = libft.a
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
 $(NAME): $(OBJS)
-	ar rcs $@ $(OBJS)
+	@ar rcs $@ $(OBJS)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean:
-	make clean
-	$(RM) $(NAME)
+	@make clean
+	@$(RM) $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 .PHONY: all clean fclean re
