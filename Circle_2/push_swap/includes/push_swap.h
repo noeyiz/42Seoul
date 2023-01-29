@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:47:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:01:30 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 17:47:55 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_find_location(t_stack *stack, int index);
 
 /* utils */
 int		ft_abs(int n);
-int		ft_exit();
+int		ft_exit(void);
 void	ft_free_array(char **arr);
 void	ft_free_stack(t_stack *stack);
 int		ft_check_sorted_stack(t_stack *stack);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:07:11 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:08:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/checker_bonus.h"
 
-int	ft_exit()
+int	ft_exit(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(1);

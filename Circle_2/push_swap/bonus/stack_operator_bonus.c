@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_operator.c                                   :+:      :+:    :+:   */
+/*   stack_operator_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:11:17 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 15:27:29 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:57 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/checker_bonus.h"
 
 void	ft_push_front(t_stack *stack, t_node *new)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   init_stack_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 03:26:53 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:07:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:42 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/checker_bonus.h"
 
 static int	ft_fill_stack_a(t_info *info)
 {

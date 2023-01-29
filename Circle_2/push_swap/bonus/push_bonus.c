@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   push_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 01:56:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/19 16:26:41 by jikoo            ###   ########.fr       */
+/*   Created: 2022/12/23 01:51:26 by jikoo             #+#    #+#             */
+/*   Updated: 2023/01/29 18:07:50 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/checker_bonus.h"
 
-static void	ft_reverse_rotate(t_stack *stack)
+static void	ft_push(t_stack *from, t_stack *to)
 {
-	if (stack->size < 2)
+	t_node	*temp;
+
+	if (from->size == 0)
 		return ;
-	stack->tail = stack->tail->prev;
+	temp = ft_pop_front(from);
+	ft_push_front(to, temp);
 }
 
-void	ft_rra(t_info *info)
+void	ft_pa(t_info *info)
 {
-	ft_reverse_rotate(info->a);
+	ft_push(info->b, info->a);
 }
 
-void	ft_rrb(t_info *info)
+void	ft_pb(t_info *info)
 {
-	ft_reverse_rotate(info->b);
-}
-
-void	ft_rrr(t_info *info)
-{
-	ft_reverse_rotate(info->a);
-	ft_reverse_rotate(info->b);
+	ft_push(info->a, info->b);
 }

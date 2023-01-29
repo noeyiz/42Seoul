@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:59:06 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:00:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 17:48:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_abs(int n)
 	return (n);
 }
 
-int	ft_exit()
+int	ft_exit(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(1);

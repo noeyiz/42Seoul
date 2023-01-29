@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:24:09 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:18:45 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:08:11 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -76,7 +76,7 @@ void	ft_init_stack(t_info *info);
 void	ft_run_checker(t_info *info);
 
 /* utils */
-int		ft_exit();
+int		ft_exit(void);
 void	ft_free_array(char **arr);
 void	ft_free_stack(t_stack *stack);
 int		ft_check_sorted_stack(t_stack *stack);

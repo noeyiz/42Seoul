@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_stack.c                                     :+:      :+:    :+:   */
+/*   create_stack_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:11:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/21 20:45:03 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:39 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/checker_bonus.h"
 
 t_node	*ft_create_node(int data)
 {
