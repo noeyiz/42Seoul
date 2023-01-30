@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 21:22:31 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:29:20 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_atoll_if(char *str)
 		count++;
 	}
 	result *= sign;
-	if (*str != '\0' || count == 0 || \
+	if (*str != '\0' || count == 0 || count > 11 || \
 	result > 2147483647 || result < -2147483648)
 		return (0);
 	return (1);
