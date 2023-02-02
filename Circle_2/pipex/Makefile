@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 07:52:45 by jikoo             #+#    #+#              #
-#    Updated: 2023/01/31 15:52:03 by jikoo            ###   ########.fr        #
+#    Updated: 2023/02/02 16:18:32 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT		= -Llibft -lft
 
 # source files
 M_DIR		= mandatory/
-M_SRCS		= main.c args.c utils.c
+M_SRCS		= main.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 

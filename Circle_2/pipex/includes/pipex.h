@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 08:00:31 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/31 17:04:02 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/02 20:41:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+typedef struct s_command
+{
+	char	*file;
+	char	**argv;
+}	t_command;
+
 typedef struct s_info
 {
-    char    **envp;
-    int     fd_infile;
-    int     fd_outfile;
-}   t_info;
-
-/* args */
-void	ft_parse_args(t_info *info, char **argv, char **envp);
-
-/* utils */
-void	ft_exit(char *message, int type);
+	int			fd_infile;
+	int			fd_outfile;
+	int			fd_pipe[2];
+	char		**envp;
+	t_command	*command;
+	pid_t 		pid;
+}	t_info;
 
 #endif
