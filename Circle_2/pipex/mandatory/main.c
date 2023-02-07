@@ -5,128 +5,173 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 19:38:08 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/02 21:19:12 by jikoo            ###   ########.fr       */
+/*   Created: 2023/02/03 15:01:56 by jikoo             #+#    #+#             */
+/*   Updated: 2023/02/07 21:06:58 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// 0 : 성공
+// 1 : 일반적인 에러
+// 127 : command not found
+
 #include "../includes/pipex.h"
 
-void	ft_exit(char *message, int type)
+void	ft_exit(char *message, int status)
 {
-	if (type)
-		perror(message);
-	else
-		ft_putstr_fd(message, 2);
-	exit(1);
+	perror(message);
+	exit(status);
 }
 
-void	ft_set_io_fd(t_info *info, char **argv)
+static char	*ft_strjoin_with_space(char *s1, char *s2)
 {
-	info->fd_infile = open(argv[1], O_RDONLY);
-	if (info->fd_infile < 0)
-		ft_exit("infile", 1);
-	info->fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (info->fd_outfile < 0)
-		ft_exit("outfile", 1);
+	int		idx;
+	int		len;
+	char	*join;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	join = (char *)malloc(sizeof(char) * (len + 2));
+	if (join == NULL)
+		return (NULL);
+	idx = 0;
+	while (*s1)
+		join[idx++] = *s1++;
+	join[idx++] = ' ';
+	while (*s2)
+		join[idx++] = *s2++;
+	join[idx] = '\0';
+	return (join);
 }
 
-void	ft_set_envp(t_info *info, char **envp)
+char	*ft_join_params(char **params, int idx)
 {
-	char	*path;
-
-	while (ft_strncmp(*envp, "PATH", 4))
-		envp++;
-	path = *envp + 5;
-	info->envp = ft_split(path, ':');
+	char	*result;
+	char	*temp;
+	
+	result = ft_strdup("");
+	while (params[idx])
+	{
+		temp = ft_strjoin_with_space(result, params[idx]);
+		free(result);
+		result = temp;
+		idx++;
+	}
+	temp = ft_substr(result, 2, ft_strlen(result) - 3);
+	free(result);
+	result = temp;
+	return(result);
 }
 
-char	*ft_get_path_command(t_info *info, char *cmd)
+char	**ft_get_argv(char *str)
 {
 	int		i;
-	char	*temp;
-	char	*command;
+	int		awk_sed_flag;
+	char	**result;
 
-	temp = ft_strjoin("/", cmd);
-	if (temp == NULL)
-		ft_exit(NULL, 0);
-	i = 0;
-	while (info->envp[i])
+	result = ft_split(str, ' ');
+	awk_sed_flag = 0;
+	i = -1;
+	while (result[++i])
 	{
-		command = ft_strjoin(info->envp[i], temp);
-		if (command == NULL)
-			ft_exit(NULL, 0);
-		if (access(command, X_OK) == 0)
+		if (result[i][0] == '\'' || result[i][0] == '\"')
 		{
-			free(temp);
-			return (command);
+			awk_sed_flag = 1;
+			break ;
 		}
-		free(command);
-		i++;
 	}
-	free(temp);
+	if (awk_sed_flag)
+	{
+		result[i] = ft_join_params(result, i);
+		result[++i] = NULL;
+	}
+	return (result);
+}
+
+char	*ft_get_filename(char *cmd, char **envps)
+{
+	char	*result;
+	char	*slash_cmd;
+
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	slash_cmd = ft_strjoin("/", cmd);
+	while (*envps)
+	{
+		result = ft_strjoin(*envps, slash_cmd);
+		if (access(result, X_OK) == 0)
+		{
+			free(slash_cmd);
+			return (result);
+		}
+		free(result);
+		envps++;
+	}
+	free(slash_cmd);
 	return (NULL);
 }
 
-void	ft_set_command(t_info *info, char **argv)
+void	ft_execute_command_child(t_info *info, char **args)
 {
-	int	i;
+	int		infile_fd;
+	char	**argv;
+	char	*file;
 
-	info->command = (t_command *)malloc(sizeof(t_command) * 2);
-	if (info->command == NULL)
-		ft_exit(NULL, 0);
-	i = 0;
-	while (i < 2)
-	{
-		info->command[i].argv = ft_split(argv[i + 2], ' ');
-		if (info->command[i].argv == NULL)
-			ft_exit(NULL, 0);
-		info->command[i].file = ft_get_path_command(info, \
-		info->command[i].argv[0]);
-		if (info->command[i].file == NULL)
-			ft_exit(NULL, 0);
-		i++;
-	}
+	infile_fd = open(args[1], O_RDONLY);
+	if (infile_fd < 0)
+		ft_exit("infile", EXIT_FAILURE);
+	close(info->pipe_fd[0]);
+	dup2(infile_fd, STDIN_FILENO);
+	dup2(info->pipe_fd[1], STDOUT_FILENO);
+	argv = ft_get_argv(args[2]);
+	file = ft_get_filename(argv[0], info->envp);
+	if (file == NULL)
+		ft_exit("command not found", 127);
+	execve(file, argv, info->envp);
+	ft_exit("execve failure", EXIT_FAILURE);
+}
+
+void	ft_execute_command_parent(t_info *info, char **args)
+{
+	int		outfile_fd;
+	char	**argv;
+	char	*file;
+	
+	outfile_fd = open(args[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (outfile_fd < 0)
+		ft_exit("outfile", EXIT_FAILURE);
+	close(info->pipe_fd[1]);
+	dup2(info->pipe_fd[0], STDIN_FILENO);
+	dup2(outfile_fd, STDOUT_FILENO);
+	argv = ft_get_argv(args[3]);
+	file = ft_get_filename(argv[0], info->envp);
+	if (file == NULL)
+		ft_exit("command not found", 127);
+	execve(file, argv, info->envp);
+	ft_exit("execve failure", EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
+	int		status;
 
 	if (argc != 5)
-		ft_exit("Invalid number of arguments!\n", 0);
-	ft_set_io_fd(&info, argv);
-	ft_set_envp(&info, envp);
-	ft_set_command(&info, argv);
-	if (pipe(info.fd_pipe) < 0)
-		ft_exit("pipe error", 1);
+		ft_exit("invalid parameters", EXIT_FAILURE);
+	while (ft_strncmp(*envp, "PATH=", 5))
+		envp++;
+	info.envp = ft_split(*envp + 5, ':');
+	if (pipe(info.pipe_fd) < 0)
+		ft_exit("pipe", EXIT_FAILURE);
 	info.pid = fork();
 	if (info.pid < 0)
-		ft_exit("fork error", 1);
-	else if (info.pid == 0)
+		ft_exit("fork", EXIT_FAILURE);
+	if (info.pid == 0)
+		ft_execute_command_child(&info, argv);
+	if (info.pid > 0)
 	{
-		if (dup2(info.fd_infile, STDIN_FILENO) < 0)
-			ft_exit("dup2 error", 1);
-		if (dup2(info.fd_pipe[1], STDOUT_FILENO) < 0)
-			ft_exit("dup2 error", 1);
-		close(info.fd_pipe[0]);
-		close(info.fd_pipe[1]);
-		close(info.fd_infile);
-		if (execve(info.command[0].file, info.command[0].argv, info.envp) < 0)
-			ft_exit("execve error", 1);
+		waitpid(info.pid, &status, 0);
+		ft_execute_command_parent(&info, argv);
 	}
-	else
-	{
-		if (dup2(info.fd_pipe[0], STDIN_FILENO) < 0)
-			ft_exit("dup2 error", 1);
-		if (dup2(info.fd_outfile, STDOUT_FILENO) < 0)
-			ft_exit("dup2 error", 1);
-		close(info.fd_pipe[0]);
-		close(info.fd_pipe[1]);
-		close(info.fd_outfile);
-		waitpid(info.pid, NULL, WNOHANG);
-		if (execve(info.command[1].file, info.command[1].argv, info.envp) < 0)
-			ft_exit("execve error", 1);
-	}
-	return (0);
+	exit(WEXITSTATUS(status));
 }
