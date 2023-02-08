@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 08:00:31 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/08 19:48:35 by jikoo            ###   ########.fr       */
+/*   Created: 2023/02/08 19:53:58 by jikoo             #+#    #+#             */
+/*   Updated: 2023/02/08 20:02:05 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -24,12 +24,8 @@
 
 typedef struct s_info
 {
-    int     pipe_fd[2];
-    char    **envp;
-    pid_t   pid;
-}   t_info;
-
-char	**ft_get_cmd_argv(char *str);
-char	*ft_get_cmd_file(char *cmd, char **envps);
+	int		num_of_cmds;
+	int		is_heredoc;
+}	t_info;
 
 #endif
