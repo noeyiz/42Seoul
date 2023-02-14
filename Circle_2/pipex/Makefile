@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 07:52:45 by jikoo             #+#    #+#              #
-#    Updated: 2023/02/08 20:00:37 by jikoo            ###   ########.fr        #
+#    Updated: 2023/02/14 20:24:53 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,20 @@ RM			= rm -f
 LIBFT		= -Llibft -lft
 
 # source files
-M_DIR		= ./mandatory/
-M_SRCS		= main.c get_cmd.c
+M_DIR		= mandatory/
+M_SRCS		= main.c cmd.c
 M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 
-B_DIR		= ./bonus/
+B_DIR		= bonus/
 B_SRCS		= main_bonus.c
 B_PATH		= $(addprefix $(B_DIR), $(B_SRCS))
 B_OBJS		= $(B_PATH:c=o)
+
+G_DIR		= gnl/
+G_SRCS		= get_next_line.c get_next_line_utils.c
+G_PATH		= $(addprefix $(G_DIR), $(G_SRCS))
+G_OBJS		= $(G_PATH:c=o)
 
 # colors
 RESET = \033[0m
@@ -47,7 +52,7 @@ $(NAME): $(M_OBJS)
 	@echo "$(GREEN)║                                             ║$(RESET)"
 	@echo "$(GREEN)╚═════════════════════════════════════════════╝$(RESET)"
 	
-bonus: $(B_OBJS)
+bonus: $(B_OBJS) $(G_OBJS)
 	@make -sC libft all
 	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $(NAME)
 	@echo "$(GREEN)╔═════════════════════════════════════════════╗$(RESET)"
@@ -58,7 +63,7 @@ bonus: $(B_OBJS)
 
 clean:
 	@make -C libft clean
-	@$(RM) $(M_OBJS) $(B_OBJS)
+	@$(RM) $(M_OBJS) $(B_OBJS) $(G_OBJS)
 	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
 	@echo "$(CYAN)║             make clean finished.            ║$(RESET)"
 	@echo "$(CYAN)╚═════════════════════════════════════════════╝$(RESET)"

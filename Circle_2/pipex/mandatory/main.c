@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:01:56 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/08 19:05:43 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/14 17:41:02 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_execute_cmd_child(t_info *info, char *filename, char *cmd)
 
 	infile_fd = open(filename, O_RDONLY);
 	if (infile_fd < 0)
-		ft_exit("infile", EXIT_FAILURE);
+		ft_exit(filename, EXIT_FAILURE);
 	close(info->pipe_fd[0]);
 	dup2(infile_fd, STDIN_FILENO);
 	dup2(info->pipe_fd[1], STDOUT_FILENO);
@@ -45,7 +45,7 @@ static void	ft_execute_cmd_parent(t_info *info, char *filename, char *cmd)
 
 	outfile_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd < 0)
-		ft_exit("outfile", EXIT_FAILURE);
+		ft_exit(filename, EXIT_FAILURE);
 	close(info->pipe_fd[1]);
 	dup2(info->pipe_fd[0], STDIN_FILENO);
 	dup2(outfile_fd, STDOUT_FILENO);

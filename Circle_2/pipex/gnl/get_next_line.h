@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 19:53:58 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/14 21:25:35 by jikoo            ###   ########.fr       */
+/*   Created: 2022/09/01 16:13:19 by jikoo             #+#    #+#             */
+/*   Updated: 2022/11/25 16:10:32 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_BONUS_H
-# define PIPEX_BONUS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <sys/wait.h>
 # include <unistd.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
 
-# define EXIT_COMMAND_NOT_FOUND 127
+char	*get_next_line(int fd);
 
-typedef struct s_info
-{
-	int		is_heredoc;
-	int		infile_fd;
-	int		outfile_fd;
-	int		num_of_cmds;
-	int		pipe_odd[2];
-	int		pipe_even[2];
-	char	**envp;
-	pid_t	pid;
-}	t_info;
+int		ft_find_nextline(char *str);
+int		ft_gnl_strlen(char *str);
+char	*ft_gnl_strjoin(char *s1, char *s2);
+char	*ft_strldup(char *str, int start, int len);
 
 #endif
