@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:53:58 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/14 21:25:35 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/18 23:49:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,17 @@ typedef struct s_info
 	char	**envp;
 	pid_t	pid;
 }	t_info;
+
+/* cmd_bonus.c */
+char	**ft_get_cmd_argv(char *str);
+char	*ft_get_cmd_file(char *cmd, char **envps);
+
+/* redir_bonus.c */
+void	ft_execute_cmd(char *cmd, char **envp);
+void	ft_redir_xx(t_info *info, char *cmd, int is_odd);
+
+/* util_bonus.c */
+void	ft_exit(char *message, int status);
+int		ft_check_heredoc(t_info *info, char *str);
 
 #endif

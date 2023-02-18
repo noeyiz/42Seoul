@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 08:00:31 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/18 23:51:14 by jikoo            ###   ########.fr       */
+/*   Created: 2023/02/18 23:48:26 by jikoo             #+#    #+#             */
+/*   Updated: 2023/02/18 23:50:34 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex_bonus.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/wait.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-
-# define EXIT_COMMAND_NOT_FOUND 127
-
-typedef struct s_info
+void	ft_exit(char *message, int status)
 {
-	int		pipe_fd[2];
-	char	**envp;
-	pid_t	pid;
-}	t_info;
+	perror(message);
+	exit(status);
+}
 
-char	**ft_get_cmd_argv(char *str);
-char	*ft_get_cmd_file(char *cmd, char **envps);
-
-#endif
+int	ft_check_heredoc(t_info *info, char *str)
+{
+	if (str && ft_strncmp(str, "here_doc", ft_strlen(str)) == 0)
+		info->is_heredoc = 1;
+	else
+		info->is_heredoc = 0;
+	return (info->is_heredoc);
+}

@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 07:52:45 by jikoo             #+#    #+#              #
-#    Updated: 2023/02/14 20:24:53 by jikoo            ###   ########.fr        #
+#    Updated: 2023/02/18 23:50:23 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ M_PATH		= $(addprefix $(M_DIR), $(M_SRCS))
 M_OBJS		= $(M_PATH:c=o)
 
 B_DIR		= bonus/
-B_SRCS		= main_bonus.c
+B_SRCS		= main_bonus.c cmd_bonus.c redir_bonus.c utils_bonus.c
 B_PATH		= $(addprefix $(B_DIR), $(B_SRCS))
 B_OBJS		= $(B_PATH:c=o)
 
