@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:53:58 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/18 23:49:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/19 18:43:30 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,18 @@ typedef struct s_info
 	pid_t	pid;
 }	t_info;
 
-/* cmd_bonus.c */
+void	ft_exit(char *message, int status);
+
+/* io_fd */
+void	ft_set_infile_fd(t_info *info, char **argv);
+void	ft_set_outfile_fd(t_info *info, char **argv, int idx);
+
+/* cmd_ */
 char	**ft_get_cmd_argv(char *str);
 char	*ft_get_cmd_file(char *cmd, char **envps);
 
-/* redir_bonus.c */
+/* execute */
 void	ft_execute_cmd(char *cmd, char **envp);
-void	ft_redir_xx(t_info *info, char *cmd, int is_odd);
-
-/* util_bonus.c */
-void	ft_exit(char *message, int status);
-int		ft_check_heredoc(t_info *info, char *str);
+void	ft_pipe_to_pipe(t_info *info, char *cmd, int is_odd);
 
 #endif

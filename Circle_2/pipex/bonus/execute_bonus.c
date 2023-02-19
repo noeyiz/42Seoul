@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_bonus.c                                      :+:      :+:    :+:   */
+/*   execute_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 23:45:59 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/18 23:47:08 by jikoo            ###   ########.fr       */
+/*   Created: 2023/02/19 16:11:38 by jikoo             #+#    #+#             */
+/*   Updated: 2023/02/19 18:54:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-static void	ft_child_dup2(t_info *info, int is_odd)
+void	ft_execute_cmd(char *cmd, char **envp)
 {
-	if (is_odd)
+	char	**argv;
+	char	*file;
+
+	argv = ft_get_cmd_argv(cmd);
+	file = ft_get_cmd_file(argv[0], envp);
+	if (file == NULL)
+		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
+	execve(file, argv, envp);                                                                                                                                                    
+}
+
+static void	ft_child_dup2(t_info *info, int cnt)
+{
+	if (cnt % 2)
 	{
 		dup2(info->pipe_odd[1], STDOUT_FILENO);
 		close(info->pipe_odd[0]);
@@ -26,9 +38,9 @@ static void	ft_child_dup2(t_info *info, int is_odd)
 	}
 }
 
-static void	ft_parent_dup2(t_info *info, int is_odd)
+static void	ft_parent_dup2(t_info *info, int cnt)
 {
-	if (is_odd)
+	if (cnt % 2)
 	{
 		dup2(info->pipe_odd[0], STDIN_FILENO);
 		close(info->pipe_odd[1]);
@@ -44,21 +56,9 @@ static void	ft_parent_dup2(t_info *info, int is_odd)
 	}
 }
 
-void	ft_execute_cmd(char *cmd, char **envp)
+void	ft_pipe_to_pipe(t_info *info, char *cmd, int cnt)
 {
-	char	**argv;
-	char	*file;
-
-	argv = ft_get_cmd_argv(cmd);
-	file = ft_get_cmd_file(argv[0], envp);
-	if (file == NULL)
-		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
-	execve(file, argv, envp);
-}
-
-void	ft_redir_xx(t_info *info, char *cmd, int is_odd)
-{
-	if (is_odd)
+	if (cnt % 2)
 	{
 		if (pipe(info->pipe_odd) < 0)
 			ft_exit("pipe", EXIT_FAILURE);
@@ -73,12 +73,12 @@ void	ft_redir_xx(t_info *info, char *cmd, int is_odd)
 		ft_exit("fork", EXIT_FAILURE);
 	else if (info->pid == 0)
 	{
-		ft_child_dup2(info, is_odd);
+		ft_child_dup2(info, cnt);
 		ft_execute_cmd(cmd, info->envp);
 	}
 	else
 	{
 		waitpid(info->pid, NULL, 0);
-		ft_parent_dup2(info, is_odd);
+		ft_parent_dup2(info, cnt);
 	}
 }
