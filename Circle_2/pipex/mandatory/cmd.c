@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:02:20 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/21 17:31:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/21 18:05:51 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static char	*ft_strjoin_with_space(char *s1, char *s2)
 
 static char	*ft_join_params(char **params, int s_idx, int e_idx)
 {
-    char	*join;
-    char	*temp;
+	char	*join;
+	char	*temp;
 
 	join = ft_strdup("");
 	while (params[s_idx] && s_idx <= e_idx)
@@ -56,29 +56,29 @@ static char	*ft_join_params(char **params, int s_idx, int e_idx)
 
 char	**ft_get_cmd_argv(char *str)
 {
-	int     i;
-    int     j;
-    char    c;
-    char    **cmd_argv;
+	int		i;
+	int		j;
+	char	c;
+	char	**cmd_argv;
 
-    cmd_argv = ft_split(str, ' ');
-    i = 0;
-    while (cmd_argv[i])
-    {
-        if (cmd_argv[i][0] == '\'' || cmd_argv[i][0] == '\"')
-        {
-            c = cmd_argv[i][0];
-            j = 0;
-            while (cmd_argv[i + j][ft_strlen(cmd_argv[i + j]) - 1] != c)
-                j++;
-            cmd_argv[i] = ft_join_params(cmd_argv, i, ++j);
-            while (cmd_argv[++j])
-                cmd_argv[++i] = cmd_argv[j];
-            cmd_argv[++i] = NULL;
-            break;
-        }
-        i++;
-    }
+	cmd_argv = ft_split(str, ' ');
+	i = 0;
+	while (cmd_argv[i])
+	{
+		if (cmd_argv[i][0] == '\'' || cmd_argv[i][0] == '\"')
+		{
+			c = cmd_argv[i][0];
+			j = 0;
+			while (cmd_argv[i + j][ft_strlen(cmd_argv[i + j]) - 1] != c)
+				j++;
+			cmd_argv[i] = ft_join_params(cmd_argv, i, ++j);
+			while (cmd_argv[++j])
+				cmd_argv[++i] = cmd_argv[j];
+			cmd_argv[++i] = NULL;
+			break ;
+		}
+		i++;
+	}
 	return (cmd_argv);
 }
 
