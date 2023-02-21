@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:43:52 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/19 19:10:51 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/21 15:03:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,6 @@ static void	ft_init_info(t_info *info, int argc, char **envp)
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	info->envp = ft_split(*envp + 5, ':');
-}
-
-void	ft_free_all(t_info *info, char *filename)
-{
-	int	i;
-	
-	if (info->is_heredoc)
-		unlink(filename);
-	close(info->infile_fd);
-	close(info->outfile_fd);
-	close(info->pipe_even[0]);
-	close(info->pipe_even[1]);
-	close(info->pipe_odd[0]);
-	close(info->pipe_odd[1]);
-	i = 0;
-	while (info->envp[i])
-	{
-		free(info->envp[i]);
-		i++;
-	}
-	free(info->envp);
 }
 
 int	main(int argc, char **argv, char **envp)
