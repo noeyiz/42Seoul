@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:01:56 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/21 17:34:51 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/22 17:07:59 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	ft_execute_cmd_child(t_info *info, char *filename, char *cmd)
 	if (file == NULL)
 		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
 	execve(file, argv, info->envp);
+	ft_exit("execve failure", EXIT_FAILURE);
 }
 
 static void	ft_execute_cmd_parent(t_info *info, char *filename, char *cmd)
@@ -54,11 +55,13 @@ static void	ft_execute_cmd_parent(t_info *info, char *filename, char *cmd)
 	if (file == NULL)
 		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
 	execve(file, argv, info->envp);
+	ft_exit("execve failure", EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
+	int status;
 
 	if (argc != 5)
 		ft_exit("invalid parameters", EXIT_FAILURE);
@@ -72,7 +75,8 @@ int	main(int argc, char **argv, char **envp)
 		ft_exit("fork", EXIT_FAILURE);
 	if (info.pid == 0)
 		ft_execute_cmd_child(&info, argv[1], argv[2]);
-	waitpid(info.pid, NULL, 0);
-	ft_execute_cmd_parent(&info, argv[4], argv[3]);
+	waitpid(info.pid, &status, 0);
+	if (status)
+		ft_execute_cmd_parent(&info, argv[4], argv[3]);
 	exit(EXIT_SUCCESS);
 }

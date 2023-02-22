@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:11:38 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/21 17:34:46 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/22 17:10:47 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_execute_cmd(char *cmd, char **envp)
 	if (file == NULL)
 		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
 	execve(file, argv, envp);
+	ft_exit("execve failure", EXIT_FAILURE);
 }
 
 static void	ft_child_dup2(t_info *info, int cnt)
