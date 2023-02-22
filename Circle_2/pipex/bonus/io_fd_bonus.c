@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:25:36 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/21 15:12:10 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/22 15:27:06 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	ft_set_infile_fd(t_info *info, char **argv)
 	if (info->is_heredoc)
 		ft_heredoc(argv[1], argv[2]);
 	info->infile_fd = open(argv[1], O_RDONLY);
-	if (info->infile_fd < 0)
-		ft_exit(argv[1], EXIT_FAILURE);
 	if (info->infile_fd < 0)
 		ft_exit(argv[1], EXIT_FAILURE);
 	dup2(info->infile_fd, STDIN_FILENO);
