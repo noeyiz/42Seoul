@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 07:52:45 by jikoo             #+#    #+#              #
-#    Updated: 2023/02/21 17:56:27 by jikoo            ###   ########.fr        #
+#    Updated: 2023/02/23 16:24:04 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,24 +60,6 @@ $(NAME): $(ALLOBJ)
 	@echo "$(GREEN)║            pipex compile finished.          ║$(RESET)"
 	@echo "$(GREEN)║                                             ║$(RESET)"
 	@echo "$(GREEN)╚═════════════════════════════════════════════╝$(RESET)"
-
-# $(NAME): $(M_OBJS)
-# 	@make -sC libft all
-# 	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $(NAME)
-# 	@echo "$(GREEN)╔═════════════════════════════════════════════╗$(RESET)"
-# 	@echo "$(GREEN)║                                             ║$(RESET)"
-# 	@echo "$(GREEN)║            pipex compile finished.          ║$(RESET)"
-# 	@echo "$(GREEN)║                                             ║$(RESET)"
-# 	@echo "$(GREEN)╚═════════════════════════════════════════════╝$(RESET)"
-	
-# bonus: $(B_OBJS) $(G_OBJS)
-# 	@make -sC libft all
-# 	@$(CC) $(CFLAGS) $(LIBFT) $^ -o $(NAME)
-# 	@echo "$(GREEN)╔═════════════════════════════════════════════╗$(RESET)"
-# 	@echo "$(GREEN)║                                             ║$(RESET)"
-# 	@echo "$(GREEN)║            pipex compile finished.          ║$(RESET)"
-# 	@echo "$(GREEN)║                                             ║$(RESET)"
-# 	@echo "$(GREEN)╚═════════════════════════════════════════════╝$(RESET)"
 
 clean:
 	@make -C libft clean
