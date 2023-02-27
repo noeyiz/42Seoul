@@ -6,14 +6,14 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 16:20:18 by jikoo             #+#    #+#              #
-#    Updated: 2023/02/25 14:36:17 by jikoo            ###   ########.fr        #
+#    Updated: 2023/02/27 21:40:50 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror # -fsanitize=address
 RM			= rm -f
 
 # colors
@@ -23,7 +23,7 @@ MAGENTA = \033[1;35m
 CYAN 	= \033[1;36m
 
 # source files
-SRCS		= main.c
+SRCS		= main.c init.c
 OBJS		= $(SRCS:c=o)
 
 all: $(NAME)
