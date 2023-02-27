@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:54:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/01/29 21:29:06 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/02/27 20:13:50 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	ft_atoll_if(char *str)
+static int	ft_ps_atoi(char *str)
 {
 	long long	result;
 	int			sign;
@@ -47,7 +47,7 @@ int	ft_check_int(char **args)
 	idx = 0;
 	while (args[idx])
 	{
-		if (ft_atoll_if(args[idx]))
+		if (ft_ps_atoi(args[idx]))
 			idx++;
 		else
 			return (0);
