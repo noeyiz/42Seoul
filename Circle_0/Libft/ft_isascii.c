@@ -5,16 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 15:34:30 by jikoo             #+#    #+#             */
-/*   Updated: 2022/07/26 14:19:56 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 21:58:11 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:23:41 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * The ft_isascii() function tests for an ASCII character, which is any character
+ * between 0 and octal 0177 inclusive.
+ */
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
+	if (0 <= c && c <= 127)
 		return (1);
-	return (0);
+	else
+		return (0);	
 }

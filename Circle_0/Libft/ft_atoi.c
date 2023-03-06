@@ -5,32 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 13:26:31 by jikoo             #+#    #+#             */
-/*   Updated: 2022/07/26 14:14:40 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 23:49:13 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:23:33 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * The ft_atoi() function converts the initial portion of the string pointed to
+ * by str to int representation.
+ */
 int	ft_atoi(const char *str)
 {
-	int	i;
+	int	num;
 	int	sign;
-	int	result;
-
-	i = 0;
+	
+	num = 0;
 	sign = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-')
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
 		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (*str == '+' || *str == '-')
+		str++;
+	while (ft_isdigit(*str))
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		num = num * 10 + (num - '0');
+		str++;
 	}
-	return (sign * result);
+	return (sign * num);
 }

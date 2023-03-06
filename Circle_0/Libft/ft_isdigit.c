@@ -5,16 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 15:35:29 by jikoo             #+#    #+#             */
-/*   Updated: 2022/07/26 14:20:37 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 21:11:03 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:23:45 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+/**
+ * The ft_isdigit() function tests for a decimal digit character.
+ */
+int ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
+	if ('0' <= c && c <= '9')
 		return (1);
-	return (0);
+	else
+		return (0);
 }

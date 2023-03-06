@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 23:41:17 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:03 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 19:24:52 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:23:49 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * The ft_strchr() function locates the first occurrence of c (converted to a
- * char) in the string pointed to by s.  The terminating null character is
- * considered to be part of the string; therefore if c is ‘\0’, the functions
- * locate the terminating ‘\0’.
+ * The ft_isspace() function tests for the white-space characters.
  */
-char	*ft_strchr(const char *s, int c)
+int	ft_isspace(int c)
 {
-	while (*s && *s != (char)c)
-		s++;
-	return ((char *)s);
+	if (c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	else
+		return (0);
 }

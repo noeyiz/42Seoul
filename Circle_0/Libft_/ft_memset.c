@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 23:41:17 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:03 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/08 15:35:38 by jikoo             #+#    #+#             */
+/*   Updated: 2022/07/26 14:46:36 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * The ft_strchr() function locates the first occurrence of c (converted to a
- * char) in the string pointed to by s.  The terminating null character is
- * considered to be part of the string; therefore if c is ‘\0’, the functions
- * locate the terminating ‘\0’.
- */
-char	*ft_strchr(const char *s, int c)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	while (*s && *s != (char)c)
-		s++;
-	return ((char *)s);
+	while (len--)
+		((unsigned char *)b)[len] = c;
+	return (b);
 }

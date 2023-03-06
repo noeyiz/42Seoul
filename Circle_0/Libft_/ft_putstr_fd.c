@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 23:41:17 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:03 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/22 15:21:33 by jikoo             #+#    #+#             */
+/*   Updated: 2022/07/26 14:48:36 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * The ft_strchr() function locates the first occurrence of c (converted to a
- * char) in the string pointed to by s.  The terminating null character is
- * considered to be part of the string; therefore if c is ‘\0’, the functions
- * locate the terminating ‘\0’.
- */
-char	*ft_strchr(const char *s, int c)
+void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s && *s != (char)c)
-		s++;
-	return ((char *)s);
+	size_t	i;
+
+	if (fd < 0)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }

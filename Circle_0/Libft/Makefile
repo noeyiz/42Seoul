@@ -5,57 +5,55 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/18 14:33:45 by jikoo             #+#    #+#              #
-#    Updated: 2022/12/08 18:36:54 by jikoo            ###   ########.fr        #
+#    Created: 2023/03/07 01:53:44 by jikoo             #+#    #+#              #
+#    Updated: 2023/03/07 02:12:00 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
+# compile options
+NAME		= libft.a
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror 
 RM			= rm -f
 
-HEADER      = libft.h
-SRCS        = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c \
-			  ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-			  ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c \
-			  ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c \
-			  ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-			  ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-BONUS       = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-              ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+# source files
+SRCS		= ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
+			  ft_isspace.c ft_memcpy.c ft_memset.c ft_putchar_fd.c \
+			  ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
+			  ft_strcat.c ft_strchr.c ft_strcpy.c ft_strdup.c ft_strjoin.c \
+			  ft_strlen.c ft_strncmp.c ft_strndup.c ft_strrepl.c ft_substr.c \
+			  ft_abs.c ft_max.c ft_min.c
+OBJS		= $(SRCS:c=o)
 
-OBJS        = $(SRCS:c=o)
-OBJS_BONUS  = $(BONUS:c=o)
-
-ifdef BONUSFLAG
-    ALLOBJ  = $(OBJS) $(OBJS_BONUS)
-else
-    ALLOBJ  = $(OBJS)
-endif
-
-NAME        = libft.a
+# colors
+RESET 	= \033[0m
+GREEN 	= \033[1;32m
+MAGENTA = \033[1;35m
+CYAN 	= \033[1;36m
 
 all: $(NAME)
-	sleep 1
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(ALLOBJ)
-	ar rcs $@ $(ALLOBJ)
-
-bonus:
-	make BONUSFLAG=1
+$(NAME): $(OBJS)
+	@ar rcs $@ $(OBJS)
+	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
+	@echo "$(GREEN)║                                               ║$(RESET)"
+	@echo "$(GREEN)║             Libft compile finished            ║$(RESET)"
+	@echo "$(GREEN)║                                               ║$(RESET)"
+	@echo "$(GREEN)╚═══════════════════════════════════════════════╝$(RESET)"
 
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(OBJS)
 
 fclean:
-	make clean
-	$(RM) $(NAME)
+	@make clean
+	@$(RM) $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
+

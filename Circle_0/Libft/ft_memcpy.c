@@ -5,18 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 16:38:02 by jikoo             #+#    #+#             */
-/*   Updated: 2022/08/03 16:34:03 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 22:50:08 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:23:52 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * The ft_memcpy() function copies n bytes from memory area src to memory area
+ * dst.  If dst and src overlap, behavior is undefined.  Applications in which
+ * dst and src might overlap should use memmove(3) instead.
+ */
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
-	if (!dst && !src)
-		return (NULL);
+	char		*dst_ptr;
+	const char	*src_ptr;
+
+	dst_ptr = (char *)dst;
+	src_ptr = (const char *)src;
 	while (n--)
-		((unsigned char *)dst)[n] = ((const unsigned char *)src)[n];
+		*dst_ptr++ = *src_ptr++;
 	return (dst);
 }

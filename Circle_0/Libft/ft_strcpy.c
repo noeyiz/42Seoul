@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 23:41:17 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:03 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/06 23:07:33 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 01:24:05 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * The ft_strchr() function locates the first occurrence of c (converted to a
- * char) in the string pointed to by s.  The terminating null character is
- * considered to be part of the string; therefore if c is ‘\0’, the functions
- * locate the terminating ‘\0’.
+ * The ft_strcpy() function copies the string src to dst (including the
+ * terminating ‘\0’ character.)  The source and destination strings should
+ * not overlap, as the behavior is undefined.
  */
-char	*ft_strchr(const char *s, int c)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	while (*s && *s != (char)c)
-		s++;
-	return ((char *)s);
+	char		*dst_ptr;
+	const char	*src_ptr;
+
+	dst_ptr = dst;
+	src_ptr = src;
+	while (*src_ptr)
+		*dst_ptr++ = *src_ptr++;
+	*dst_ptr = '\0';
+	return (dst);
 }

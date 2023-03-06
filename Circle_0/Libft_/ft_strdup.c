@@ -5,31 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 00:01:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:09 by jikoo            ###   ########.fr       */
+/*   Created: 2022/07/18 14:28:07 by jikoo             #+#    #+#             */
+/*   Updated: 2022/08/03 16:34:03 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * The ft_strdup() function allocates sufficient memory for a copy of the string
- * s1, does the copy, and returns a pointer to it.  The pointer may
- * subsequently be used as an argument to the function free(3).
-
- * If insufficient memory is available, NULL is returned and errno is set to
- * ENOMEM.
- */
-char    *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-	char	*str;
-	size_t	len;
+	int		i;
+	int		len;
+	char	*dup_str;
 
 	len = ft_strlen(s1);
-	str = malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
+	dup_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dup_str)
 		return (NULL);
-	ft_memcpy(str, s1, len);
-	str[len] = '\0';
-	return (str);
+	i = 0;
+	while (s1[i])
+	{
+		dup_str[i] = s1[i];
+		i++;
+	}
+	dup_str[i] = '\0';
+	return (dup_str);
 }

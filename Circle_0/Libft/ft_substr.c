@@ -5,52 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 11:05:14 by jikoo             #+#    #+#             */
-/*   Updated: 2022/08/03 16:34:03 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/07 01:43:16 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/07 02:07:08 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_getsize(char const *s, unsigned int start, size_t len)
-{
-	if (ft_strlen(s) - start < len)
-		return (ft_strlen(s) - start);
-	else
-		return (len);
-}
+static char	*ft_return_null(void);
 
-static char	*ft_nullreturn(void)
+/**
+ * The ft_substr() function allocates (with malloc(3)) and returns a substring
+ * from the string ’s’.  The substring begins at index ’start’ and is of
+ * maximum size ’len’.
+ */
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 
-	str = (char *)malloc(sizeof(char));
-	if (!str)
+	if (s == NULL)
 		return (NULL);
-	str[0] = '\0';
+	if (ft_strlen(s) < start)
+		return (ft_return_null());
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	ft_memcpy(str, s + start, len);
+	str[len] = '\0';
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_return_null(void)
 {
-	char	*sub_str;
-	size_t	i;
-	size_t	size;
+	char	*str;
 
-	if (!s)
+	str = malloc(sizeof(char));
+	if (str == NULL)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		return (ft_nullreturn());
-	size = ft_getsize(s, start, len);
-	sub_str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!sub_str)
-		return (NULL);
-	i = 0;
-	while (size--)
-	{
-		sub_str[i] = s[start + i];
-		i++;
-	}
-	sub_str[i] = '\0';
-	return (sub_str);
+	str[0] = '\0';
+	return (str);
 }
