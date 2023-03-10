@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:47:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/27 21:26:18 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/10 20:33:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_ph_atoi(char *str)
+static int	ph_atoi(char *str)
 {
 	int			sign;
 	long long	num;
@@ -38,21 +38,21 @@ static int	ft_ph_atoi(char *str)
 	return (sign * num);
 }
 
-int	ft_init_info(t_info *info, char **argv)
+int	init_info(t_info *info, char **argv)
 {
 	memset(info, 0, sizeof(t_info));
-	info->num_of_philosophers = ft_ph_atoi(argv[1]);
-	info->time_to_die = ft_ph_atoi(argv[2]);
-	info->time_to_eat = ft_ph_atoi(argv[3]);
-	info->time_to_sleep = ft_ph_atoi(argv[4]);
+	info->num_of_philosophers = ph_atoi(argv[1]);
+	info->time_to_die = ph_atoi(argv[2]);
+	info->time_to_eat = ph_atoi(argv[3]);
+	info->time_to_sleep = ph_atoi(argv[4]);
 	if (argv[5])
-		info->num_of_times_to_must_eat = ft_ph_atoi(argv[5]);
+		info->num_of_times_to_must_eat = ph_atoi(argv[5]);
 	if (info->num_of_philosophers <= 0 || info->time_to_die <= 0
 		|| info->time_to_eat <= 0 || info->time_to_sleep <= 0
 		|| info->num_of_times_to_must_eat < 0)
 		return (FAILURE);
 	gettimeofday(&info->start_time, NULL);
-	info->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	info->mutex = malloc(sizeof(pthread_mutex_t));
 	if (info->mutex == NULL)
 		return (FAILURE);
 	if (pthread_mutex_init(info->mutex, NULL))
@@ -60,27 +60,49 @@ int	ft_init_info(t_info *info, char **argv)
 	return (SUCCESS);
 }
 
-int	ft_init_forks(pthread_mutex_t **forks, int num)
+int	init_forks(t_fork **forks, int num)
 {
 	int	i;
 
-	*forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * num);
+	*forks = malloc(sizeof(t_fork) * num);
 	if (*forks == NULL)
 		return (FAILURE);
-	i = 0;
-	while (i < num)
+	i = -1;
+	while (++i < num)
 	{
-		if (pthread_mutex_init(&(*forks)[i], NULL))
+		(*forks)[i].is_available = TRUE;
+		(*forks)[i].mutex = malloc(sizeof(pthread_mutex_t));
+		if ((*forks)[i].mutex == NULL)
 			return (FAILURE);
-		i++;
+		if (pthread_mutex_init((*forks)[i].mutex, NULL))
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }
 
-int	ft_init_philos(t_philo **philos, t_info *info, pthread_mutex_t **forks)
+int	init_philos(t_philo **philos, t_info info, t_fork *forks)
 {
-	(void)info;
-	(void)forks;
-	(void)philos;
+	int	i;
+	int	num;
+
+	num = info.num_of_philosophers;
+	*philos = malloc(sizeof(t_philo) * num);
+	if (*philos == NULL)
+		return (FAILURE);
+	i = -1;
+	while (++i < num)
+	{
+		(*philos)[i].id = i;
+		(*philos)[i].eat_cnt = 0;
+		(*philos)[i].status = FORK;
+		(*philos)[i].last_eat_time = info.start_time;
+		(*philos)[i].left_fork = &forks[i];
+		(*philos)[i].right_fork = &forks[(i + 1) % num];
+		(*philos)[i].mutex = malloc(sizeof(pthread_mutex_t));
+		if ((*philos)[i].mutex == NULL)
+			return (FAILURE);
+		if (pthread_mutex_init((*philos)[i].mutex, NULL))
+			return (FAILURE);
+	}
 	return (SUCCESS);
 }

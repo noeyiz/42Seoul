@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:58:36 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/27 21:23:08 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/10 20:30:05 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 
 # define SUCCESS 1
 # define FAILURE 0
+# define TRUE 1
+# define FALSE 0
+
 typedef enum e_status
 {
 	FORK,
@@ -38,6 +41,12 @@ typedef enum e_status
 	DIE
 }	t_status;
 
+typedef struct s_fork
+{
+	int				is_available;
+	pthread_mutex_t	*mutex;
+}	t_fork;
+
 typedef struct s_philo
 {
 	int				id;
@@ -45,8 +54,8 @@ typedef struct s_philo
 	t_status		status;
 	pthread_t		thread;
 	struct timeval	last_eat_time;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
 	pthread_mutex_t	*mutex;
 }	t_philo;
 
@@ -63,8 +72,8 @@ typedef struct s_info
 }	t_info;
 
 /* init.c */
-int	ft_init_info(t_info *info, char **argv);
-int	ft_init_forks(pthread_mutex_t **forks, int num);
-int	ft_init_philos(t_philo **philos, t_info *info, pthread_mutex_t **forks);
+int	init_info(t_info *info, char **argv);
+int	init_forks(t_fork **forks, int num);
+int	init_philos(t_philo **philos, t_info info, t_fork *forks);
 
 #endif
