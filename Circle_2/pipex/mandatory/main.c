@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:01:56 by jikoo             #+#    #+#             */
-/*   Updated: 2023/02/22 17:07:59 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/10 18:06:01 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_execute_cmd_parent(t_info *info, char *filename, char *cmd)
 	if (file == NULL)
 		ft_exit("command not found", EXIT_COMMAND_NOT_FOUND);
 	execve(file, argv, info->envp);
-	ft_exit("execve failure", EXIT_FAILURE);
+	ft_exit("execve", EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -77,6 +77,9 @@ int	main(int argc, char **argv, char **envp)
 		ft_execute_cmd_child(&info, argv[1], argv[2]);
 	waitpid(info.pid, &status, 0);
 	if (status)
+	{
 		ft_execute_cmd_parent(&info, argv[4], argv[3]);
+		ft_exit("execve", EXIT_FAILURE);
+	}
 	exit(EXIT_SUCCESS);
 }
