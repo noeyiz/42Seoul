@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 20:47:37 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/10 20:33:07 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/15 21:48:14 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/16 00:04:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ph_atoi(char *str)
 {
-	int			sign;
 	long long	num;
+	int			sign;
 
 	num = 0;
 	sign = 1;
@@ -38,71 +38,57 @@ static int	ph_atoi(char *str)
 	return (sign * num);
 }
 
-int	init_info(t_info *info, char **argv)
+int	init_common_attr(t_common_attr *attr, char **argv)
 {
-	memset(info, 0, sizeof(t_info));
-	info->num_of_philosophers = ph_atoi(argv[1]);
-	info->time_to_die = ph_atoi(argv[2]);
-	info->time_to_eat = ph_atoi(argv[3]);
-	info->time_to_sleep = ph_atoi(argv[4]);
+	attr->num_of_philosophers = ph_atoi(argv[1]);
+	attr->time_to_die = ph_atoi(argv[2]);
+	attr->time_to_eat = ph_atoi(argv[3]);
+	attr->time_to_sleep = ph_atoi(argv[4]);
 	if (argv[5])
-		info->num_of_times_to_must_eat = ph_atoi(argv[5]);
-	if (info->num_of_philosophers <= 0 || info->time_to_die <= 0
-		|| info->time_to_eat <= 0 || info->time_to_sleep <= 0
-		|| info->num_of_times_to_must_eat < 0)
-		return (FAILURE);
-	gettimeofday(&info->start_time, NULL);
-	info->mutex = malloc(sizeof(pthread_mutex_t));
-	if (info->mutex == NULL)
-		return (FAILURE);
-	if (pthread_mutex_init(info->mutex, NULL))
-		return (FAILURE);
-	return (SUCCESS);
+		attr->num_of_times_to_must_eat = ph_atoi(argv[5]);
+	else
+		attr->num_of_times_to_must_eat = 0;
+	if (attr->num_of_philosophers <= 0 || attr->time_to_die <= 0
+		|| attr->time_to_eat <= 0 || attr->time_to_sleep <= 0
+		|| attr->num_of_times_to_must_eat < 0)
+		return (0);
+	return (1);
 }
 
-int	init_forks(t_fork **forks, int num)
+int	init_shared_data(t_shared_data *data, int n)
 {
 	int	i;
 
-	*forks = malloc(sizeof(t_fork) * num);
-	if (*forks == NULL)
-		return (FAILURE);
+	data->end_flag = 0;
+	data->start_time = get_milisecond(0);
+	pthread_mutex_init(&data->end_mutex, NULL);
+	pthread_mutex_init(&data->print_mutex, NULL);
+	data->fork_mutex = malloc(sizeof(pthread_mutex_t) * n);
+	if (!data->fork_mutex)
+		return (0);
 	i = -1;
-	while (++i < num)
-	{
-		(*forks)[i].is_available = TRUE;
-		(*forks)[i].mutex = malloc(sizeof(pthread_mutex_t));
-		if ((*forks)[i].mutex == NULL)
-			return (FAILURE);
-		if (pthread_mutex_init((*forks)[i].mutex, NULL))
-			return (FAILURE);
-	}
-	return (SUCCESS);
+	while (++i < n)
+		pthread_mutex_init(&data->fork_mutex[i], NULL);
+	return (1);
 }
 
-int	init_philos(t_philo **philos, t_info info, t_fork *forks)
+int	init_philos(t_philo **philos, t_common_attr *attr, t_shared_data *data)
 {
-	int	i;
-	int	num;
+	const int	n = attr->num_of_philosophers;
+	int			i;
 
-	num = info.num_of_philosophers;
-	*philos = malloc(sizeof(t_philo) * num);
-	if (*philos == NULL)
-		return (FAILURE);
+	*philos = malloc(sizeof(t_philo) * n);
+	if (!*philos)
+		return (0);
 	i = -1;
-	while (++i < num)
+	while (++i < n)
 	{
-		(*philos)[i].id = i;
-		(*philos)[i].eat_cnt = 0;
-		(*philos)[i].status = FORK;
-		(*philos)[i].last_eat_time = info.start_time;
-		(*philos)[i].left_fork = &forks[i];
-		(*philos)[i].right_fork = &forks[(i + 1) % num];
-		(*philos)[i].mutex = malloc(sizeof(pthread_mutex_t));
-		if ((*philos)[i].mutex == NULL)
-			return (FAILURE);
-		if (pthread_mutex_init((*philos)[i].mutex, NULL))
-			return (FAILURE);
+		(*philos)[i].id = i + 1;
+		(*philos)[i].eat_count = 0;
+		(*philos)[i].last_eat_time = data->start_time;
+		pthread_mutex_init(&(*philos)[i].mutex, NULL);
+		(*philos)[i].attr = attr;
+		(*philos)[i].data = data;
 	}
-	return (SUCCESS);
+	return (1);
 }

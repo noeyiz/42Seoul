@@ -5,75 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:58:36 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/10 20:30:05 by jikoo            ###   ########.fr       */
+/*   Created: 2023/03/15 16:49:47 by jikoo             #+#    #+#             */
+/*   Updated: 2023/03/16 00:09:37 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-/* pthread_create, pthread_detach, pthread_join, pthread_mutex_init, 
-	pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock */
 # include <pthread.h>
-/* printf */
 # include <stdio.h>
-/* malloc, free */
 # include <stdlib.h>
-/* memset */
-# include <string.h>
-/* gettimeofday */
 # include <sys/time.h>
-/* write, usleep */
 # include <unistd.h>
 
-# define SUCCESS 1
-# define FAILURE 0
-# define TRUE 1
-# define FALSE 0
+# define FORK		"has taken a fork"
+# define EAT		"is eating"
+# define SLEEP		"is sleeping"
+# define THINK		"is thinking"
+# define DIE		"died"
 
-typedef enum e_status
-{
-	FORK,
-	EAT,
-	SLEEP,
-	THINK,
-	DIE
-}	t_status;
+# define RESET		"\033[0m"
+# define GRAY		"\033[1;90m"
+# define RED		"\033[1;91m"
+# define GREEN		"\033[1;92m"
+# define YELLOW		"\033[1;93m"
+# define BLUE		"\033[1;94m"
+# define MAGENTA	"\033[1;95m"
+# define CYAN		"\033[1;96m"
 
-typedef struct s_fork
+typedef struct s_common_attr
 {
-	int				is_available;
-	pthread_mutex_t	*mutex;
-}	t_fork;
+	int	num_of_philosophers;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	num_of_times_to_must_eat;
+}	t_common_attr;
+
+typedef struct s_shared_data
+{
+	int				end_flag;
+	long long		start_time;
+	pthread_mutex_t	end_mutex;
+	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	print_mutex;
+}	t_shared_data;
 
 typedef struct s_philo
 {
 	int				id;
-	int				eat_cnt;
-	t_status		status;
+	int				eat_count;
+	long long		last_eat_time;
 	pthread_t		thread;
-	struct timeval	last_eat_time;
-	t_fork			*left_fork;
-	t_fork			*right_fork;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
+	t_common_attr	*attr;
+	t_shared_data	*data;
 }	t_philo;
 
-typedef struct s_info
-{
-	int				end_flag;
-	int				num_of_philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				num_of_times_to_must_eat;
-	struct timeval	start_time;
-	pthread_mutex_t	*mutex;
-}	t_info;
+int			init_common_attr(t_common_attr *attr, char **argv);
+int			init_shared_data(t_shared_data *data, int n);
+int			init_philos(t_philo **philos, t_common_attr *attr, \
+						t_shared_data *data);
 
-/* init.c */
-int	init_info(t_info *info, char **argv);
-int	init_forks(t_fork **forks, int num);
-int	init_philos(t_philo **philos, t_info info, t_fork *forks);
+int			check_end(t_shared_data *data);
+void		simulate(t_philo **philos);
+void		*routine(void *philosopher);
+
+long long	get_milisecond(long long start_time);
+void		msleep(long long time);
+void		print_state(pthread_mutex_t *print, long long start_time, \
+						int philo_id, char *state);
 
 #endif

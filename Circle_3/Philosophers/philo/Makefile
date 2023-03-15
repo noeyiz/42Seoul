@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/23 16:20:18 by jikoo             #+#    #+#              #
-#    Updated: 2023/03/10 20:39:36 by jikoo            ###   ########.fr        #
+#    Created: 2023/03/14 19:11:53 by jikoo             #+#    #+#              #
+#    Updated: 2023/03/15 22:52:25 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,8 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address
 RM			= rm -f
 
-# colors
-RESET 	= \033[0m
-GREEN 	= \033[1;32m
-MAGENTA = \033[1;35m
-CYAN 	= \033[1;36m
-
 # source files
-SRCS		= main.c init.c
+SRCS		= main.c init.c simulate.c routine.c utils.c
 OBJS		= $(SRCS:c=o)
 
 all: $(NAME)
@@ -33,25 +27,25 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
-	@echo "$(CYAN)╔═════════════════════════════════════════════╗$(RESET)"
-	@echo "$(CYAN)║                                             ║$(RESET)"
-	@echo "$(CYAN)║                🍽   philo   🍽                ║$(RESET)"
-	@echo "$(CYAN)║               compile finished              ║$(RESET)"
-	@echo "$(CYAN)║                                             ║$(RESET)"
-	@echo "$(CYAN)╚═════════════════════════════════════════════╝$(RESET)"
+	@echo "╔═════════════════════════════════════════════╗"
+	@echo "║                                             ║"
+	@echo "║                🍽   philo   🍽                ║"
+	@echo "║               compile finished              ║"
+	@echo "║                                             ║"
+	@echo "╚═════════════════════════════════════════════╝"
 
 clean:
 	@$(RM) $(OBJS)
-	@echo "$(MAGENTA)╔═════════════════════════════════════════════╗$(RESET)"
-	@echo "$(MAGENTA)║             make clean finished.            ║$(RESET)"
-	@echo "$(MAGENTA)╚═════════════════════════════════════════════╝$(RESET)"
+	@echo "╔═════════════════════════════════════════════╗"
+	@echo "║             make clean finished.            ║"
+	@echo "╚═════════════════════════════════════════════╝"
 
 fclean:
 	@make clean
 	@$(RM) $(NAME)
-	@echo "$(MAGENTA)╔═════════════════════════════════════════════╗$(RESET)"
-	@echo "$(MAGENTA)║            make fclean finished.            ║$(RESET)"
-	@echo "$(MAGENTA)╚═════════════════════════════════════════════╝$(RESET)"
+	@echo "╔═════════════════════════════════════════════╗"
+	@echo "║            make fclean finished.            ║"
+	@echo "╚═════════════════════════════════════════════╝"
 
 re:
 	@make fclean
