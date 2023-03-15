@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:48:14 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 00:04:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:24:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int	init_shared_data(t_shared_data *data, int n)
 {
 	int	i;
 
-	data->end_flag = 0;
 	data->start_time = get_milisecond(0);
-	pthread_mutex_init(&data->end_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	data->fork_mutex = malloc(sizeof(pthread_mutex_t) * n);
 	if (!data->fork_mutex)

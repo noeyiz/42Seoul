@@ -6,14 +6,14 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 19:11:53 by jikoo             #+#    #+#              #
-#    Updated: 2023/03/15 22:52:25 by jikoo            ###   ########.fr        #
+#    Updated: 2023/03/16 01:20:16 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 RM			= rm -f
 
 # source files

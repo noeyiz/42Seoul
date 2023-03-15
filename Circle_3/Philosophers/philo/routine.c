@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 22:41:51 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 00:28:48 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:22:32 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,12 @@ void	*routine(void *philosopher)
 	t_shared_data *const	data = philo->data;
 
 	if (philo->id % 2)
-		msleep(100);
+		msleep(philo->attr->time_to_eat);
 	while (1)
 	{
-		if (check_end(data))
-			break ;
 		pickup(philo);
 		eat(philo);
 		putdown(philo);
-		if (check_end(data))
-			break ;
 		print_state(&(data->print_mutex), data->start_time, philo->id, SLEEP);
 		msleep(philo->attr->time_to_sleep);
 		print_state(&(data->print_mutex), data->start_time, philo->id, THINK);

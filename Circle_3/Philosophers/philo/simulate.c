@@ -6,22 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 22:38:53 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 00:12:02 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:24:28 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	check_end(t_shared_data *data)
-{
-	int	result;
-
-	result = 0;
-	pthread_mutex_lock(&data->end_mutex);
-	result = data->end_flag;
-	pthread_mutex_unlock(&data->end_mutex);
-	return (result);
-}
 
 int	check_die(t_philo philo)
 {
@@ -53,10 +42,10 @@ int	check_done(t_philo *philo)
 	return (1);
 }
 
-void	monitoring(t_philo **philos)
+void	monitoring(t_philo *philos)
 {
-	t_common_attr *const	attr = (*philos)[0].attr;
-	t_shared_data *const	data = (*philos)[0].data;
+	t_common_attr *const	attr = philos[0].attr;
+	t_shared_data *const	data = philos[0].data;
 	int						i;
 	int						end;
 	
@@ -65,17 +54,14 @@ void	monitoring(t_philo **philos)
 	{
 		i = -1;
 		while (end == 0 && ++i < attr->num_of_philosophers)
-			end = check_die((*philos)[i]);
-		pthread_mutex_lock(&data->end_mutex);
-		data->end_flag = end;
-		pthread_mutex_unlock(&data->end_mutex);
+			end = check_die(philos[i]);
 		if (end)
 		{
 			printf(RED"die\n"RESET);
 			print_state(&(data->print_mutex), data->start_time, i + 1, DIE);
 			break ;
 		}
-		if (attr->num_of_times_to_must_eat && check_done(*philos))
+		if (attr->num_of_times_to_must_eat && check_done(philos))
 		{
 			printf(YELLOW"done\n"RESET);
 			break ;
@@ -83,16 +69,16 @@ void	monitoring(t_philo **philos)
 	}	
 }
 
-void	simulate(t_philo **philos)
+void	simulate(t_philo *philos)
 {
-	const int	n = (*philos)[0].attr->num_of_philosophers;
+	const int	n = philos[0].attr->num_of_philosophers;
 	int			i;
 
 	i = -1;
-	while (++i < n)
-		pthread_create(&(*philos)[i].thread, NULL, routine, &(*philos)[i]);
+	while (++i < n)	
+	{
+		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
+		pthread_detach(philos[i].thread);
+	}
 	monitoring(philos);
-	i = -1;
-	while (++i < n)
-		pthread_join((*philos)[i].thread, NULL);
 }

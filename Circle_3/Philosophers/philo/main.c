@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:40:23 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/15 22:48:09 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:20:10 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	t_shared_data	data;
 	t_philo			*philos;
 
-	atexit(check_leak); ////////////////////////////////////////////////////////
+	// atexit(check_leak); ////////////////////////////////////////////////////////
 	if (argc != 5 && argc != 6)
 		return (error("usage: num_of_philosophers time_to_die time_to_eat "
 				"time_to_sleep [num_of_times_to_must_eat]"));
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 		free_all(&philos);
 		return (error("initialization failed"));
 	}
-	simulate(&philos);
+	simulate(philos);
 	free_all(&philos);
 	return (1);
 }

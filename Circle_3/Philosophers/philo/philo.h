@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:49:47 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 00:09:37 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:23:46 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ typedef struct s_common_attr
 
 typedef struct s_shared_data
 {
-	int				end_flag;
 	long long		start_time;
-	pthread_mutex_t	end_mutex;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	print_mutex;
 }	t_shared_data;
@@ -69,7 +67,7 @@ int			init_philos(t_philo **philos, t_common_attr *attr, \
 						t_shared_data *data);
 
 int			check_end(t_shared_data *data);
-void		simulate(t_philo **philos);
+void		simulate(t_philo *philos);
 void		*routine(void *philosopher);
 
 long long	get_milisecond(long long start_time);
