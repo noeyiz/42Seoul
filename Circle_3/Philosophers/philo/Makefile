@@ -5,19 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/14 19:11:53 by jikoo             #+#    #+#              #
-#    Updated: 2023/03/16 01:20:16 by jikoo            ###   ########.fr        #
+#    Created: 2023/03/16 16:04:51 by jikoo             #+#    #+#              #
+#    Updated: 2023/03/16 20:50:20 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address
 RM			= rm -f
 
 # source files
-SRCS		= main.c init.c simulate.c routine.c utils.c
+SRCS		= main.c init_free.c simulate.c routine.c utils.c
 OBJS		= $(SRCS:c=o)
 
 all: $(NAME)
