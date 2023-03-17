@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:13:57 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 20:41:33 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/17 20:56:25 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 typedef struct s_philo_data
 {
+	int				end_flag;
 	int				num_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
@@ -43,6 +44,7 @@ typedef struct s_philo_data
 	int				*eat_count;
 	long long		start_time;
 	long long		*last_eat_time;
+	pthread_mutex_t	end_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*eat_mutex;
 	pthread_mutex_t	*fork_mutex;
@@ -74,5 +76,8 @@ long long	get_milisecond(long long start_time);
 void		msleep(long long target_time);
 void		print_state(pthread_mutex_t *print_mutex, long long start_time,
 				int philo_id, char *state);
-
+void		print_die(pthread_mutex_t *print_mutex, long long start_time,
+				int philo_id);
+void		print_done(pthread_mutex_t *print_mutex);
+				
 #endif

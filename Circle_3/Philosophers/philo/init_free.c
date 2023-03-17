@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:39:38 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 21:02:40 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/17 20:32:58 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	init_arr_philo_data(t_philo_data *data, int n)
 
 int	init_philo_data(t_philo_data *data, char **argv)
 {
+	data->end_flag = 0;
 	data->num_of_philosophers = ph_atoi(argv[1]);
 	data->time_to_die = ph_atoi(argv[2]);
 	data->time_to_eat = ph_atoi(argv[3]);
@@ -75,9 +76,9 @@ int	init_philo_data(t_philo_data *data, char **argv)
 		|| data->time_to_eat <= 0 || data->time_to_sleep <= 0
 		|| data->num_of_times_to_must_eat < 0)
 		return (0);
-	return (1);
 	data->start_time = get_milisecond(0);
 	pthread_mutex_init(&data->print_mutex, NULL);
+	pthread_mutex_init(&data->end_mutex, NULL);
 	if (init_arr_philo_data(data, data->num_of_philosophers) == 0)
 		return (0);
 	return (1);
@@ -100,7 +101,7 @@ int	init_philos(t_philo **philos, t_philo_data *data)
 		(*philos)[i].right = (i + 1) % n;
 		(*philos)[i].data = data;
 	}
-	return (0);
+	return (1);
 }
 
 void	free_all(t_philo **philos)
@@ -118,6 +119,7 @@ void	free_all(t_philo **philos)
 			pthread_mutex_destroy(&data->fork_mutex[i]);
 		}
 		pthread_mutex_destroy(&data->print_mutex);
+		pthread_mutex_destroy(&data->end_mutex);
 		free(data->eat_count);
 		free(data->last_eat_time);
 		free(data->eat_mutex);

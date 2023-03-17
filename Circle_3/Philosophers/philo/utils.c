@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:31:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 19:17:01 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/17 20:44:00 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,20 @@ void	print_state(pthread_mutex_t *print_mutex, long long start_time,
 {
 	pthread_mutex_lock(print_mutex);
 	printf("%lld %d %s\n", get_milisecond(start_time), philo_id + 1, state);
+	pthread_mutex_unlock(print_mutex);
+}
+
+void	print_die(pthread_mutex_t *print_mutex, long long start_time,
+				int philo_id)
+{
+	pthread_mutex_lock(print_mutex);
+	printf(RED"%lld %d %s\n"RESET, get_milisecond(start_time), philo_id + 1, DIE);
+	pthread_mutex_unlock(print_mutex);
+}
+
+void	print_done(pthread_mutex_t *print_mutex)
+{
+	pthread_mutex_lock(print_mutex);
+	printf(YELLOW"every philosophers is full ~~~ 😉\n"RESET);
 	pthread_mutex_unlock(print_mutex);
 }

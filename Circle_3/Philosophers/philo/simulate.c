@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:35:05 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/16 20:42:12 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/17 20:56:44 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,34 @@ static int	check_done(t_philo_data *data)
 	return (1);
 }
 
+void	set_end(t_philo_data *data)
+{
+	pthread_mutex_lock(&data->end_mutex);
+	data->end_flag = 1;
+	pthread_mutex_unlock(&data->end_mutex);
+}
+
 void	monitoring(t_philo_data *data)
 {
-	int	i;
-	int	is_anyone_dead;
+	int	idx;
+	int	end;
 
-	is_anyone_dead = 0;
+	end = 0;
 	while (1)
 	{
-		i = -1;
-		while (!is_anyone_dead && ++i < data->num_of_philosophers)
-			is_anyone_dead = check_die(data, i);
-		if (is_anyone_dead)
+		idx = -1;
+		while (end == 0 && ++idx < data->num_of_philosophers)
+			end = check_die(data, idx);
+		if (end)
 		{
-			printf(RED"someone die ....... 😈\n"RESET);
-			print_state(&data->print_mutex, data->start_time, i, DIE);
+			set_end(data);
+			print_die(&data->print_mutex, data->start_time, idx);
 			break ;
 		}
 		if (data->num_of_times_to_must_eat && check_done(data))
 		{
-			printf(YELLOW"every philosophers is full ~~~ 😁\n"RESET);
+			set_end(data);
+			print_done(&data->print_mutex);
 			break ;
 		}
 	}
@@ -75,9 +83,8 @@ void	simulate(t_philo *philos)
 	n = philos[0].data->num_of_philosophers;
 	i = -1;
 	while (++i < n)
-	{
 		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
-		pthread_detach(philos[i].thread);
-	}
 	monitoring(philos[0].data);
+	while (--i)
+		pthread_join(philos[i].thread, NULL);
 }
