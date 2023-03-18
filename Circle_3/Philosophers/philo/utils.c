@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:31:01 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/18 20:56:25 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/19 00:13:27 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	msleep(long long target_time)
 
 	start_time = get_millisecond(0);
 	while (target_time > get_millisecond(0) - start_time)
-		usleep(100);
+		usleep(1000);
 }
 
 void	print_state(t_philo_data *data, int philo_id, char *state)
@@ -37,11 +37,14 @@ void	print_state(t_philo_data *data, int philo_id, char *state)
 	pthread_mutex_t	*print_mutex;
 	long long		start_time;
 
-	if (check_end(data))
-		return ;
 	print_mutex = &data->print_mutex;
 	start_time = data->start_time;
 	pthread_mutex_lock(print_mutex);
+	if (check_end(data))
+	{
+		pthread_mutex_unlock(print_mutex);
+		return ;
+	}
 	printf("%lld %d %s\n", get_millisecond(start_time), philo_id + 1, state);
 	pthread_mutex_unlock(print_mutex);
 }

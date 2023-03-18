@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:27:42 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/18 20:56:07 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 23:21:11 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		|| init_philos(&philos, &data) == 0)
 	{
 		free_all(&philos);
-		return (error("initialization failed"));
+		return (error("error: initialization"));
 	}
 	simulate(philos);
 	free_all(&philos);
