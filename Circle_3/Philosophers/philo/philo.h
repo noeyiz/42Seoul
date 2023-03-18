@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:13:57 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/17 20:56:25 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:48:14 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <stdio.h>
 # include <unistd.h>
-# include <stdio.h> ////////////////////////////////////////////////////////////
-# include <stdlib.h> ///////////////////////////////////////////////////////////
 
 # define FORK		"has taken a fork"
 # define EAT		"is eating"
@@ -69,15 +68,14 @@ void		monitoring(t_philo_data *data);
 void		simulate(t_philo *philos);
 
 /* routine.c */
+int			check_end(t_philo_data *data);
 void		*routine(void *philosophers);
 
 /* utils.c */
-long long	get_milisecond(long long start_time);
+long long	get_millisecond(long long start_time);
 void		msleep(long long target_time);
-void		print_state(pthread_mutex_t *print_mutex, long long start_time,
-				int philo_id, char *state);
-void		print_die(pthread_mutex_t *print_mutex, long long start_time,
-				int philo_id);
+void		print_state(t_philo_data *data, int philo_id, char *state);
+void		print_die(t_philo_data *data, int philo_id);
 void		print_done(pthread_mutex_t *print_mutex);
-				
+
 #endif

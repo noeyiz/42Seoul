@@ -6,13 +6,13 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 20:18:15 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/17 20:56:20 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:53:34 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	check_end(t_philo_data *data)
+int	check_end(t_philo_data *data)
 {
 	int	result;
 
@@ -29,9 +29,9 @@ static void	pickup(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(&data->fork_mutex[philo->left]);
-	print_state(&data->print_mutex, data->start_time, philo->id, FORK);
+	print_state(data, philo->id, FORK);
 	pthread_mutex_lock(&data->fork_mutex[philo->right]);
-	print_state(&data->print_mutex, data->start_time, philo->id, FORK);
+	print_state(data, philo->id, FORK);
 }
 
 static void	eat(t_philo *philo)
@@ -40,9 +40,9 @@ static void	eat(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(&data->eat_mutex[philo->id]);
-	data->last_eat_time[philo->id] = get_milisecond(0);
+	data->last_eat_time[philo->id] = get_millisecond(0);
 	data->eat_count[philo->id]++;
-	print_state(&data->print_mutex, data->start_time, philo->id, EAT);
+	print_state(data, philo->id, EAT);
 	pthread_mutex_unlock(&data->eat_mutex[philo->id]);
 	msleep(data->time_to_eat);
 }
@@ -72,11 +72,9 @@ void	*routine(void *philosophers)
 		putdown(philo);
 		if (check_end(data))
 			break ;
-		print_state(&data->print_mutex, data->start_time, philo->id, SLEEP);
+		print_state(data, philo->id, SLEEP);
 		msleep(data->time_to_sleep);
-		if (check_end(data))
-			break ;
-		print_state(&data->print_mutex, data->start_time, philo->id, THINK);
+		print_state(data, philo->id, THINK);
 	}
 	return (NULL);
 }

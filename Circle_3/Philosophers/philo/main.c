@@ -6,16 +6,11 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:27:42 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/17 20:28:55 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:56:07 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	check_leak(void) ///////////////////////////////////////////////////////
-{
-	system("leaks philo | grep leaked");
-}
 
 static int	error(char *message)
 {
@@ -28,7 +23,6 @@ int	main(int argc, char **argv)
 	t_philo_data	data;
 	t_philo			*philos;
 
-	atexit(check_leak); ///////////////////////////////////////////////////////
 	if (argc != 5 && argc != 6)
 		return (error("usage: num_of_philosophers time_to_die time_to_eat "
 				"time_to_sleep [num_of_times_to_must_eat]"));

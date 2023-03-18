@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:39:38 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/17 20:32:58 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:36:39 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	init_philo_data(t_philo_data *data, char **argv)
 		|| data->time_to_eat <= 0 || data->time_to_sleep <= 0
 		|| data->num_of_times_to_must_eat < 0)
 		return (0);
-	data->start_time = get_milisecond(0);
+	data->start_time = get_millisecond(0);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->end_mutex, NULL);
 	if (init_arr_philo_data(data, data->num_of_philosophers) == 0)

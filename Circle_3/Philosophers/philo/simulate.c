@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:35:05 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/17 20:56:44 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:53:11 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_die(t_philo_data *data, int idx)
 	long long	time;
 
 	pthread_mutex_lock(&data->eat_mutex[idx]);
-	time = get_milisecond(data->last_eat_time[idx]);
+	time = get_millisecond(data->last_eat_time[idx]);
 	pthread_mutex_unlock(&data->eat_mutex[idx]);
 	if (time >= data->time_to_die)
 		return (1);
@@ -63,7 +63,7 @@ void	monitoring(t_philo_data *data)
 		if (end)
 		{
 			set_end(data);
-			print_die(&data->print_mutex, data->start_time, idx);
+			print_die(data, idx);
 			break ;
 		}
 		if (data->num_of_times_to_must_eat && check_done(data))
@@ -86,5 +86,8 @@ void	simulate(t_philo *philos)
 		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
 	monitoring(philos[0].data);
 	while (--i)
+	{
+		pthread_mutex_unlock(&philos[0].data->fork_mutex[i]);
 		pthread_join(philos[i].thread, NULL);
+	}
 }
