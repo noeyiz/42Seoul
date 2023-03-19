@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 20:18:15 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/18 20:53:34 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/20 00:24:02 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,11 @@ void	*routine(void *philosophers)
 	data = philo->data;
 	if (philo->id % 2)
 		msleep(data->time_to_eat);
-	while (1)
+	while (check_end(data) == 0)
 	{
 		pickup(philo);
 		eat(philo);
 		putdown(philo);
-		if (check_end(data))
-			break ;
 		print_state(data, philo->id, SLEEP);
 		msleep(data->time_to_sleep);
 		print_state(data, philo->id, THINK);
