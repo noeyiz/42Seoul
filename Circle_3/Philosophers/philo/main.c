@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:27:42 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/18 23:21:11 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/04/13 00:57:53 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	main(int argc, char **argv)
 		return (error("usage: num_of_philosophers time_to_die time_to_eat "
 				"time_to_sleep [num_of_times_to_must_eat]"));
 	philos = NULL;
-	if (init_philo_data(&data, argv) == 0
-		|| init_philos(&philos, &data) == 0)
+	if (init_philo_data(&data, argv) == 0 || init_philos(&philos, &data) == 0)
 	{
 		free_all(&philos);
 		return (error("error: initialization"));

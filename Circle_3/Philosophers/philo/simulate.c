@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:35:05 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/18 20:53:11 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/04/13 00:55:49 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	simulate(t_philo *philos)
 	monitoring(philos[0].data);
 	while (--i)
 	{
-		pthread_mutex_unlock(&philos[0].data->fork_mutex[i]);
 		pthread_join(philos[i].thread, NULL);
+		pthread_mutex_unlock(&philos[0].data->fork_mutex[i]);
 	}
 }
