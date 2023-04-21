@@ -6,14 +6,14 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/19 22:49:53 by jikoo             #+#    #+#              #
-#    Updated: 2023/04/21 15:59:33 by jikoo            ###   ########.fr        #
+#    Updated: 2023/04/21 18:04:48 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
 NAME		= minishell
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM			= rm -f
 LIBFT		= -Llibft -lft
 LDFLAGS		= -lreadline -L$(shell brew --prefix readline)/lib
