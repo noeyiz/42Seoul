@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:49:59 by jikoo             #+#    #+#             */
-/*   Updated: 2023/04/21 17:55:13 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/04/27 20:07:29 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef enum e_token_type
 
 typedef struct s_token
 {
-	char			*origin_string;
 	char			*string;
 	t_token_type	type;
 	struct s_token	*next;
