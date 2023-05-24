@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:49:00 by jikoo             #+#    #+#             */
-/*   Updated: 2023/04/21 17:54:51 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:39:30 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,18 @@ t_token	*lexical_analysis(t_info *info, char *input)
 
 // 	// 8. remove empty chunk & change chunk to argv
 // 	handle_chunk(&token_list);
-// 	printf("=== 8 CHUNK 처리 ================================\n");
-// 	print_token_list(token_list);
+// 	// printf("=== 8 CHUNK 처리 ================================\n");
+// 	// print_token_list(token_list);
 	
 // 	// 9. merge continuous argv token
 // 	merge_continuous_argv_token(&token_list);
-// 	printf("=== 9 연속된 argv 병합 ==========================\n");
-// 	print_token_list(token_list);
+// 	// printf("=== 9 연속된 ARGV 병합 ==========================\n");
+// 	// print_token_list(token_list);
 
 // 	// 10. remove space token
 // 	remove_space_token(&token_list);
-// 	printf("=== 10 SPACE 지우기 =============================\n");
-// 	print_token_list(token_list);
+// 	// printf("=== 10 SPACE 지우기 =============================\n");
+// 	// print_token_list(token_list);
 
 // 	return (token_list);
 // }
