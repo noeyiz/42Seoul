@@ -29,7 +29,6 @@ private:
     void displaySavedContacts(void);
     void displayContact(int idx);
 
-private:
     Contact m_contacts[PHONEBOOK_SIZE];
     int     m_num_of_contacts;
     int     m_last_contact_idx;

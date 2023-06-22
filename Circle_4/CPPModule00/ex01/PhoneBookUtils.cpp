@@ -7,6 +7,7 @@ bool PhoneBook::isEmptyString(std::string str) {
         if (isspace(str[i]) == false)
             return false;
     }
+
     return true;
 }
 
@@ -24,6 +25,7 @@ std::string PhoneBook::getAddInput(std::string message) {
         }
         std::cout << YELLOW << "빈 문자는 올 수 없습니다 다시 입력해주세요" << RESET << std::endl;
     }
+
     return input;
 }
 
@@ -70,6 +72,7 @@ bool PhoneBook::isRightSearchInput(std::string input) {
         || n_input < 0 || n_input > 7
         || (m_num_of_contacts < 8 && n_input > m_last_contact_idx))
         return false;
+        
     return true;
 }
 
