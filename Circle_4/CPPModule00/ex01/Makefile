@@ -5,9 +5,10 @@ CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
 # source files
-SRCS		= main.cpp		\
-			  Contact.cpp	\
-			  PhoneBook.cpp
+SRCS		= main.cpp			\
+			  Contact.cpp		\
+			  PhoneBook.cpp		\
+			  PhoneBookUtils.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 # colors

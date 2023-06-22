@@ -47,11 +47,3 @@ void Contact::SetPhoneNumber(std::string phone_number) {
 void Contact::SetDarkestSecret(std::string darkest_secret) {
     m_darkest_secret = darkest_secret;
 }
-
-void Contact::Display(void) {
-    std::cout << m_first_name << std::endl;
-    std::cout << m_last_name << std::endl;
-    std::cout << m_nickname << std::endl;
-    std::cout << m_phone_number << std::endl;
-    std::cout << m_darkest_secret << std::endl;
-}

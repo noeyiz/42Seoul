@@ -17,7 +17,6 @@ public:
     void        SetNickname(std::string nickname);
     void        SetPhoneNumber(std::string phone_number);
     void        SetDarkestSecret(std::string darkest_secret);
-    void        Display(void);
 
 private:
     int         m_index;

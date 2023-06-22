@@ -22,6 +22,12 @@ public:
 private:
     void add(void);
     void search(void);
+    bool isEmptyString(std::string str);
+    std::string getAddInput(std::string message);
+    void printColumn(std::string str);
+    bool isRightSearchInput(std::string input);
+    void displaySavedContacts(void);
+    void displayContact(int idx);
 
 private:
     Contact m_contacts[PHONEBOOK_SIZE];
