@@ -13,6 +13,7 @@
 # define CYAN		"\033[1;96m"
 
 # define PHONEBOOK_SIZE 8
+# define COLUMN_MAX 10
 
 class PhoneBook {
 public:
@@ -22,9 +23,6 @@ public:
 private:
     void add(void);
     void search(void);
-    bool isEmptyString(std::string str);
-    std::string getAddInput(std::string message);
-    void printColumn(std::string str);
     bool isRightSearchInput(std::string input);
     void displaySavedContacts(void);
     void displayContact(int idx);

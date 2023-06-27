@@ -4,8 +4,8 @@ static void printUpperCase(std::string str) {
     int size = str.size();
 
     for (int i = 0; i < size; i++) {
-        if (islower(str[i]))
-            std::cout << static_cast<char>(toupper(str[i]));
+        if (std::islower(str[i]))
+            std::cout << static_cast<char>(std::toupper(str[i]));
         else
             std::cout << str[i];
     }

@@ -1,10 +1,11 @@
-#include "Account.hpp"
 #include <iostream>
 
-int Account::_nbAccounts = 0;
-int Account::_totalAmount = 0;
-int Account::_totalNbDeposits = 0;
-int Account::_totalNbWithdrawals = 0;
+#include "Account.hpp"
+
+int Account::_nbAccounts;
+int Account::_totalAmount;
+int Account::_totalNbDeposits;
+int Account::_totalNbWithdrawals;
 
 int Account::getNbAccounts(void) {
     return _nbAccounts;
@@ -22,7 +23,6 @@ int Account::getNbWithdrawals(void) {
     return _totalNbWithdrawals;
 }
 
-// [19920104_091532] accounts:8;total:20049;deposits:0;withdrawals:0
 void Account::displayAccountsInfos(void) {
     _displayTimestamp();
 
@@ -32,7 +32,6 @@ void Account::displayAccountsInfos(void) {
     std::cout << "withdrawals:" << _totalNbWithdrawals << std::endl;
 }
 
-// [19920104_091532] index:0;amount:42;created
 Account::Account(int initial_deposit) {
     _accountIndex = _nbAccounts;
     _amount = initial_deposit;
@@ -49,7 +48,6 @@ Account::Account(int initial_deposit) {
     _totalAmount += _amount;
 }
 
-// [19920104_091532] index:0;amount:47;closed
 Account::~Account(void) {
     _displayTimestamp();
 
@@ -58,7 +56,6 @@ Account::~Account(void) {
     std::cout << "closed" << std::endl; 
 }
 
-// [19920104_091532] index:0;p_amount:42;deposit:5;amount:47;nb_deposits:1
 void Account::makeDeposit(int deposit) {
     _displayTimestamp();
 
@@ -76,8 +73,6 @@ void Account::makeDeposit(int deposit) {
     _totalNbDeposits += 1;
 }
 
-// [19920104_091532] index:0;p_amount:47;withdrawal:refused
-// [19920104_091532] index:1;p_amount:819;withdrawal:34;amount:785;nb_withdrawals:1
 bool Account::makeWithdrawal(int withdrawal) {
     _displayTimestamp();
 
@@ -108,7 +103,6 @@ int	Account::checkAmount(void) const {
     return _amount;
 }
 
-// [19920104_091532] index:0;amount:42;deposits:0;withdrawals:0
 void Account::displayStatus(void) const {
     _displayTimestamp();
 
@@ -119,5 +113,10 @@ void Account::displayStatus(void) const {
 }
 
 void	Account::_displayTimestamp(void) {
-    std::cout << "[" << "어쩌고" << "_" << "저쩌고" << "] ";
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+    char buffer[128];
+
+    std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", now);
+    std::cout << "[" << buffer << "] ";
 }

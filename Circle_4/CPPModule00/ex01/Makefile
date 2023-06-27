@@ -7,8 +7,7 @@ RM			= rm -f
 # source files
 SRCS		= main.cpp			\
 			  Contact.cpp		\
-			  PhoneBook.cpp		\
-			  PhoneBookUtils.cpp
+			  PhoneBook.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 # colors
