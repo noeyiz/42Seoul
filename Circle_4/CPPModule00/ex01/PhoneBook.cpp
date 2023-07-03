@@ -32,7 +32,7 @@ static bool isEmptyString(std::string str) {
     return true;
 }
 
-static std::string getAddInput(std::string message) {
+std::string PhoneBook::getAddInput(std::string message) {
     std::string input;
 
     while (true) {
@@ -40,7 +40,7 @@ static std::string getAddInput(std::string message) {
         if (std::getline(std::cin, input) && isEmptyString(input) == false)
             break;
         if (std::cin.eof()) {
-            clearerr(stdin); // why ... :) eofbit failbit ?
+            clearerr(stdin);
             std::cin.clear();
             std::cout << std::endl;
         }
@@ -63,7 +63,7 @@ void PhoneBook::add(void) {
     std::cout << MAGENTA << "• • • 전화번호 추가가 완료되었습니다\n" << RESET << std::endl;
 }
 
-static void printColumn(std::string str) {
+void PhoneBook::printColumn(std::string str) {
     std::cout << "|";
     if (str.size() > COLUMN_MAX) {
         std::cout << str.substr(0, COLUMN_MAX - 1) << ".";
@@ -149,7 +149,7 @@ void PhoneBook::search(void) {
             break;
         }
         if (std::cin.eof()) {
-            clearerr(stdin); // why ... :) eofbit failbit ?
+            clearerr(stdin);
             std::cin.clear();
             std::cout << std::endl;
         }

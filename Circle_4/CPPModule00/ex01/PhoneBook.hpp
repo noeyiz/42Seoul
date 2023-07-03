@@ -23,6 +23,8 @@ public:
 private:
     void add(void);
     void search(void);
+    std::string getAddInput(std::string message);
+    void printColumn(std::string str);
     bool isRightSearchInput(std::string input);
     void displaySavedContacts(void);
     void displayContact(int idx);
