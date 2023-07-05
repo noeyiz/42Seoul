@@ -1,6 +1,5 @@
 # compile options
-NAME		= harl_2_0
-CC			= c++
+NAME		= ex05
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
@@ -22,10 +21,10 @@ CYAN		= \033[1;96m
 all: $(NAME)
 
 %.o: %.cpp
-	@$(CC) $(CXXFLAGS) -c $<
+	@$(CXX) $(CXXFLAGS) -c $<
 
 $(NAME): $(OBJS)
-	@$(CC) $(CXXFLAGS) $^ -o $@
+	@$(CXX) $(CXXFLAGS) $^ -o $@
 	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"

@@ -1,6 +1,5 @@
 # compile options
-NAME		= sed_is_for_losers
-CC			= c++
+NAME		= ex04
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
@@ -21,10 +20,10 @@ CYAN		= \033[1;96m
 all: $(NAME)
 
 %.o: %.cpp
-	@$(CC) $(CXXFLAGS) -c $<
+	@$(CXX) $(CXXFLAGS) -c $<
 
 $(NAME): $(OBJS)
-	@$(CC) $(CXXFLAGS) $^ -o $@
+	@$(CXX) $(CXXFLAGS) $^ -o $@
 	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
