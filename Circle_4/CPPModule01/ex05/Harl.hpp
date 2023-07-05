@@ -21,7 +21,6 @@ private:
     void error(void);
     
     void (Harl::*funcs[4])(void);
-
     std::string levels[4];
 };
 
