@@ -19,7 +19,7 @@ static int replaceString(const std::string& filename, const std::string& s1, con
     int index;
 
     while (getline(ifs, input)) {
-        while (input.find(s1) != std::string::npos) {
+        while (!s1.empty() && input.find(s1) != std::string::npos) {
             index = input.find(s1);
             ofs << input.substr(0, index) << s2;
             input = input.substr(index + s1.size());

@@ -2,7 +2,7 @@
 
 HumanB::HumanB(std::string name) {
     this->name = name;
-    this->weapon = nullptr;
+    this->weapon = NULL;
 }
 
 void HumanB::setWeapon(Weapon& weapon) {
@@ -10,7 +10,7 @@ void HumanB::setWeapon(Weapon& weapon) {
 }
 
 void HumanB::attack(void) {
-    if (weapon != nullptr)
+    if (weapon)
         std::cout << name << " attacks with their " << (*weapon).getType() << std::endl;
     else
         std::cout << name << " has no weapons ..." << std::endl;
