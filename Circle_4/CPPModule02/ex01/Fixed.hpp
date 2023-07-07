@@ -3,23 +3,27 @@
 
 # include <iostream>
 
+# define CYAN		"\033[1;96m"
+# define RESET		"\033[0m"
+
 class Fixed {
-public:
-    Fixed();
-    Fixed(const int number);
-    Fixed(const float number);
-    Fixed(const Fixed& other);
-    ~Fixed();
-
-    Fixed& operator=(const Fixed& other);
-    std::ostream& operator<<(std::ostream& os);
-
-    float toFloat(void) const;
-    int toInt(void) const;
-
 private:
-    float number;
+    int              value;
     static const int fractional_bits = 8;
+
+public:
+    Fixed( void );
+    Fixed( const int value );
+    Fixed( const float value );
+    Fixed( const Fixed& other );
+    ~Fixed( void );
+
+    Fixed& operator=( const Fixed& other );
+
+    float toFloat( void ) const;
+    int toInt( void ) const;
 };
+
+std::ostream& operator<<( std::ostream& os, const Fixed& fixed );
 
 #endif

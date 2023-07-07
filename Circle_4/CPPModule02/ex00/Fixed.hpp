@@ -3,29 +3,19 @@
 
 # include <iostream>
 
-# define RESET		"\033[0m"
-# define GRAY		"\033[1;90m"
-# define RED		"\033[1;91m"
-# define GREEN		"\033[1;92m"
-# define YELLOW		"\033[1;93m"
-# define BLUE		"\033[1;94m"
-# define MAGENTA	"\033[1;95m"
-# define CYAN		"\033[1;96m"
-
 class Fixed {
-public:
-    Fixed();
-    Fixed(const Fixed& other);
-    ~Fixed();
-
-    Fixed& operator=(const Fixed& other);
-    
-    int getRawBits(void) const;
-    void setRawBits(int const raw);
-
 private:
-    int number;
+    int              value;
     static const int fractional_bits = 8;
+
+public:
+    Fixed( void );
+    Fixed( const Fixed& other );
+    Fixed& operator=( const Fixed& other );
+    ~Fixed( void );
+    
+    int getRawBits( void ) const;
+    void setRawBits( int const raw );
 };
 
 #endif // FIXED_HPP
