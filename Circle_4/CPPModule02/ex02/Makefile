@@ -1,5 +1,5 @@
 # compile options
-NAME		= 
+NAME		= ex02
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
