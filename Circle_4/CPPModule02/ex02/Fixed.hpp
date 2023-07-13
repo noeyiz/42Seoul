@@ -1,6 +1,7 @@
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
+# include <cmath>
 # include <iostream>
 
 # define RESET		"\033[0m"
@@ -45,6 +46,8 @@ public:
 
     Fixed& operator++( void );
     Fixed operator++( int );
+    Fixed& operator--( void );
+    Fixed operator--( int );
 
     static Fixed& min( Fixed& one, Fixed &other );
     static const Fixed& min( const Fixed& one, const Fixed &other );

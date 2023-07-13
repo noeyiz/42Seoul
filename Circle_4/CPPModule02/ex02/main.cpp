@@ -24,5 +24,8 @@ int main(void) {
 
     std::cout << Fixed::max( a, b ) << std::endl;
 
+    /* test */
+    std::cout << Fixed(2) / Fixed(0) << std::endl;
+
     return 0;
 }

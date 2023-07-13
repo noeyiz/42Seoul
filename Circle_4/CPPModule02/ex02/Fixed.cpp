@@ -1,46 +1,28 @@
 #include "./Fixed.hpp"
 
 Fixed::Fixed() {
-    std::cout << "Default constructor called" << std::endl;
     setRawBits(0);
 }
 
 Fixed::Fixed(const int raw) {
-    std::cout << "Int constructor called" << std::endl;
-    if (raw > (INT_MAX >> fractional_bits) || raw < (INT_MIN >> fractional_bits)) {
-        std::cerr << RED << "Out of range: " << RESET << "initialize to the default value of 0" << std::endl;
-        setRawBits(0);
-    } else {
-        setRawBits(raw << fractional_bits);
-    }
+    setRawBits(raw << fractional_bits);
 }
 
 Fixed::Fixed(const float raw) {
-    std::cout << "Float constructor called" << std::endl;
-    if (raw > (INT_MAX >> fractional_bits) || raw < (INT_MIN >> fractional_bits)) {
-        std::cerr << RED << "Out of range: " << RESET << "initialize to the default value of 0" << std::endl;
-        setRawBits(0);
-    } else {
-        setRawBits(roundf(raw * (1 << fractional_bits)));
-    }
+    setRawBits(roundf(raw * (1 << fractional_bits)));
 }
 
 Fixed::Fixed(const Fixed& other) {
-    std::cout << "Copy constructor called" << std::endl;
     setRawBits(other.getRawBits());
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
-    if (this != &other) { // 객체가 자기 자신에게 대입되는지 여부를 확인하기 위해 ... 안정성 보장 !
-        std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &other)
         setRawBits(other.getRawBits());
-    }
     return *this;
 }
 
-Fixed::~Fixed() {
-    std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed() {}
 
 int Fixed::getRawBits(void) const {
     return raw_bits;
@@ -59,91 +41,102 @@ int Fixed::toInt(void) const {
 }
 
 bool Fixed::operator>(const Fixed& other) {
-    return raw_bits > other.getRawBits();
+    return toFloat() > other.toFloat();
 }
 
 bool Fixed::operator<(const Fixed& other) {
-    return raw_bits < other.getRawBits();
+    return toFloat() < other.toFloat();
 }
 
 bool Fixed::operator>=(const Fixed& other) {
-    return raw_bits >= other.getRawBits();
+    return toFloat() >= other.toFloat();
 }
 
 bool Fixed::operator<=(const Fixed& other) {
-    return raw_bits <= other.getRawBits();
+    return toFloat() <= other.toFloat();
 }
 
 bool Fixed::operator==(const Fixed& other) {
-    return raw_bits == other.getRawBits();
+    return toFloat() == other.toFloat();
 }
 
 bool Fixed::operator!=(const Fixed& other) {
-    return raw_bits != other.getRawBits();
+    return toFloat() != other.toFloat();
 }
 
 Fixed& Fixed::operator+(const Fixed& other) {
-    int new_raw = raw_bits + other.getRawBits();
+    float new_raw = toFloat() + other.toFloat();
+    setRawBits(roundf(new_raw * (1 << fractional_bits)));
 
-    if (new_raw > (INT_MAX >> fractional_bits) || new_raw < (INT_MIN >> fractional_bits))
-        std::cout << RED << "Out of range: " << RESET << "returned to origin value" << std::endl;
-    else
-        setRawBits(new_raw);
     return *this;
 }
 
 Fixed& Fixed::operator-(const Fixed& other) {
-    int new_raw = raw_bits - other.getRawBits();
+    float new_raw = toFloat() - other.toFloat();
+    setRawBits(roundf(new_raw * (1 << fractional_bits)));
 
-    if (new_raw < (INT_MIN >> fractional_bits))
-        std::cout << RED << "Out of range: " << RESET << "returned to origin value" << std::endl;
-    else
-        setRawBits(new_raw);
     return *this;
 }
 
 Fixed& Fixed::operator*(const Fixed& other) {
-    int new_raw = raw_bits + other.getRawBits();
+    float new_raw = toFloat() * other.toFloat();
+    setRawBits(roundf(new_raw * (1 << fractional_bits)));
 
-    if (new_raw > (INT_MAX >> fractional_bits))
-        std::cout << RED << "Out of range: " << RESET << "returned to origin value" << std::endl;
-    else
-        setRawBits(new_raw);
     return *this;
 }
 
 Fixed& Fixed::operator/(const Fixed& other) {
-    int new_raw = raw_bits + other.getRawBits();
+    if (other.toFloat() == 0) {
+        std::cout << RED << "Error: division by zero" << RESET << std::endl;
+        exit(1);
+    }
 
-    if (new_raw > (INT_MAX >> fractional_bits))
-        std::cout << RED << "Out of range: " << RESET << "returned to origin value" << std::endl;
-    else
-        setRawBits(new_raw);
+    float new_raw = toFloat() / other.toFloat();
+    setRawBits(roundf(new_raw * (1 << fractional_bits)));
+
     return *this;
 }
 
 Fixed& Fixed::operator++(void) {
+    setRawBits(raw_bits + 1);
 
+    return *this;
 }
 
 Fixed Fixed::operator++(int) {
+    Fixed temp = *this;
+    setRawBits(raw_bits + 1);
 
+    return temp;
+}
+
+Fixed& Fixed::operator--(void) {
+    setRawBits(raw_bits - 1);
+
+    return *this;
+}
+
+Fixed Fixed::operator--(int) {
+    Fixed temp = *this;
+    setRawBits(raw_bits - 1);
+
+    return temp;
 }
 
 Fixed& Fixed::min(Fixed& one, Fixed &other) {
-
+    return (one.getRawBits() < other.getRawBits()) ? one : other;
 }
 
 const Fixed& Fixed::min(const Fixed& one, const Fixed &other) {
-
+    return (one.getRawBits() < other.getRawBits()) ? one : other;
 }
 
 Fixed& Fixed::max(Fixed& one, Fixed &other) {
-
+    return (one.getRawBits() > other.getRawBits()) ? one : other;
 }
 
 const Fixed& Fixed::max(const Fixed& one, const Fixed &other) {
-
+    return (one.getRawBits() > other.getRawBits()) ? one : other;
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {

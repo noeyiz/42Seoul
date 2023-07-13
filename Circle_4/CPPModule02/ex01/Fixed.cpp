@@ -7,22 +7,12 @@ Fixed::Fixed() {
 
 Fixed::Fixed(const int raw) {
     std::cout << "Int constructor called" << std::endl;
-    if (raw > (INT_MAX >> fractional_bits) || raw < (INT_MIN >> fractional_bits)) {
-        std::cerr << RED << "Out of range: " << RESET << "initialize to the default value of 0" << std::endl;
-        setRawBits(0);
-    } else {
-        setRawBits(raw << fractional_bits);
-    }
+    setRawBits(raw << fractional_bits);
 }
 
 Fixed::Fixed(const float raw) {
     std::cout << "Float constructor called" << std::endl;
-    if (raw > (INT_MAX >> fractional_bits) || raw < (INT_MIN >> fractional_bits)) {
-        std::cerr << RED << "Out of range: " << RESET << "initialize to the default value of 0" << std::endl;
-        setRawBits(0);
-    } else {
-        setRawBits(roundf(raw * (1 << fractional_bits)));
-    }
+    setRawBits(roundf(raw * (1 << fractional_bits)));
 }
 
 Fixed::Fixed(const Fixed& other) {
