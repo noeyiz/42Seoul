@@ -2,18 +2,18 @@
 
 Fixed::Fixed() {
     std::cout << "Default constructor called" << std::endl;
-    setRawBits(0);
+    this->raw_bits = 0;
 }
 
 Fixed::Fixed(const Fixed& other) {
     std::cout << "Copy constructor called" << std::endl;
-    setRawBits(other.getRawBits());
+    this->raw_bits = other.getRawBits();
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
-    if (this != &other) { // 객체가 자기 자신에게 대입되는지 여부를 확인하기 위해 ... 안정성 보장 !
+    if (this != &other) {
         std::cout << "Copy assignment operator called" << std::endl;
-        setRawBits(other.getRawBits());
+        this->raw_bits = other.getRawBits();
     }
     return *this;
 }
@@ -28,5 +28,6 @@ int Fixed::getRawBits(void) const {
 }
 
 void Fixed::setRawBits(int const raw) {
+    std::cout << "setRawBits member function called" << std::endl;
     this->raw_bits = raw;
 }

@@ -1,24 +1,24 @@
 #include "./Fixed.hpp"
 
 Fixed::Fixed() {
-    setRawBits(0);
+    this->raw_bits = 0;
 }
 
 Fixed::Fixed(const int raw) {
-    setRawBits(raw << fractional_bits);
+    this->raw_bits = raw << fractional_bits;
 }
 
 Fixed::Fixed(const float raw) {
-    setRawBits(roundf(raw * (1 << fractional_bits)));
+    this->raw_bits = roundf(raw * (1 << fractional_bits));
 }
 
 Fixed::Fixed(const Fixed& other) {
-    setRawBits(other.getRawBits());
+    this->raw_bits = other.raw_bits;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
     if (this != &other)
-        setRawBits(other.getRawBits());
+        this->raw_bits = other.raw_bits;
     return *this;
 }
 
@@ -66,21 +66,21 @@ bool Fixed::operator!=(const Fixed& other) {
 
 Fixed& Fixed::operator+(const Fixed& other) {
     float new_raw = toFloat() + other.toFloat();
-    setRawBits(roundf(new_raw * (1 << fractional_bits)));
+    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
 
     return *this;
 }
 
 Fixed& Fixed::operator-(const Fixed& other) {
     float new_raw = toFloat() - other.toFloat();
-    setRawBits(roundf(new_raw * (1 << fractional_bits)));
+    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
 
     return *this;
 }
 
 Fixed& Fixed::operator*(const Fixed& other) {
     float new_raw = toFloat() * other.toFloat();
-    setRawBits(roundf(new_raw * (1 << fractional_bits)));
+    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
 
     return *this;
 }
@@ -92,33 +92,33 @@ Fixed& Fixed::operator/(const Fixed& other) {
     }
 
     float new_raw = toFloat() / other.toFloat();
-    setRawBits(roundf(new_raw * (1 << fractional_bits)));
+    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
 
     return *this;
 }
 
 Fixed& Fixed::operator++(void) {
-    setRawBits(raw_bits + 1);
+    this->raw_bits += 1;
 
     return *this;
 }
 
 Fixed Fixed::operator++(int) {
     Fixed temp = *this;
-    setRawBits(raw_bits + 1);
+    this->raw_bits += 1;
 
     return temp;
 }
 
 Fixed& Fixed::operator--(void) {
-    setRawBits(raw_bits - 1);
+    this->raw_bits -= 1;
 
     return *this;
 }
 
 Fixed Fixed::operator--(int) {
     Fixed temp = *this;
-    setRawBits(raw_bits - 1);
+    this->raw_bits -= 1;
 
     return temp;
 }
