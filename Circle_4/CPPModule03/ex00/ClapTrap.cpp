@@ -29,22 +29,6 @@ ClapTrap::~ClapTrap() {
     std::cout << GRAY << "Destructor called" << RESET << std::endl;
 }
 
-std::string ClapTrap::getName() const {
-    return name;
-}
-
-unsigned int ClapTrap::getHitPoints() const {
-    return hit_points;
-}
-
-unsigned int ClapTrap::getEnergyPoints() const {
-    return energy_points;
-}
-
-unsigned int ClapTrap::getAttackDamage() const {
-    return attack_damage;
-}
-
 bool ClapTrap::checkPoints() {
     if (hit_points == 0) {
         std::cout << RED << "ClapTrap " << name << " is dead ..." << RESET << std::endl;
