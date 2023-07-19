@@ -18,8 +18,10 @@ private:
     unsigned int hit_points;
     unsigned int energy_points;
     unsigned int attack_damage;
+    const int initial_hit_points;
+    const int initial_energy_points;
 
-    bool checkPoints();
+    bool isAnyPointsZero();
     void showPoints();
     void setLimitedHitPoints(int point);
     void setLimitedEnergyPoints(int point);
