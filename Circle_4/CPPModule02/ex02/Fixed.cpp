@@ -1,43 +1,49 @@
 #include "./Fixed.hpp"
 
-Fixed::Fixed() {
-    this->raw_bits = 0;
+Fixed::Fixed(void) : value(0) {
+    std::cout << GRAY << "Default constructor called" << RESET << std::endl;
 }
 
-Fixed::Fixed(const int raw) {
-    this->raw_bits = raw << fractional_bits;
+Fixed::Fixed(const int num) {
+    std::cout << GRAY << "Int constructor called" << RESET << std::endl;
+    value = num << bits;
 }
 
-Fixed::Fixed(const float raw) {
-    this->raw_bits = roundf(raw * (1 << fractional_bits));
+Fixed::Fixed(const float num) {
+    std::cout << GRAY << "Float constructor called" << RESET << std::endl;
+    value = roundf(num * (1 << bits));
 }
 
-Fixed::Fixed(const Fixed& other) {
-    this->raw_bits = other.raw_bits;
+Fixed::Fixed(const Fixed& other) : value(other.getRawBits()) {
+    std::cout << GRAY << "Copy constructor called" << RESET << std::endl;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
-    if (this != &other)
-        this->raw_bits = other.raw_bits;
+    std::cout << GRAY << "Copy assignment operator called" << RESET << std::endl;
+    if (this != &other) value = other.getRawBits();
     return *this;
 }
 
-Fixed::~Fixed() {}
+Fixed::~Fixed(void) {
+    std::cout << GRAY << "Destructor called" << RESET << std::endl;
+}
 
 int Fixed::getRawBits(void) const {
-    return raw_bits;
+    std::cout << GRAY << "getRawBits member function called" << RESET << std::endl;
+    return value;
 }
 
 void Fixed::setRawBits(int const raw) {
-    raw_bits = raw;
+    std::cout << GRAY << "setRawBits member function called" << RESET << std::endl;
+    value = raw;
 }
 
 float Fixed::toFloat(void) const {
-    return static_cast<float>(raw_bits) / (1 << fractional_bits);
+    return static_cast<float>(value) / (1 << bits);
 }
 
 int Fixed::toInt(void) const {
-    return raw_bits >> fractional_bits;
+    return value >> bits;
 }
 
 bool Fixed::operator>(const Fixed& other) {
@@ -65,23 +71,20 @@ bool Fixed::operator!=(const Fixed& other) {
 }
 
 Fixed& Fixed::operator+(const Fixed& other) {
-    float new_raw = toFloat() + other.toFloat();
-    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
-
+    float num = toFloat() + other.toFloat();
+    value = round(num * (1 << bits));
     return *this;
 }
 
 Fixed& Fixed::operator-(const Fixed& other) {
-    float new_raw = toFloat() - other.toFloat();
-    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
-
+    float num = toFloat() - other.toFloat();
+    value = round(num * (1 << bits));
     return *this;
 }
 
 Fixed& Fixed::operator*(const Fixed& other) {
-    float new_raw = toFloat() * other.toFloat();
-    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
-
+    float num = toFloat() * other.toFloat();
+    value = round(num * (1 << bits));
     return *this;
 }
 
@@ -90,36 +93,30 @@ Fixed& Fixed::operator/(const Fixed& other) {
         std::cout << RED << "Error: division by zero" << RESET << std::endl;
         exit(1);
     }
-
-    float new_raw = toFloat() / other.toFloat();
-    this->raw_bits = roundf(new_raw * (1 << fractional_bits));
-
+    float num = toFloat() / other.toFloat();
+    value = round(num * (1 << bits));
     return *this;
 }
 
 Fixed& Fixed::operator++(void) {
-    this->raw_bits += 1;
-
+    value += 1;
     return *this;
 }
 
 Fixed Fixed::operator++(int) {
     Fixed temp = *this;
-    this->raw_bits += 1;
-
+    value += 1;
     return temp;
 }
 
 Fixed& Fixed::operator--(void) {
-    this->raw_bits -= 1;
-
+    value -= 1;
     return *this;
 }
 
 Fixed Fixed::operator--(int) {
     Fixed temp = *this;
-    this->raw_bits -= 1;
-
+    value -= 1;
     return temp;
 }
 

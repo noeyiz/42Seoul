@@ -15,46 +15,46 @@
 
 class Fixed {
 private:
-    int              raw_bits;
-    static const int fractional_bits = 8;
+    int              value;
+    static const int bits = 8;
 
 public:
-    Fixed( void );
-    Fixed( const int raw );
-    Fixed( const float raw );
-    Fixed( const Fixed& other );
-    Fixed& operator=( const Fixed& other );
-    ~Fixed( void );
+    Fixed(void);
+    Fixed(const int num);
+    Fixed(const float num);
+    Fixed(const Fixed& other);
+    Fixed& operator=( const Fixed& other);
+    ~Fixed(void);
     
-    int getRawBits( void ) const;
-    void setRawBits( int const raw );
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
+    
+    float toFloat(void) const;
+    int toInt(void) const;
 
-    float toFloat( void ) const;
-    int toInt( void ) const;
+    bool operator>(const Fixed& other);
+    bool operator<(const Fixed& other);
+    bool operator>=(const Fixed& other);
+    bool operator<=(const Fixed& other);
+    bool operator==(const Fixed& other);
+    bool operator!=(const Fixed& other);
 
-    bool operator>( const Fixed& other );
-    bool operator<( const Fixed& other );
-    bool operator>=( const Fixed& other );
-    bool operator<=( const Fixed& other );
-    bool operator==( const Fixed& other );
-    bool operator!=( const Fixed& other );
+    Fixed& operator+(const Fixed& other);
+    Fixed& operator-(const Fixed& other);
+    Fixed& operator*(const Fixed& other);
+    Fixed& operator/(const Fixed& other);
 
-    Fixed& operator+( const Fixed& other );
-    Fixed& operator-( const Fixed& other );
-    Fixed& operator*( const Fixed& other );
-    Fixed& operator/( const Fixed& other );
+    Fixed& operator++(void);
+    Fixed operator++(int);
+    Fixed& operator--(void);
+    Fixed operator--(int);
 
-    Fixed& operator++( void );
-    Fixed operator++( int );
-    Fixed& operator--( void );
-    Fixed operator--( int );
-
-    static Fixed& min( Fixed& one, Fixed &other );
-    static const Fixed& min( const Fixed& one, const Fixed &other );
-    static Fixed& max( Fixed& one, Fixed &other );
-    static const Fixed& max( const Fixed& one, const Fixed &other );
+    static Fixed& min(Fixed& one, Fixed &other);
+    static const Fixed& min(const Fixed& one, const Fixed &other);
+    static Fixed& max(Fixed& one, Fixed &other);
+    static const Fixed& max(const Fixed& one, const Fixed &other);
 };
 
-std::ostream& operator<<( std::ostream& os, const Fixed& fixed );
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
 #endif // FIXED_HPP
