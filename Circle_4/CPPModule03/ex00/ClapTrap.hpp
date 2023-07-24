@@ -3,6 +3,9 @@
 
 # include <iostream>
 
+# define MAX_HIT 10
+# define MAX_ENERGY 10
+
 # define RESET		"\033[0m"
 # define GRAY		"\033[1;90m"
 # define RED		"\033[1;91m"
@@ -18,20 +21,18 @@ private:
     unsigned int hit_points;
     unsigned int energy_points;
     unsigned int attack_damage;
-    const int initial_hit_points;
-    const int initial_energy_points;
 
-    bool isAnyPointsZero();
-    void showPoints();
     void setLimitedHitPoints(int point);
     void setLimitedEnergyPoints(int point);
+    bool isAnyPointsZero(unsigned int hit, unsigned int energy);
+    void showPoints(void);
 
 public:
-    ClapTrap();
+    ClapTrap(void);
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap& other);
     ClapTrap& operator=(const ClapTrap& other);
-    ~ClapTrap();
+    ~ClapTrap(void);
 
     void attack(const std::string& target);
     void takeDamage(unsigned int amount);
