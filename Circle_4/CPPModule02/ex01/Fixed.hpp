@@ -1,6 +1,7 @@
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
+# include <cmath>
 # include <iostream>
 
 # define RESET		"\033[0m"

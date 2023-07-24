@@ -1,16 +1,6 @@
-#include "./Fixed.hpp"
-
-/*
-    KEYWORD: 오버로딩과 고정 소수점
-*/
-
-void check_leak(void) {
-    system("leaks ex01 | grep leaked");
-}
+#include "Fixed.hpp"
 
 int main(void) {
-    atexit(check_leak);
-
     Fixed a;
     Fixed const b(10);
     Fixed const c(42.42f);
@@ -30,3 +20,9 @@ int main(void) {
 
     return 0;
 }
+
+/*
+
+
+
+*/

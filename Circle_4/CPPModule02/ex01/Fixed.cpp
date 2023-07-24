@@ -1,4 +1,4 @@
-#include "./Fixed.hpp"
+#include "Fixed.hpp"
 
 Fixed::Fixed(void) : value(0) {
     std::cout << GRAY << "Default constructor called" << RESET << std::endl;
@@ -11,7 +11,7 @@ Fixed::Fixed(const int num) {
 
 Fixed::Fixed(const float num) {
     std::cout << GRAY << "Float constructor called" << RESET << std::endl;
-    value = roundf(num * (1 << bits));
+    value = static_cast<int>(roundf(num * (1 << bits)));
 }
 
 Fixed::Fixed(const Fixed& other) : value(other.getRawBits()) {

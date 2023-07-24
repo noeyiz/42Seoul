@@ -1,16 +1,6 @@
-#include "./Fixed.hpp"
-
-/*
-    KEYWORD: 연산자 오버로딩
-*/
-
-void check_leak(void) {
-    system("leaks ex02 | grep leaked");
-}
+#include "Fixed.hpp"
 
 int main(void) {
-    atexit(check_leak);
-
     Fixed a;
     Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
@@ -25,7 +15,7 @@ int main(void) {
     std::cout << Fixed::max( a, b ) << std::endl;
 
     /* test */
-    std::cout << Fixed(2) / Fixed(0) << std::endl;
+    // std::cout << Fixed(2) / Fixed(0) << std::endl;
 
     return 0;
 }
