@@ -12,7 +12,7 @@
 # define MAGENTA	"\033[1;95m"
 # define CYAN		"\033[1;96m"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
 public:
     ScavTrap(void);
     ScavTrap(std::string name);

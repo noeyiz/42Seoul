@@ -3,9 +3,6 @@
 
 # include <iostream>
 
-# define MAX_HIT 10
-# define MAX_ENERGY 10
-
 # define RESET		"\033[0m"
 # define GRAY		"\033[1;90m"
 # define RED		"\033[1;91m"
@@ -21,6 +18,9 @@ private:
     unsigned int hit_points;
     unsigned int energy_points;
     unsigned int attack_damage;
+
+    static const int max_hit = 10;
+    static const int max_energy = 10;
 
     void setLimitedHitPoints(int point);
     void setLimitedEnergyPoints(int point);

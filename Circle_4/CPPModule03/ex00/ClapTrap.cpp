@@ -1,25 +1,25 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) : 
-    name("(null)"), 
-    hit_points(MAX_HIT), 
-    energy_points(MAX_ENERGY), 
+    name("(null)"),
+    hit_points(max_hit),
+    energy_points(max_energy),
     attack_damage(0) {
     std::cout << GRAY << "[ ClapTrap ] " << name << " : Default constructor called" << RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : 
-    name(name), 
-    hit_points(MAX_HIT), 
-    energy_points(MAX_ENERGY), 
+    name(name),
+    hit_points(max_hit),
+    energy_points(max_energy),
     attack_damage(0) {
     std::cout << GRAY << "[ ClapTrap ] " << name << " : String constructor called" << RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : 
-    name(other.name), 
-    hit_points(other.hit_points), 
-    energy_points(other.energy_points), 
+    name(other.name),
+    hit_points(other.hit_points),
+    energy_points(other.energy_points),
     attack_damage(other.attack_damage) {
     std::cout << GRAY << "[ ClapTrap ] " << name << " : Copy constructor called" << RESET << std::endl;
 }
@@ -41,13 +41,13 @@ ClapTrap::~ClapTrap(void) {
 
 void ClapTrap::setLimitedHitPoints(int point) {
     if (point <= 0) hit_points = 0;
-    else if (point > MAX_HIT) hit_points = MAX_HIT;
+    else if (point > max_hit) hit_points = max_hit;
     else hit_points = point;
 }
 
 void ClapTrap::setLimitedEnergyPoints(int point) {
     if (point <= 0) energy_points = 0;
-    else if (point > MAX_ENERGY) energy_points = MAX_ENERGY;
+    else if (point > max_energy) energy_points = max_energy;
     else energy_points = point;
 }
 
@@ -64,8 +64,8 @@ bool ClapTrap::isAnyPointsZero(unsigned int hit, unsigned int energy) {
 
 void ClapTrap::showPoints(void) {
     std::cout << CYAN;
-    std::cout << "💖 [" << hit_points << "/" << MAX_HIT << "]" << "  ";
-    std::cout << "💪 [" << energy_points << "/" << MAX_ENERGY << "]";
+    std::cout << "💖 [" << hit_points << "/" << max_hit << "]" << "  ";
+    std::cout << "💪 [" << energy_points << "/" << max_energy << "]";
     std::cout << RESET << std::endl;
 }
 
@@ -79,7 +79,7 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-    if (isAnyPointsZero(hit_points, MAX_ENERGY)) return;
+    if (isAnyPointsZero(hit_points, max_energy)) return;
     
     std::cout << "[ ClapTrap ] " << name << " takes " << amount << " damage!" << std::endl;
     setLimitedHitPoints(hit_points - amount);
