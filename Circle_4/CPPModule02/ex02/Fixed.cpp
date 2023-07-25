@@ -72,32 +72,28 @@ bool Fixed::operator!=(const Fixed& other) {
     return toFloat() != other.toFloat();
 }
 
-Fixed& Fixed::operator+(const Fixed& other) {
-    float num = toFloat() + other.toFloat();
-    value = static_cast<int>(roundf(num * (1 << bits)));
-    return *this;
+Fixed Fixed::operator+(const Fixed& other) {
+    Fixed result(toFloat() + other.toFloat());
+    return result;
 }
 
-Fixed& Fixed::operator-(const Fixed& other) {
-    float num = toFloat() - other.toFloat();
-    value = static_cast<int>(roundf(num * (1 << bits)));
-    return *this;
+Fixed Fixed::operator-(const Fixed& other) {
+    Fixed result(toFloat() - other.toFloat());
+    return result;
 }
 
-Fixed& Fixed::operator*(const Fixed& other) {
-    float num = toFloat() * other.toFloat();
-    value = static_cast<int>(roundf(num * (1 << bits)));
-    return *this;
+Fixed Fixed::operator*(const Fixed& other) {
+    Fixed result(toFloat() * other.toFloat());
+    return result;
 }
 
-Fixed& Fixed::operator/(const Fixed& other) {
+Fixed Fixed::operator/(const Fixed& other) {
     if (other.toFloat() == 0) {
         std::cout << RED << "Error: division by zero" << RESET << std::endl;
         exit(1);
     }
-    float num = toFloat() / other.toFloat();
-    value = static_cast<int>(roundf(num * (1 << bits)));
-    return *this;
+    Fixed result(toFloat() / other.toFloat());
+    return result;
 }
 
 Fixed& Fixed::operator++(void) {
