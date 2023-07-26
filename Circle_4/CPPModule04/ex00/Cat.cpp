@@ -2,12 +2,12 @@
 
 Cat::Cat(void) {
     std::cout << GRAY << "[ Cat ] Default constructor called" << RESET << std::endl;
-    this->type = "Cat";
+    type = "Cat";
 }
 
 Cat::Cat(const Cat& other) {
     std::cout << GRAY << "[ Cat ] Copy constructor called" << RESET << std::endl;
-    this->type = other.type;
+    type = other.type;
 }
 
 Cat& Cat::operator=(const Cat& other) {

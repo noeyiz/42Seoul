@@ -5,11 +5,13 @@ CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
 # source files
-SRCS		= main.cpp		\
-			  Animal.cpp	\
-			  Brain.cpp		\
-			  Cat.cpp		\
-			  Dog.cpp
+SRCS		= main.cpp			\
+			  Animal.cpp		\
+			  Brain.cpp			\
+			  Cat.cpp			\
+			  Dog.cpp			\
+			  WrongAnimal.cpp	\
+			  WrongCat.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 # colors

@@ -2,12 +2,12 @@
 
 Animal::Animal(void) {
     std::cout << GRAY << "[ Animal ] Default constructor called" << RESET << std::endl;
-    this->type = "(null)";
+    type = "(null)";
 }
 
 Animal::Animal(const Animal& other) {
     std::cout << GRAY << "[ Animal ] Copy constructor called" << RESET << std::endl;
-    this->type = other.type;
+    type = other.type;
 }
 
 Animal& Animal::operator=(const Animal& other) {

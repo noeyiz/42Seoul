@@ -1,7 +1,5 @@
-#include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
 void check_leak(void) {
