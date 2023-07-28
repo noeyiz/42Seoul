@@ -6,7 +6,7 @@ RM			= rm -f
 
 # source files
 SRCS		= main.cpp			\
-			  Animal.cpp		\
+			  AAnimal.cpp		\
 			  Brain.cpp			\
 			  Cat.cpp			\
 			  Dog.cpp			\

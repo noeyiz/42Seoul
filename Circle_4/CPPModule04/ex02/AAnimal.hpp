@@ -12,15 +12,15 @@
 # define MAGENTA	"\033[1;95m"
 # define CYAN		"\033[1;96m"
 
-class Animal {
+class AAnimal {
 protected:
     std::string type;
 
 public:
-    Animal(void);
-    Animal(const Animal& other);
-    Animal& operator=(const Animal& other);
-    virtual ~Animal(void);
+    AAnimal(void);
+    AAnimal(const AAnimal& other);
+    AAnimal& operator=(const AAnimal& other);
+    virtual ~AAnimal(void);
 
     std::string getType(void) const;
     virtual void makeSound(void) const = 0;

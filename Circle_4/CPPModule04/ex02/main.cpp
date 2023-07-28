@@ -9,14 +9,14 @@ int	main( void )
 {
     atexit(check_leak);
 
-	Animal *cat = new Cat();
+	AAnimal *cat = new Cat();
 	cat->makeSound();
 	delete cat;
 
-	Animal *dog = new Dog();
+	AAnimal *dog = new Dog();
 	dog->makeSound();
 	delete dog;
 
 	/* test */
-	// Animal *animal = new Animal();
+	// AAnimal *animal = new AAnimal();
 }
