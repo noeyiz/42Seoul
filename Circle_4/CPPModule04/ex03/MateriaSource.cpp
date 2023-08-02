@@ -25,7 +25,7 @@ MateriaSource::~MateriaSource(void) {
 
 void MateriaSource::learnMateria(AMateria* m) {
     if (slot[materia_idx]) delete slot[materia_idx];
-    slot[materia_idx] = m->clone();
+    slot[materia_idx] = m;
 
     materia_idx = (materia_idx + 1) % SLOT_SIZE;
 }

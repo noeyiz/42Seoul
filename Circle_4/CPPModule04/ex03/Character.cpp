@@ -1,4 +1,3 @@
-#include "AMateria.hpp"
 #include "Character.hpp"
 
 Character::Character(void) : name("(null)") {}
@@ -22,7 +21,8 @@ Character& Character::operator=(const Character& other) {
 }
 
 Character::~Character(void) {
-    for (int i = 0; i < materia_idx; i++) delete slot[i];
+    for (int i = 0; i < SLOT_SIZE; i++)
+        if (slot[i]) delete slot[i];
 }
 
 std::string const & Character::getName(void) const {
@@ -30,16 +30,21 @@ std::string const & Character::getName(void) const {
 }
 
 void Character::equip(AMateria* m) {
-    for (int i = 0; i < SLOT_SIZE; i++)
-        if (slot[i] == 0) slot[i] = m->clone();
+    for (int i = 0; i < SLOT_SIZE; i++) {
+        if (slot[i] == 0) {
+            slot[i] = m;
+            break;
+        }
+    }
 }
 
-void Character::unequip(int idx) { // 버린 재료 leak
+void Character::unequip(int idx) {
     if (idx < 0 || idx >= SLOT_SIZE) return;
+    if (slot[idx]) floor.add_materia(slot[idx]);
     slot[idx] = 0;
 }
 
 void Character::use(int idx, ICharacter& target) {
-    if (idx < 0 || idx >= materia_idx) return;
-    slot[idx]->use(target);
+    if (idx < 0 || idx >= SLOT_SIZE) return;
+    if (slot[idx]) slot[idx]->use(target);
 }

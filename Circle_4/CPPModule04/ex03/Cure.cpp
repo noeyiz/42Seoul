@@ -6,6 +6,7 @@ Cure::Cure(const Cure& other) : AMateria(other.type) {}
 
 Cure& Cure::operator=(const Cure &other) {
     if (this != &other) type = other.type;
+    return *this;
 }
 
 Cure::~Cure(void) {}

@@ -6,6 +6,7 @@ Ice::Ice(const Ice& other) : AMateria(other.type) {}
 
 Ice& Ice::operator=(const Ice &other) {
     if (this != &other) type = other.type;
+    return *this;
 }
 
 Ice::~Ice(void) {}

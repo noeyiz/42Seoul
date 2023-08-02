@@ -1,6 +1,8 @@
 #ifndef AMATERIA_HPP
 # define AMATERIA_HPP
 
+# include <iostream>
+
 # include "ICharacter.hpp"
 
 class AMateria {
@@ -12,7 +14,7 @@ public:
     AMateria(std::string const & type);
     AMateria(const AMateria& other);
     AMateria& operator=(const AMateria& other);
-    ~AMateria(void);
+    virtual ~AMateria(void);
 
     std::string const & getType(void) const; // Returns the materia type
 
