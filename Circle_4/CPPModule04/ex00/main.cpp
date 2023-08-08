@@ -16,7 +16,8 @@ int main(void)
 
     std::cout << "dog type : " << dog->getType() << std::endl;
     std::cout << "cat type : " << cat->getType() << std::endl;
-    cat->makeSound(); // will output the cat sound!
+
+    cat->makeSound();
     dog->makeSound();
     animal->makeSound();
     
@@ -25,16 +26,16 @@ int main(void)
     delete cat;
 
     /* test */
-    std::cout << std::endl;
-    const WrongAnimal* wrong_animal = new WrongAnimal();
-    const WrongAnimal* wrong_cat = new WrongCat();
+    // std::cout << std::endl;
+    // const WrongAnimal* wrong_animal = new WrongAnimal();
+    // const WrongAnimal* wrong_cat = new WrongCat();
 
-    std::cout << "wrong_cat type : " << wrong_cat->getType() << std::endl;
-    wrong_cat->makeSound();
-    wrong_animal->makeSound();
+    // std::cout << "wrong_cat type : " << wrong_cat->getType() << std::endl;
+    // wrong_cat->makeSound();
+    // wrong_animal->makeSound();
 
-    delete wrong_animal;
-    delete wrong_cat;
+    // delete wrong_animal;
+    // delete wrong_cat;
 
     return 0;
 }

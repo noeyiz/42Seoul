@@ -27,8 +27,10 @@ int main(void) {
 
     me->use(0, *bob);
     me->use(1, *bob);
+    me->use(2, *bob);
 
     me->unequip(1);
+    me->unequip(5);
 
     delete bob;
     delete me;

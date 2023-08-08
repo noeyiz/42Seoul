@@ -10,7 +10,7 @@ Brain::Brain(const Brain& other) {
 }
 
 Brain& Brain::operator=(const Brain& other) {
-    std::cout << GRAY << "[ Dog ] Copy assignment operator called" << RESET << std::endl;
+    std::cout << GRAY << "[ Brain ] Copy assignment operator called" << RESET << std::endl;
     if (this != &other) for (int i = 0; i < 100; i++) ideas[i] = other.ideas[i];
     return *this;
 }
