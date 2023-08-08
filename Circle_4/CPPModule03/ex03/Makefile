@@ -1,6 +1,6 @@
 # compile options
 NAME		= ex03
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-shadow
 RM			= rm -f
 
 # source files
