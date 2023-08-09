@@ -2,13 +2,13 @@
 #include "Dog.hpp"
 #include "WrongCat.hpp"
 
-void check_leak(void) {
-    system("leaks ex00 | grep leaked");
-}
+// void check_leak(void) {
+//     system("leaks ex00 | grep leaked");
+// }
 
 int main(void)
 {
-    atexit(check_leak);
+    // atexit(check_leak);
 
     const Animal* animal = new Animal();
     const Animal* dog = new Dog();

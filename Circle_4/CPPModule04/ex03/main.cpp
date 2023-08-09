@@ -3,12 +3,12 @@
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
 
-void check_leak(void) {
-    system("leaks ex03 | grep leaked");
-}
+// void check_leak(void) {
+//     system("leaks ex03 | grep leaked");
+// }
 
 int main(void) {
-    atexit(check_leak);
+    // atexit(check_leak);
 
     IMateriaSource* src = new MateriaSource();
 

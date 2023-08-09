@@ -2,13 +2,13 @@
 #include "Dog.hpp"
 #include "WrongCat.hpp"
 
-void check_leak(void) {
-    system("leaks ex01 | grep leaked");
-}
+// void check_leak(void) {
+//     system("leaks ex01 | grep leaked");
+// }
 
 int	main( void )
 {
-    atexit(check_leak);
+    // atexit(check_leak);
 
 	Animal	*animals[4];
 

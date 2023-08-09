@@ -1,13 +1,13 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-void check_leak(void) {
-    system("leaks ex02 | grep leaked");
-}
+// void check_leak(void) {
+//     system("leaks ex02 | grep leaked");
+// }
 
 int	main( void )
 {
-    atexit(check_leak);
+    // atexit(check_leak);
 
 	AAnimal *cat = new Cat();
 	cat->makeSound();
