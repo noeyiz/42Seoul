@@ -32,8 +32,9 @@ bool ScalarConverter::isFloat() {
     }
 
     // 'f'로 끝나지 않거나 '.'의 위치가 정상적이지 않으면 false
-    if (str.back() != 'f' || str.find('.') == std::string::npos
-        || str.find('.') == 0 || str.find('.') == str.size() - 2)
+    size_t dot_pos = str.find('.');
+    if (str.back() != 'f'
+    || dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 2)
         return false;
 
     int idx = 0, dot = 0;
@@ -55,8 +56,8 @@ bool ScalarConverter::isDouble() {
     }
 
     // '.'의 위치가 정상적이지 않으면 false
-    if (str.find('.') == std::string::npos
-        || str.find('.') == 0 || str.find('.') == str.size() - 1)
+    size_t dot_pos = str.find('.');
+    if (dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 1)
         return false;
 
     int idx = 0, dot = 0;
@@ -93,7 +94,7 @@ bool ScalarConverter::isImpossible() {
 void ScalarConverter::printChar() {
     std::cout << "char : ";
 
-    if (type == TYPE_NONE || is_literal) std::cout << "Impossible";
+    if (type == TYPE_NONE || is_literal || i < -128 || i > 127) std::cout << "Impossible";
     else if (std::isprint(c)) std::cout << "'" << c << "'" ;
     else std::cout << "Non displayable";
 
