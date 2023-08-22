@@ -34,7 +34,7 @@ bool ScalarConverter::isFloat() {
     // 'f'로 끝나지 않거나 '.'의 위치가 정상적이지 않으면 false
     size_t dot_pos = str.find('.');
     if (str.back() != 'f'
-    || dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 2)
+    || dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 1)
         return false;
 
     int idx = 0, dot = 0;
@@ -72,6 +72,41 @@ bool ScalarConverter::isDouble() {
     return true;
 }
 
+void ScalarConverter::printChar() {
+    std::cout << "char : ";
+
+    if (type == TYPE_NONE || is_literal || i < -128 || i > 127) std::cout << "Impossible";
+    else if (std::isprint(c)) std::cout << "'" << c << "'" ;
+    else std::cout << "Non displayable";
+    std::cout << std::endl;
+}
+
+void ScalarConverter::printInt() {
+    std::cout << "int : ";
+
+    if (type == TYPE_NONE || is_literal) std::cout << "Impossible";
+    else std::cout << i;
+    std::cout << std::endl;
+}
+
+void ScalarConverter::printFloat() {
+    std::cout << "float : ";
+
+    if (type == TYPE_NONE) std::cout << "Impossible";
+    else if (f == std::floor(f) && is_literal == false) std::cout << f << ".0f";
+    else std::cout << f << "f";
+    std::cout << std::endl;
+}
+
+void ScalarConverter::printDouble() {
+    std::cout << "double : ";
+
+    if (type == TYPE_NONE) std::cout << "Impossible";
+    else if (d == std::floor(d) && is_literal == false) std::cout << d << ".0";
+    else std::cout << d;
+    std::cout << std::endl;
+}
+
 void ScalarConverter::detectType() {
     if (isChar()) type = TYPE_CHAR;
     else if (isInt()) type = TYPE_INT;
@@ -89,53 +124,6 @@ bool ScalarConverter::isImpossible() {
         return true;
     }
     return false;
-}
-
-void ScalarConverter::printChar() {
-    std::cout << "char : ";
-
-    if (type == TYPE_NONE || is_literal || i < -128 || i > 127) std::cout << "Impossible";
-    else if (std::isprint(c)) std::cout << "'" << c << "'" ;
-    else std::cout << "Non displayable";
-
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printInt() {
-    std::cout << "int : ";
-
-    if (type == TYPE_NONE || is_literal) std::cout << "Impossible";
-    else std::cout << i;
-
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printFloat() {
-    std::cout << "float : ";
-
-    if (type == TYPE_NONE) std::cout << "Impossible";
-    else if (str == "inff" || str == "inf") std::cout << "inff";
-    else if (str == "+inff" || str == "+inf") std::cout << "+inff";
-    else if (str == "-inff" || str == "-inf") std::cout << "-inff";
-    else if (str == "nanf" || str == "nan") std::cout << "nanf";
-    else if (f == std::floor(f)) std::cout << f << ".0f";
-    else std::cout << f << "f";
-
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printDouble() {
-    std::cout << "double : ";
-
-    if (type == TYPE_NONE) std::cout << "Impossible";
-    else if (str == "inff" || str == "inf") std::cout << "inf";
-    else if (str == "+inff" || str == "+inf") std::cout << "+inf";
-    else if (str == "-inff" || str == "-inf") std::cout << "-inf";
-    else if (str == "nanf" || str == "nan") std::cout << "nan";
-    else if (d == std::floor(d)) std::cout << d << ".0";
-    else std::cout << d;
-
-    std::cout << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& input) {
