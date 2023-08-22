@@ -22,6 +22,6 @@ int main(void) {
 
         delete rrf;
     } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RED << e.what() << RESET << std::endl;
     }
 }
