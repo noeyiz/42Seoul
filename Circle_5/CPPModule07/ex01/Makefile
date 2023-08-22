@@ -1,11 +1,10 @@
 # compile options
-NAME		= ex00
+NAME		= ex01
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
 # source files
-SRCS		= main.cpp			\
-			  ScalarConverter.cpp
+SRCS		= main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 # colors
@@ -28,8 +27,8 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
-	@echo "$(GREEN)║                 CPP Module 06                 ║$(RESET)"
-	@echo "$(GREEN)║             ex00 compile finished             ║$(RESET)"
+	@echo "$(GREEN)║                 CPP Module 07                 ║$(RESET)"
+	@echo "$(GREEN)║             ex01 compile finished             ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)╚═══════════════════════════════════════════════╝$(RESET)"
