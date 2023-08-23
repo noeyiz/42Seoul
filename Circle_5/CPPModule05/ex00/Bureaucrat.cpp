@@ -7,7 +7,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(validate
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.name), grade(validateGrade(other.grade)) {}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    if (this != &other) validateGrade(other.grade);
+    if (this != &other) grade = validateGrade(other.grade);
     return *this;
 }
 
