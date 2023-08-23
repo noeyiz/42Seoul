@@ -2,6 +2,9 @@
 
 #include "Array.hpp"
 
+#define RESET	"\033[0m"
+#define RED	    "\033[1;91m"
+
 int main() {
     size_t size = 5;
 
@@ -12,7 +15,7 @@ int main() {
 
     for (size_t i = 0; i < size; i++)
         std::cout << int_arr[i] << " ";
-    std::cout << std::endl << "size = " << int_arr.size() << std::endl;
+    std::cout << "\nsize = " << int_arr.size() << "\n" << std::endl;
 
     // 예시 2) char 배열
     Array<char> char_arr(5);
@@ -21,13 +24,13 @@ int main() {
 
     for (size_t i = 0; i < size; i++)
         std::cout << char_arr[i] << " ";
-    std::cout << std::endl << "size = " << char_arr.size() << std::endl;
+    std::cout << "\nsize = " << char_arr.size() << "\n" << std::endl;
 
     // 예시 3) out of range
     try {
         std::cout << int_arr[size] << std::endl;
     } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RED << e.what() << RESET << std::endl;
     }
 
     return 0;
