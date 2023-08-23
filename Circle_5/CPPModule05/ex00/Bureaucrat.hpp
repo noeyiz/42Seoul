@@ -3,6 +3,9 @@
 
 # include <iostream>
 
+# define RESET	"\033[0m"
+# define RED	    "\033[1;91m"
+
 class Bureaucrat {
 private:
     const std::string name;

@@ -1,8 +1,5 @@
 #include "Bureaucrat.hpp"
 
-# define RESET	"\033[0m"
-# define RED	"\033[1;91m"
-
 int main(void) {
     try {
         Bureaucrat a("a", 2);
