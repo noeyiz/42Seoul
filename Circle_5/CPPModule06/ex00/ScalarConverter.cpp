@@ -1,168 +1,151 @@
 #include "ScalarConverter.hpp"
 
-std::string ScalarConverter::str = "";
-e_type ScalarConverter::type = TYPE_NONE;
-bool ScalarConverter::is_literal = false;
-char ScalarConverter::c = '\0';
-int ScalarConverter::i = 0;
-float ScalarConverter::f = 0.0f;
-double ScalarConverter::d = 0.0;
+e_type detectType(const std::string& input) {
+    if (input.size() == 1 && std::isdigit(input[0]) == false) return TYPE_CHAR;
 
-bool ScalarConverter::isChar() {
-    return str.size() == 1 && std::isdigit(str[0]) == false;
-}
-
-bool ScalarConverter::isInt() {
-    int idx = 0;
-    if (str[0] == '-' || str[0] == '+') idx++;
-
-    // 숫자가 아닌 문자가 있다면 false
-    for (unsigned long i = idx; i < str.size(); i++) {
-        if (std::isdigit(str[i]) == false)
-            return false;
+    if (input == "inff" || input == "+inff" || input == "-inff") return TYPE_FLOAT;
+    else if (input == "inf" || input == "+inf" || input == "-inf") return TYPE_DOUBLE;
+    
+    size_t idx = 0;
+    if (input[0] == '-' || input[0] == '+') idx++;
+    bool dot_flag = false, f_flag = false;
+    for (size_t i = idx; i < input.size(); i++) {
+        if (std::isdigit(input[i]) == false) {
+            if (input[i] == '.' && dot_flag == false && i != idx && i != input.size() - 1) dot_flag = true;
+            else if (input[i] == 'f' && i == input.size() - 1 && dot_flag) f_flag = true;
+            else return TYPE_NAN;
+        }
     }
 
-    return true;
+    if (dot_flag == false) return TYPE_INT;
+    else if (f_flag) return TYPE_FLOAT;
+    else return TYPE_DOUBLE;
 }
 
-bool ScalarConverter::isFloat() {
-    if (str == "inff" || str == "-inff" || str == "+inff" || str == "nanf") {
-        is_literal = true;
-        return true;
+char castToChar(const std::string& input, e_type type) {
+    int i_val; float f_val; double d_val;
+
+    switch (type) {
+    case TYPE_CHAR:
+        return input[0];
+    case TYPE_INT:
+        i_val = std::stoi(input);
+        if (i_val < -128 || i_val > 127) throw std::exception();
+        return static_cast<char>(i_val);
+    case TYPE_FLOAT:
+        f_val = std::stof(input);
+        if (f_val < -128 || f_val > 127) throw std::exception();
+        return static_cast<char>(f_val);
+    case TYPE_DOUBLE:
+        d_val = std::stod(input);
+        if (d_val < -128 || d_val > 127) throw std::exception();
+        return static_cast<char>(d_val);
+    default:
+        throw std::exception();
     }
+}
 
-    // 'f'로 끝나지 않거나 '.'의 위치가 정상적이지 않으면 false
-    size_t dot_pos = str.find('.');
-    if (str.back() != 'f'
-    || dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 1)
-        return false;
+int castToInt(const std::string& input, e_type type) {
+    float f_val; double d_val;
 
-    int idx = 0, dot = 0;
-    if (str[0] == '-' || str[0] == '+') idx++;
-    // 숫자가 아닌 다른 문자가 있거나 '.'이 두번 이상 나오면 false
-    for (unsigned long i = idx; i < str.size() - 1; i++) {
-        if (str[i] == '.') dot++;
-        if ((std::isdigit(str[i]) == false && str[i] != '.') || dot > 1)
-            return false;
+    switch (type) {
+    case TYPE_CHAR:
+        return static_cast<int>(input[0]);
+    case TYPE_INT:
+        return std::stoi(input);
+    case TYPE_FLOAT:
+        f_val = std::stof(input);
+        if (std::abs(f_val) == 1.0f / 0.0f) throw std::exception();
+        std::stoi(input);
+        return static_cast<int>(f_val);
+    case TYPE_DOUBLE:
+        d_val = std::stod(input);
+        if (std::abs(d_val) == 1.0 / 0.0) throw std::exception();
+        std::stoi(input);
+        return static_cast<int>(d_val);
+    default:
+        throw std::exception();
     }
-
-    return true;
 }
 
-bool ScalarConverter::isDouble() {
-    if (str == "inf" || str == "-inf" || str == "+inf" || str == "nan") {
-        is_literal = true;
-        return true;
+float castToFloat(const std::string& input, e_type type) {
+    double d_val;
+
+    switch (type) {
+    case TYPE_CHAR:
+        return static_cast<float>(input[0]);
+    case TYPE_INT:
+        return static_cast<float>(std::stoi(input));
+    case TYPE_FLOAT:
+        return std::stof(input);
+    case TYPE_DOUBLE:
+        d_val = std::stod(input);
+        std::stof(input);
+        return static_cast<float>(d_val);
+    default:
+        throw std::exception();
     }
+}
 
-    // '.'의 위치가 정상적이지 않으면 false
-    size_t dot_pos = str.find('.');
-    if (dot_pos == std::string::npos || dot_pos == 0 || dot_pos == str.size() - 1)
-        return false;
-
-    int idx = 0, dot = 0;
-    if (str[0] == '-' || str[0] == '+') idx++;
-    // 숫자가 아닌 다른 문자가 있거나 '.'이 두번 이상 나오면 false
-    for (unsigned long i = idx; i < str.size(); i++) {
-        if (str[i] == '.') dot++;
-        if ((std::isdigit(str[i]) == false && str[i] != '.') || dot > 1)
-            return false;
+double castToDouble(const std::string& input, e_type type) {
+    switch (type) {
+    case TYPE_CHAR:
+        return static_cast<double>(input[0]);
+    case TYPE_INT:
+        return static_cast<double>(std::stoi(input));
+    case TYPE_FLOAT:
+        return static_cast<double>(std::stof(input));
+    case TYPE_DOUBLE:
+        return std::stod(input);
+    default:
+        throw std::exception();
     }
-
-    return true;
 }
 
-void ScalarConverter::printChar() {
-    std::cout << "char : ";
-
-    if (type == TYPE_NONE || is_literal || i < -128 || i > 127) std::cout << "Impossible";
-    else if (std::isprint(c)) std::cout << "'" << c << "'" ;
-    else std::cout << "Non displayable";
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printInt() {
-    std::cout << "int : ";
-
-    if (type == TYPE_NONE || is_literal) std::cout << "Impossible";
-    else std::cout << i;
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printFloat() {
-    std::cout << "float : ";
-
-    if (type == TYPE_NONE) std::cout << "Impossible";
-    else if (f == std::floor(f) && is_literal == false) std::cout << f << ".0f";
-    else std::cout << f << "f";
-    std::cout << std::endl;
-}
-
-void ScalarConverter::printDouble() {
-    std::cout << "double : ";
-
-    if (type == TYPE_NONE) std::cout << "Impossible";
-    else if (d == std::floor(d) && is_literal == false) std::cout << d << ".0";
-    else std::cout << d;
-    std::cout << std::endl;
-}
-
-void ScalarConverter::detectType() {
-    if (isChar()) type = TYPE_CHAR;
-    else if (isInt()) type = TYPE_INT;
-    else if (isFloat()) type = TYPE_FLOAT;
-    else if (isDouble()) type = TYPE_DOUBLE;
-    else type = TYPE_NONE;
-}
-
-bool ScalarConverter::isImpossible() {
-    try {
-        if (type == TYPE_INT) std::stoi(str);
-        else if (type == TYPE_FLOAT) std::stof(str);
-        else if (type == TYPE_DOUBLE) std::stod(str);
-    } catch (std::out_of_range& e) {
-        return true;
-    }
-    return false;
-}
 
 void ScalarConverter::convert(const std::string& input) {
-    str = input;
-    detectType();
-    // 변환 불가능
-    if (isImpossible()) type = TYPE_NONE;
+    e_type type = detectType(input);
 
-    // 변환 !!!
-    switch(type) {
-    case TYPE_CHAR:
-        c = str[0];
-        i = static_cast<int>(c);
-        f = static_cast<float>(c);
-        d = static_cast<double>(c);
-        break;
-    case TYPE_INT:
-        i = std::stoi(str);
-        c = static_cast<char>(i);
-        f = static_cast<float>(i);
-        d = static_cast<double>(i);
-        break;
-    case TYPE_FLOAT:
-        f = std::stof(str);
-        c = static_cast<char>(f);
-        i = static_cast<int>(f);
-        d = static_cast<double>(f);
-        break;
-    case TYPE_DOUBLE:
-        d = std::stod(str);
-        c = static_cast<char>(d);
-        i = static_cast<int>(d);
-        f = static_cast<float>(d);
-        break;
-    default: break;
+    std::cout << "char: ";
+    try {
+        char c = castToChar(input, type);
+        if (std::isprint(c)) std::cout << c << std::endl;
+        else std::cout << "non displayable" << std::endl;
+    } catch (std::exception &) {
+        std::cout << "impossible" << std::endl;
     }
-
-    printChar();
-    printInt();
-    printFloat();
-    printDouble();
+    std::cout << "int: ";
+    try {
+        std::cout << castToInt(input, type) << std::endl;
+    } catch (std::exception &) {
+        std::cout << "impossible" << std::endl;
+    }
+    std::cout << "float: ";
+    try {
+        float f = castToFloat(input, type);
+        std::cout << f;
+        if (f == std::floorf(f) && f < std::powf(10.f, 6.f)) std::cout << ".0";
+        std::cout << "f" << std::endl;
+    } catch (std::exception &) {
+        std::cout << "impossible" << std::endl;
+    }
+    std::cout << "double: ";
+    try {
+        double d = castToDouble(input, type);
+        std::cout << d;
+        if (d == std::floor(d) && d < std::pow(10.0, 6.0)) std::cout << ".0";
+        std::cout << std::endl;
+    } catch (std::exception &) {
+        std::cout << "impossible" << std::endl;
+    }
 }
+
+    // std::cout << "type : ";
+    // switch(type) {
+    // case TYPE_CHAR: std::cout << "CHAR"; break;
+    // case TYPE_INT: std::cout << "INT"; break;
+    // case TYPE_FLOAT: std::cout << "FLOAT"; break;
+    // case TYPE_DOUBLE: std::cout << "DOUBLE"; break;
+    // case TYPE_NAN: std::cout << "NAN"; break;
+    // }
+    // std::cout << std::endl;

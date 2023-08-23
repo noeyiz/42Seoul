@@ -1,5 +1,5 @@
 # compile options
-NAME		= ex00
+NAME		= convert
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
