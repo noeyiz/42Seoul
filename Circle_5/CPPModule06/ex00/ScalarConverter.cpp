@@ -1,10 +1,12 @@
 #include "ScalarConverter.hpp"
 
 e_type detectType(const std::string& input) {
-    if (input.size() == 1 && std::isdigit(input[0]) == false) return TYPE_CHAR;
-
-    if (input == "inff" || input == "+inff" || input == "-inff") return TYPE_FLOAT;
-    else if (input == "inf" || input == "+inf" || input == "-inf") return TYPE_DOUBLE;
+    if (input.size() == 1 && std::isdigit(input[0]) == false)
+        return TYPE_CHAR;
+    if (input == "inff" || input == "+inff" || input == "-inff" || input == "nanf")
+        return TYPE_FLOAT;
+    if (input == "inf" || input == "+inf" || input == "-inf" || input == "nan")
+        return TYPE_DOUBLE;
     
     size_t idx = 0;
     if (input[0] == '-' || input[0] == '+') idx++;
