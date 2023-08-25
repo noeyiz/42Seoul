@@ -111,8 +111,8 @@ void ScalarConverter::convert(const std::string& input) {
     std::cout << "char: ";
     try {
         char c = castToChar(input, type);
-        if (std::isprint(c)) std::cout << c << std::endl;
-        else std::cout << "non displayable" << std::endl;
+        if (std::isprint(c)) std::cout << "'" << c << "'" << std::endl;
+        else std::cout << "Non displayable" << std::endl;
     } catch (std::exception &) {
         std::cout << "impossible" << std::endl;
     }
@@ -126,7 +126,7 @@ void ScalarConverter::convert(const std::string& input) {
     try {
         float f = castToFloat(input, type);
         std::cout << f;
-        if (f == std::floorf(f) && f < std::powf(10.f, 6.f)) std::cout << ".0";
+        if (f == std::floor(f) && f < std::pow(10.f, 6.f)) std::cout << ".0";
         std::cout << "f" << std::endl;
     } catch (std::exception &) {
         std::cout << "impossible" << std::endl;

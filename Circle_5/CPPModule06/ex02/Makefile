@@ -1,5 +1,5 @@
 # compile options
-NAME		= ex01
+NAME		= ex02
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
@@ -29,7 +29,7 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                 CPP Module 06                 ║$(RESET)"
-	@echo "$(GREEN)║             ex01 compile finished             ║$(RESET)"
+	@echo "$(GREEN)║             ex02 compile finished             ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)╚═══════════════════════════════════════════════╝$(RESET)"
