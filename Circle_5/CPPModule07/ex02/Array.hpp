@@ -20,6 +20,8 @@ public:
     Array& operator=(const Array& other) {
         if (this != &other) {
             _size = other._size;
+            delete[] array;
+            array = new T[_size];
             for (size_t i = 0; i < other._size; i++)
                 array[i] = other.array[i];
         }
