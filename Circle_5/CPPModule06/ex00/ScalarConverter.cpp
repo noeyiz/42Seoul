@@ -36,11 +36,11 @@ char castToChar(const std::string& input, e_type type) {
         return static_cast<char>(i_val);
     case TYPE_FLOAT:
         f_val = std::stof(input);
-        if (f_val < -128 || f_val > 127) throw std::exception();
+        if (f_val < -128 || f_val > 127 || input == "nanf") throw std::exception();
         return static_cast<char>(f_val);
     case TYPE_DOUBLE:
         d_val = std::stod(input);
-        if (d_val < -128 || d_val > 127) throw std::exception();
+        if (d_val < -128 || d_val > 127 || input == "nan") throw std::exception();
         return static_cast<char>(d_val);
     default:
         throw std::exception();
