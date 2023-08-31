@@ -5,9 +5,6 @@ int main(int argc, char **argv) {
         std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
-    
-    BitcoinExchange bitcoinExchange("data.csv", argv[1]);
-    bitcoinExchange.run();
-
+    BitcoinExchange::exchange(argv[1]);
     return 0;
 }

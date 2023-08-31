@@ -2,32 +2,28 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <fstream>
-# include <map>
 # include <iostream>
+# include <map>
 # include <sstream>
-# include <string>
 
 class BitcoinExchange {
 private:
-    std::map<std::string, double> map;
-    std::string db_file;
-    std::string input_file;
+    static std::string data_file;
+    static std::map<std::string, double> map;
 
     BitcoinExchange();
-
-    void parseDataToMap();
-    void checkInput(const std::string& date, const std::string& value);
-    void printResult();
-
-public:
-    BitcoinExchange(std::string db_file, std::string input_file);
     BitcoinExchange(const BitcoinExchange& other);
     BitcoinExchange& operator=(const BitcoinExchange& other);
     ~BitcoinExchange();
 
-    void run();
+    static void parseDataToMap();
+    static void outputCalculatedValues(const std::string& input_file);
+    static void displayResult(const std::string& date, const std::string& value);
 
-    class FileOpenExcepton : public std::exception {
+public:
+    static void exchange(const std::string& input_file);
+
+    class FileOpenException : public std::exception {
     public:
         virtual const char* what() const throw();
     };
