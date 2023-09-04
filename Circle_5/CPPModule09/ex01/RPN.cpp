@@ -3,9 +3,9 @@
 std::stack<double> RPN::stack;
 
 void RPN::setFirstOperand(const std::string& input) {
-    if (input.size() < 3 || std::isdigit(input[0]) == false)
+    if (input.size() < 5 || std::isdigit(input[0]) == false)
         throw RPNException();
-    stack.push(static_cast<double>(input[0]));
+    stack.push(static_cast<double>(input[0] - '0'));
 }
 
 void RPN::performOperation(const std::string& input) {
@@ -14,7 +14,7 @@ void RPN::performOperation(const std::string& input) {
         if (input[idx] == ' ') { // 공백 위치가 정상적이지 않으면 error
             if (idx % 2 == 0 || idx == input.size() - 1) throw RPNException();
         } else if (std::isdigit(input[idx])) { // 숫자면 push
-            stack.push(static_cast<double>(input[idx]));
+            stack.push(static_cast<double>(input[idx] - '0'));
         } else if (stack.size() < 2) { // 피연산자가 없으면 error
             throw RPNException();
         } else { // 연산 !!!
