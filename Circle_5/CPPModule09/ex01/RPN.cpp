@@ -4,7 +4,7 @@ std::stack<double> RPN::stack;
 
 void RPN::setFirstOperand(const std::string& input) {
     if (input.size() < 5 || std::isdigit(input[0]) == false)
-        throw RPNException();
+        throw BadInputException();
     stack.push(static_cast<double>(input[0] - '0'));
 }
 
@@ -12,11 +12,11 @@ void RPN::performOperation(const std::string& input) {
     double operand_1, operand_2;
     for (size_t idx = 1; idx < input.size(); idx++) {
         if (input[idx] == ' ') { // 공백 위치가 정상적이지 않으면 error
-            if (idx % 2 == 0 || idx == input.size() - 1) throw RPNException();
+            if (idx % 2 == 0 || idx == input.size() - 1) throw BadInputException();
         } else if (std::isdigit(input[idx])) { // 숫자면 push
             stack.push(static_cast<double>(input[idx] - '0'));
         } else if (stack.size() < 2) { // 피연산자가 없으면 error
-            throw RPNException();
+            throw BadInputException();
         } else { // 연산 !!!
             operand_2 = stack.top();
             stack.pop();
@@ -30,13 +30,13 @@ void RPN::performOperation(const std::string& input) {
                 stack.push(operand_1 - operand_2);
                 break;
             case '/':
-                if (operand_2 == 0) throw RPNException();
+                if (operand_2 == 0) throw DivisionByZerotException();
                 stack.push(operand_1 / operand_2);
                 break;
             case '*':
                 stack.push(operand_1 * operand_2);
                 break;
-            default: throw RPNException();
+            default: throw BadInputException();
             }
         }
     }
@@ -47,7 +47,7 @@ void RPN::displayResult() {
     if (stack.size() == 1)
         std::cout << stack.top() << std::endl;
     else
-        throw RPNException();
+        throw BadInputException();
 }
 
 void RPN::calculate(const std::string& input) {
@@ -55,11 +55,15 @@ void RPN::calculate(const std::string& input) {
         setFirstOperand(input);
         performOperation(input);
         displayResult();
-    } catch (RPNException& e) {
-        std::cout << e.what() << std::endl;
+    } catch (std::exception& e) {
+        std::cout << "Error: " << e.what() << std::endl;
     }
 }
 
-const char* RPN::RPNException::what() const throw() {
-    return "Error";
+const char* RPN::BadInputException::what() const throw() {
+    return "bad input";
+}
+
+const char* RPN::DivisionByZerotException::what() const throw() {
+    return "division by zero";
 }
