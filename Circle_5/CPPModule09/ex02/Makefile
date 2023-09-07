@@ -1,6 +1,6 @@
 # compile options
 NAME		= PmergeMe
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -g3 -std=c++98 -fsanitize=address
 RM			= rm -f
 
 # source files
