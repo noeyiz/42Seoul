@@ -10,10 +10,6 @@
 # include <utility>
 # include <vector>
 
-# define RESET		"\033[0m"
-# define GRAY		"\033[1;90m"
-# define RED		"\033[1;91m"
-
 class PmergeMe {
 private:
     static std::deque<int> deque;
@@ -26,7 +22,6 @@ private:
 
     static void parseInput(int size, char **input);
     static void mergeInsertionSort_D();
-    static void parseInput_V(int size, char **input);
     static void mergeInsertionSort_V();
 
 public:

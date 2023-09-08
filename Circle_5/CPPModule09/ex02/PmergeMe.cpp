@@ -24,7 +24,7 @@ void PmergeMe::parseInput(int size, char **input) {
     if (sorted) throw AlreadySortedException();
 }
 
-static void insertionSort_V(std::vector<std::pair<int, int> >& elements) {
+static void insertionSort_D(std::deque<std::pair<int, int> >& elements) {
     for (size_t i = 1; i < elements.size(); i++) {
         std::pair<int, int> value = elements[i];
 
@@ -37,20 +37,99 @@ static void insertionSort_V(std::vector<std::pair<int, int> >& elements) {
     }
 }
 
-static void setJacobsthalNumber_V(std::vector<int>& jacobsthal_num, int size) {
-    int prevprev = 1;  // J(n-1)
-    int prev = 3;      // J(n-2)
+static void setJacobsthalNumber_D(std::deque<int>& jacobsthal_num, int size) {
+    int prevprev = 1;  // J(n-2)
+    int prev = 3;      // J(n-1)
     int curr = prev;   // J(n)
 
     jacobsthal_num.push_back(1);
     for (int i = 0; i < size - 1; i++) {
-        if (curr-- <= prevprev + 1) {
+        if (curr == prevprev) {
             curr = prev + 2 * prevprev; // 점화식 : J(n) = J(n-1) + 2*J(n-2) (n >= 2)
-            if (curr > size) curr = size;
             prevprev = prev;
             prev = curr;
         }
-        jacobsthal_num.push_back(curr);
+        if (curr > size) curr = size;
+        jacobsthal_num.push_back(curr--);
+    }
+}
+
+static void binarySearchSort_D(std::deque<int>& main_chain, int target, int start, int end) {
+    if (start > end) {
+        main_chain.insert(main_chain.begin() + start, target);
+        return;
+    }
+
+    int mid = start + (end - start) / 2;
+
+    if (main_chain[mid] < target) binarySearchSort_D(main_chain, target, mid + 1, end);
+    else binarySearchSort_D(main_chain, target, start, mid - 1);
+}
+
+void PmergeMe::mergeInsertionSort_D() {
+    // 1. 정렬할 원소의 개수가 홀수일 때 : 마지막 수 (remain) 저장
+    int stray = vector.size() % 2 ? 1 : 0;
+    int remain = stray ? deque.back() : -1;
+
+    // 2. pair <b, a> 만들기 ! 이 때, b < a
+    std::deque<std::pair<int, int> > elements;
+    for (size_t i = 0; i < deque.size() - stray; i += 2) {
+        if (deque[i] < deque[i + 1]) elements.push_back(std::make_pair(deque[i], deque[i + 1]));
+        else elements.push_back(std::make_pair(deque[i + 1], deque[i]));
+    }
+
+    // 3. a를 기준으로 정렬하기
+    insertionSort_D(elements);
+
+    // 4. main chain 만들기
+    std::deque<int> main_chain;
+    for (size_t i = 0; i < elements.size(); i++)
+        main_chain.push_back(elements[i].second);
+
+    // 5. jacobsthal number에 따라 pending elements를 main chain 사이에.. 자리 찾아주기
+    std::deque<int> jacobsthal_num;
+    setJacobsthalNumber_D(jacobsthal_num, elements.size());
+    for (size_t i = 0; i < elements.size(); i++) {
+        std::pair<int, int> element = elements[jacobsthal_num[i] - 1];
+        int end = std::find(main_chain.begin(), main_chain.end(), element.second) - main_chain.begin();
+        binarySearchSort_D(main_chain, element.first, 0, end);
+    }
+
+    // 6. remain 있으면 자리 찾아주기
+    if (stray) binarySearchSort_D(main_chain, remain, 0, main_chain.size() - 1);
+
+    // 7. 정렬된 데이터 저장
+    deque.clear();
+    for (size_t i = 0; i < main_chain.size(); i++) deque.push_back(main_chain[i]);
+}
+
+static void insertionSort_V(std::vector<std::pair<int, int> >& elements) {
+    for (size_t i = 1; i < elements.size(); i++) {
+        std::pair<int, int> value = elements[i];
+
+        size_t j = i - 1;
+        while (j >= 0 && elements[j].second > value.second) {
+            elements[j + 1] = elements[j];
+            j--;
+        }
+        elements[j + 1] = value;
+    }
+}
+
+static void setJacobsthalNumber_V(std::vector<int>& jacobsthal_num, int size) {
+    int prevprev = 1;  // J(n-2)
+    int prev = 3;      // J(n-1)
+    int curr = prev;   // J(n)
+
+    jacobsthal_num.push_back(1);
+    for (int i = 0; i < size - 1; i++) {
+        if (curr == prevprev) {
+            curr = prev + 2 * prevprev; // 점화식 : J(n) = J(n-1) + 2*J(n-2) (n >= 2)
+            prevprev = prev;
+            prev = curr;
+        }
+        if (curr > size) curr = size;
+        jacobsthal_num.push_back(curr--);
     }
 }
 
@@ -77,18 +156,9 @@ void PmergeMe::mergeInsertionSort_V() {
         if (vector[i] < vector[i + 1]) elements.push_back(std::make_pair(vector[i], vector[i + 1]));
         else elements.push_back(std::make_pair(vector[i + 1], vector[i]));
     }
-    
-    std::cout << "=== before ===" << std::endl;
-    for (size_t i = 0; i < elements.size(); i++)
-        std::cout << elements[i].first << ", " << elements[i].second << std::endl;
 
     // 3. a를 기준으로 정렬하기
     insertionSort_V(elements);
-    // std::sort(elements.begin(), elements.end(), compareSecond);
-
-    std::cout << "=== after ===" << std::endl;
-    for (size_t i = 0; i < elements.size(); i++)
-        std::cout << elements[i].first << ", " << elements[i].second << std::endl;
 
     // 4. main chain 만들기
     std::vector<int> main_chain;
@@ -110,83 +180,6 @@ void PmergeMe::mergeInsertionSort_V() {
     // 7. 정렬된 데이터 저장
     vector.clear();
     for (size_t i = 0; i < main_chain.size(); i++) vector.push_back(main_chain[i]);
-}
-
-static void insertionSort_D(std::deque<std::pair<int, int> >& elements) {
-    for (size_t i = 1; i < elements.size(); i++) {
-        std::pair<int, int> value = elements[i];
-
-        int j = i - 1;
-        while (j >= 0 && elements[j].second > value.second) {
-            elements[j + 1] = elements[j];
-            j--;
-        }
-        elements[j + 1] = value;
-    }
-}
-
-static void setJacobsthalNumber_D(std::deque<int>& jacobsthal_num, int size) {
-    jacobsthal_num.push_back(1);
-    jacobsthal_num.push_back(3);
-
-    int prevprev = jacobsthal_num[0];
-    int prev = jacobsthal_num[1];
-    int curr = prev;
-
-    for (int i = 0; i < size - 2; i++) {
-        if (curr-- > prevprev + 1) {
-            jacobsthal_num.push_back(curr);
-        } else {
-            curr = prev + 2 * prevprev;
-            if (curr > size) curr = size;
-            jacobsthal_num.push_back(curr);
-            prevprev = prev;
-            prev = curr;
-        }
-    }
-}
-
-static void binarySearchSort_D(std::deque<int>& main_chain, int target, int start, int end) {
-    if (start > end) {
-        main_chain.insert(main_chain.begin() + start, target);
-        return;
-    }
-
-    int mid = start + (end - start) / 2;
-
-    if (main_chain[mid] < target) binarySearchSort_D(main_chain, target, mid + 1, end);
-    else binarySearchSort_D(main_chain, target, start, mid - 1);
-}
-
-void PmergeMe::mergeInsertionSort_D() {
-    int stray = deque.size() % 2 ? 1 : 0;
-    int remain = stray ? deque.back() : -1;
-
-    std::deque<std::pair<int, int> > elements;
-    for (size_t i = 0; i < deque.size() - stray; i += 2) {
-        if (deque[i] < deque[i + 1]) elements.push_back(std::make_pair(deque[i], deque[i + 1]));
-        else elements.push_back(std::make_pair(deque[i + 1], deque[i]));
-    }
-    
-    insertionSort_D(elements);
-
-    std::deque<int> main_chain;
-    for (size_t i = 0; i < elements.size(); i++)
-        main_chain.push_back(elements[i].second);
-
-    std::deque<int> jacobsthal_num;
-    setJacobsthalNumber_D(jacobsthal_num, elements.size());
-    for (size_t i = 0; i < elements.size(); i++) {
-        std::pair<int, int> element = elements[jacobsthal_num[i] - 1];
-        int start = 0;
-        int end = std::find(deque.begin(), deque.end(), element.second) - deque.begin();
-        binarySearchSort_D(main_chain, element.first, start, end);
-    }
-
-    if (stray) binarySearchSort_D(main_chain, remain, 0, main_chain.size() - 1);
-
-    deque.clear();
-    for (size_t i = 0; i < main_chain.size(); i++) deque.push_back(main_chain[i]);
 }
 
 void PmergeMe::sort(int size, char **input) {
