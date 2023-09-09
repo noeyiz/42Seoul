@@ -107,7 +107,7 @@ static void insertionSort_V(std::vector<std::pair<int, int> >& elements) {
     for (size_t i = 1; i < elements.size(); i++) {
         std::pair<int, int> value = elements[i];
 
-        size_t j = i - 1;
+        int j = i - 1;
         while (j >= 0 && elements[j].second > value.second) {
             elements[j + 1] = elements[j];
             j--;
