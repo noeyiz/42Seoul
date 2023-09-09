@@ -28,20 +28,20 @@ void Span::addNumber(int num) {
     std::sort(vector.begin(), vector.end());
 }
 
-unsigned int Span::shortestSpan() {
+long long Span::shortestSpan() {
     if (vector.size() < 2) throw Span::NoSpanFoundException();
 
-    unsigned int span = longestSpan();
+    long long span = longestSpan();
     for (size_t i = 1; i < vector.size(); i++)
-        span = std::min(span, static_cast<unsigned int>(vector[i]) - static_cast<unsigned int>(vector[i - 1]));
+        span = std::min(span, static_cast<long long>(vector[i]) - static_cast<long long>(vector[i - 1]));
 
     return span;
 }
 
-unsigned int Span::longestSpan() {
+long long Span::longestSpan() {
     if (vector.size() < 2) throw Span::NoSpanFoundException();
 
-    return static_cast<unsigned int>(vector[vector.size() - 1]) - static_cast<unsigned int>(vector[0]);
+    return static_cast<long long>(vector[vector.size() - 1]) - static_cast<long long>(vector[0]);
 }
 
 const char* Span::OutOfRangeException::what() const throw() {

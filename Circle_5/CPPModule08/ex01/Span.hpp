@@ -17,8 +17,8 @@ public:
     ~Span();
 
     void addNumber(int num);
-    unsigned int shortestSpan();
-    unsigned int longestSpan();
+    long long shortestSpan();
+    long long longestSpan();
 
     template <typename T>
     void addNumbers(typename T::iterator begin, typename T::iterator end) {
