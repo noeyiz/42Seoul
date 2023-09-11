@@ -28,7 +28,7 @@ void Span::addNumber(int num) {
     std::sort(vector.begin(), vector.end());
 }
 
-long long Span::shortestSpan() {
+long long Span::shortestSpan() const {
     if (vector.size() < 2) throw Span::NoSpanFoundException();
 
     long long span = longestSpan();
@@ -38,7 +38,7 @@ long long Span::shortestSpan() {
     return span;
 }
 
-long long Span::longestSpan() {
+long long Span::longestSpan() const {
     if (vector.size() < 2) throw Span::NoSpanFoundException();
 
     return static_cast<long long>(vector[vector.size() - 1]) - static_cast<long long>(vector[0]);

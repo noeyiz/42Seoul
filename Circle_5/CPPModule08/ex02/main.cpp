@@ -30,7 +30,21 @@ int main() {
         std::cout << *it << std::endl;
         ++it;
     }
-    std::stack<int> s(mstack);
+
+    MutantStack<int> s(mstack);
+    std::cout << "===========" << std::endl;
+    for (it = s.begin(); it != s.end(); it++)
+        std::cout << *it << std::endl;
+
+    s.pop();
+    std::cout << "===========" << std::endl;
+    for (it = s.begin(); it != s.end(); it++)
+        std::cout << *it << std::endl;
+
+    s = mstack;
+    std::cout << "===========" << std::endl;
+    for (it = s.begin(); it != s.end(); it++)
+        std::cout << *it << std::endl;
 
     return 0;
 }

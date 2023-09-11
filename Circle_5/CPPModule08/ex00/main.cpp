@@ -6,20 +6,20 @@
 #include "easyfind.hpp"
 
 template <typename T>
-void print(T container, std::string name) {
+void print(T& container, std::string name) {
     std::cout << name << " = {";
     for (typename T::iterator it = container.begin(); it != container.end(); it++) {
         std::cout << *it;
-        if (it != --container.end()) std::cout << ", ";
+        if (it != --(container.end())) std::cout << ", ";
     }
     std::cout << "}" << std::endl;
 }
 
 template <typename T>
-void printEasyFind(T container, int value) {
-    typename T::iterator it = easyfind(container, value);
+void printEasyFind(T& container, int target) {
+    typename T::iterator it = easyfind(container, target);
 
-    std::cout << "easyfind(" << value << ") : ";
+    std::cout << "easyfind(" << target << ") : ";
     if (it != container.end()) {
         std::cout << *it;
         if (++it != container.end()) std::cout << " (next is " << *it << ")";
