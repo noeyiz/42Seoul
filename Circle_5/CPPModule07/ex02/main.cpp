@@ -17,8 +17,8 @@ int main() {
             std::cout << int_arr[i] << " ";
         std::cout << std::endl;
 
-        // 예시 2) char 배열
-        Array<char> char_arr(size);
+        // 예시 2) const char 배열
+        const Array<char> char_arr(size);
         for (size_t i = 0; i < char_arr.size(); i++)
             char_arr[i] = static_cast<char>('a' + i);
 

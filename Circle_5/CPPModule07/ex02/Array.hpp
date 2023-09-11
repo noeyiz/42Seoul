@@ -1,6 +1,8 @@
 #ifndef ARRAY_HPP
 # define ARRAY_HPP
 
+#include <cstddef>
+
 template <typename T>
 class Array {
 private:
@@ -10,7 +12,7 @@ private:
 public:
     Array() : _size(0), array(new T[0]) {}
 
-    Array(unsigned int n) : _size(n), array(new T[n]) {}
+    Array(const unsigned int n) : _size(n), array(new T[n]) {}
 
     Array(const Array& other) : _size(other._size), array(new T[other._size]) {
         for (size_t i = 0; i < other._size; i++)
@@ -28,14 +30,19 @@ public:
         return *this;
     }
 
+    ~Array() { delete[] array; }
+
     T& operator[](size_t idx) {
         if (idx < 0 || idx >= _size) throw std::exception();
         return array[idx];
     }
 
-    ~Array() { delete[] array; }
+    T& operator[](size_t idx) const {
+        if (idx < 0 || idx >= _size) throw std::exception();
+        return array[idx];
+    }
 
-    size_t size() { return _size; }
+    size_t size() const { return _size; }
 };
 
 #endif // ARRAY_HPP
