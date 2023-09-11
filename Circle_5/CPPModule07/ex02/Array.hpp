@@ -37,7 +37,7 @@ public:
         return array[idx];
     }
 
-    T& operator[](size_t idx) const {
+    const T& operator[](size_t idx) const {
         if (idx < 0 || idx >= _size) throw std::exception();
         return array[idx];
     }
