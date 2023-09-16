@@ -1,7 +1,5 @@
 #include "Span.hpp"
 
-Span::Span() : n(0) {}
-
 Span::Span(unsigned int n) : n(n) {}
 
 Span::Span(const Span& other) : n(other.n) {

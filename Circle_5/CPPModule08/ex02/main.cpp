@@ -9,11 +9,11 @@ int main() {
     mstack.push(5);
     mstack.push(17);
 
-    std::cout << mstack.top() << std::endl;
+    std::cout << "top : " << mstack.top() << std::endl;
 
     mstack.pop();
 
-    std::cout << mstack.size() << std::endl;
+    std::cout << "size : " << mstack.size() << std::endl;
 
     mstack.push(3);
     mstack.push(5);
@@ -21,9 +21,9 @@ int main() {
     //[...]
     mstack.push(0);
 
+    std::cout << "===========" << std::endl;
     MutantStack<int>::iterator it = mstack.begin();
     MutantStack<int>::iterator ite = mstack.end();
-
     ++it;
     --it;
     while (it != ite) {
@@ -31,18 +31,18 @@ int main() {
         ++it;
     }
 
+    std::cout << "===========" << std::endl;
     MutantStack<int> s(mstack);
-    std::cout << "===========" << std::endl;
     for (it = s.begin(); it != s.end(); it++)
         std::cout << *it << std::endl;
 
+    std::cout << "===========" << std::endl;
     s.pop();
-    std::cout << "===========" << std::endl;
     for (it = s.begin(); it != s.end(); it++)
         std::cout << *it << std::endl;
 
-    s = mstack;
     std::cout << "===========" << std::endl;
+    s = mstack;
     for (it = s.begin(); it != s.end(); it++)
         std::cout << *it << std::endl;
 
