@@ -51,7 +51,8 @@ void BitcoinExchange::displayResult(const std::string& date, const std::string& 
     // display !!!
     std::map<std::string, double>::iterator it = map.begin();
     while (it->first <= date) it++;
-    std::cout << date << " => " << value << " = " << val * (--it)->second << std::endl;
+    if (it != map.begin()) it--;
+    std::cout << date << " => " << value << " = " << val * it->second << std::endl;
 }
 
 void BitcoinExchange::outputCalculatedValues(const std::string& input_file) {
