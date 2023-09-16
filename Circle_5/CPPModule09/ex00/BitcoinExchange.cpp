@@ -32,18 +32,19 @@ bool isValidDate(int year, int month, int day) {
 
 void BitcoinExchange::displayResult(const std::string& date, const std::string& value) {
     // check date
-    int year, month, day;
-    char separator;
+    if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+        throw BadInputException();
+    int year, month, day; char separator;
     std::istringstream date_ss(date);
-    if (date.size() != 10 || date[4] != '-' || date[7] != '-'
-    || (date_ss >> year >> separator >> month >> separator >> day) == false
-    || isValidDate(year, month, day) == false)
+    date_ss >> year >> separator >> month >> separator >> day;
+    if (date_ss.eof() == false || isValidDate(year, month, day) == false)
         throw BadInputException();
 
     // check value
     double val;
     std::istringstream value_ss(value);
-    if ((value_ss >> val) == false) throw BadInputException();
+    value_ss >> val;
+    if (value_ss.eof() == false) throw BadInputException();
     if (val < 0) throw NonPositiveValueException();
     if (val > 1000.0) throw ValueTooLargeException();
 
