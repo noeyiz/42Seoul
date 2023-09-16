@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 int main(int argc, char **argv) {
-    if (argc < 2 || argc > 3001) {
+    if (argc < 3) {
         std::cout << "Error" << std::endl;
         return 1;
     }

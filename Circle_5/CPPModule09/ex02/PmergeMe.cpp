@@ -5,10 +5,11 @@ std::vector<int> PmergeMe::vector;
 
 void PmergeMe::parseInput(int size, char **input) {
     // parse
-    int num; char c;
+    int num;
     for (int i = 0; i < size; i++) {
         std::istringstream ss(input[i]);
-        if ((ss >> num) == false || ss >> c || num <= 0)
+        ss >> num;
+        if (!ss.eof() || num <= 0)
             throw BadInputException();
         deque.push_back(num);
         vector.push_back(num);
