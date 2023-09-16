@@ -20,12 +20,7 @@ private:
 public:
     static void calculate(const std::string& input);
 
-    class BadInputException : public std::exception {
-    public:
-        virtual const char* what() const throw();
-    };
-
-    class DivisionByZerotException : public std::exception {
+    class RPNException : public std::exception {
     public:
         virtual const char* what() const throw();
     };
