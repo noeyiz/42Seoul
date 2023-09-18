@@ -70,7 +70,7 @@ static void binarySearchSort_D(std::deque<int>& main_chain, int target, int star
 void PmergeMe::mergeInsertionSort_D() {
     // 1. 정렬할 원소의 개수가 홀수일 때 : 마지막 수 (remain) 저장
     int stray = vector.size() % 2 ? 1 : 0;
-    int remain = stray ? deque.back() : -1;
+    int remain = deque.back();
 
     // 2. pair <b, a> 만들기 ! 이 때, b < a
     std::deque<std::pair<int, int> > elements;
@@ -149,7 +149,7 @@ static void binarySearchSort_V(std::vector<int>& main_chain, int target, int sta
 void PmergeMe::mergeInsertionSort_V() {
     // 1. 정렬할 원소의 개수가 홀수일 때 : 마지막 수 (remain) 저장
     int stray = vector.size() % 2 ? 1 : 0;
-    int remain = stray ? vector.back() : -1;
+    int remain = vector.back();
 
     // 2. pair <b, a> 만들기 ! 이 때, b < a
     std::vector<std::pair<int, int> > elements;

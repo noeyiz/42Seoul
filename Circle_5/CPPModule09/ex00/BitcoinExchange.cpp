@@ -48,9 +48,9 @@ void BitcoinExchange::displayResult(const std::string& date, const std::string& 
     if (val < 0) throw NonPositiveValueException();
     if (val > 1000.0) throw ValueTooLargeException();
 
-    // display !!!
+    // print !!!
     std::map<std::string, double>::iterator it = map.begin();
-    while (it->first <= date) it++;
+    while (it != map.end() && it->first <= date) it++;
     if (it != map.begin()) it--;
     std::cout << date << " => " << value << " = " << val * it->second << std::endl;
 }
