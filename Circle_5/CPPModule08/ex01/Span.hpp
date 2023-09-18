@@ -22,31 +22,11 @@ public:
     long long longestSpan() const;
 
     template <typename T>
-    void addNumbers(typename T::iterator begin, typename T::iterator end) {
-        if (std::distance(begin, end) < 0) throw Span::BadRangeException();
-        if (vector.size() + std::distance(begin, end) >= n) throw Span::OutOfRangeException();
-
-        for (typename T::iterator it = begin; it != end; it++)
-            vector.push_back(*it);
-        std::sort(vector.begin(), vector.end());
-    }
-
-    template <typename T>
     void addNumbers(typename T::const_iterator begin, typename T::const_iterator end) {
         if (std::distance(begin, end) < 0) throw Span::BadRangeException();
         if (vector.size() + std::distance(begin, end) >= n) throw Span::OutOfRangeException();
 
         for (typename T::const_iterator it = begin; it != end; it++)
-            vector.push_back(*it);
-        std::sort(vector.begin(), vector.end());
-    }
-
-    template <typename T>
-    void addNumbers(typename T::reverse_iterator begin, typename T::reverse_iterator end) {
-        if (std::distance(begin, end) < 0) throw Span::BadRangeException();
-        if (vector.size() + std::distance(begin, end) >= n) throw Span::OutOfRangeException();
-
-        for (typename T::reverse_iterator it = begin; it != end; it++)
             vector.push_back(*it);
         std::sort(vector.begin(), vector.end());
     }
