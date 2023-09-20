@@ -37,14 +37,14 @@ void BitcoinExchange::displayResult(const std::string& date, const std::string& 
     int year, month, day; char separator;
     std::istringstream date_ss(date);
     date_ss >> year >> separator >> month >> separator >> day;
-    if (date_ss.eof() == false || isValidDate(year, month, day) == false)
+    if (date_ss.eof() == false || date_ss.fail() || isValidDate(year, month, day) == false)
         throw BadInputException();
 
     // check value
     double val;
     std::istringstream value_ss(value);
     value_ss >> val;
-    if (value_ss.eof() == false) throw BadInputException();
+    if (value_ss.eof() == false || value_ss.fail()) throw BadInputException();
     if (val < 0) throw NonPositiveValueException();
     if (val > 1000.0) throw ValueTooLargeException();
 
