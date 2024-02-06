@@ -1,4 +1,4 @@
-.PHONY: all up down clean setup-dirs delete-dirs
+.PHONY: all up down clean vclean setup-dirs
 
 all: setup-dirs up
 
@@ -18,5 +18,7 @@ clean: down
 	@echo "Cleaning unused Docker resources ..."
 	@docker system prune -af
 
-delete-dirs:
+vclean:
 	@sudo rm -rf /home/jikoo/data
+	@docker volume rm srcs_db-volume
+	@docker volume rm srcs_wp-volume
